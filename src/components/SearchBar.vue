@@ -74,17 +74,19 @@ input {
         rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-.item {
-    width: 350px;
+.items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.error {
+    min-width: 200px;
     margin: 0 auto 10px auto;
     padding: 10px 20px;
     color: white;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
         rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-}
-
-.error {
     background-color: tomato;
 }
 </style>
