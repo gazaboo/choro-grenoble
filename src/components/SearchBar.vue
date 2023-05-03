@@ -24,9 +24,9 @@ function filteredList() {
     let selectedList = listeChoros.data.filter((itemSong) =>
         ignore_diacritics_case(itemSong.title).includes(ignore_diacritics_case(input.value))
     );
-
     selectedList = selectedList.filter(itemSong =>
-        itemSong.melody.C || itemSong.melody.Bb || itemSong.melody.Eb || itemSong.contracanto.C || itemSong.contracanto.Bb || itemSong.contracanto.Eb
+        Object.entries(itemSong.melody).map(entry => entry[1] != "").includes(true) ||
+        Object.entries(itemSong.contracanto).map(entry => entry[1] != "").includes(true)
     );
     return selectedList
 }
