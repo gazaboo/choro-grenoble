@@ -17,11 +17,14 @@ export default {
 </script>
 
 <template>
-    <div v-if="mainThemeKeys.length > 0" class="item song">
-        <h2> {{ [music.title, music.author].join(" - ") }} </h2>
+    <div v-if="mainThemeKeys.length * mainThemeKeys.length > 0" class="itemSong">
+
+        <h2> {{ music.title }} </h2>
+        <h3> {{ music.author }} </h3>
+
         <div class="container-canto-contraconto">
             <div class="container-music-keys">
-                <span> Chant </span>
+                <span class="role"> Melody </span>
                 <router-link v-for="key in mainThemeKeys" :key="key" :to="{
                         name: 'songView',
                         params: {
@@ -35,7 +38,7 @@ export default {
             </div>
 
             <div v-if="secondVoiceKeys.length > 0" class="container-music-keys">
-                <span> Contracanto </span>
+                <span class="role"> Second Voice </span>
                 <router-link v-for="key in secondVoiceKeys" :key="key" :to="{
                         name: 'songView',
                         params: {
@@ -53,59 +56,77 @@ export default {
 
 
 <style scoped>
+/* Card */
+.itemSong {
+    background-color: rgb(97, 163, 99);
+    width: 45%;
+    max-width: 300px;
+    margin: 5px;
+    color: white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Titre de la musique */
 h2 {
     font-size: 1rem;
-    padding: 3px;
-    margin: 3px;
+    margin: 0.25rem 0 0 0.5rem;
+    padding: 0;
 }
 
-.container-canto-contraconto {
-    display: flex;
-    flex-direction: row;
+h3 {
+    font-size: 0.75rem;
+    color: rgb(200, 200, 200);
+    margin: 0 0 0.75rem 0.5rem;
+    padding: 0;
 }
 
+/* Container qui contient les clés disponibles */
 .container-music-keys {
-    background-color: rgb(64, 128, 0);
-    padding: 1px;
-    border: solid rgb(24, 135, 24) 1px;
+    width: 50%;
     border-radius: 3px;
     font-size: 0.5rem;
-    margin: 5px;
+    position: relative;
+
 }
 
+/* Liens vers la partition */
 a {
     display: inline-block;
+    width: 25%;
+    background-color: rgb(70, 104, 19);
     border-radius: 3px;
-    margin: 0px 5px;
+    padding: 5px;
+    margin-right: 0.5rem;
     text-decoration: none;
     cursor: pointer;
     color: white;
     transition: background-color 0.1s;
+    text-align: center;
 }
 
 a:hover {
-    background-color: rgb(211, 255, 212);
+    background-color: rgb(56, 175, 58);
 }
 
-.song {
-    background-color: rgb(97, 163, 99);
+
+
+.container-canto-contraconto {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: 100%;
+    padding: 0.2rem;
 }
 
-.song:hover {
-    background-color: rgb(156, 185, 90);
-}
-
-.item {
-    width: 45%;
-    max-width: 300px;
-    margin: 5px;
-    padding: 3px 20px;
-    color: white;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px;
-}
-
-.item:hover {
-    box-shadow: rgba(209, 205, 82, 0.3) 0px 1px 3px 0px;
+.role {
+    font-size: 0.5rem;
+    position: absolute;
+    top: -1rem;
+    left: 0.25rem;
+    color: rgb(255, 255, 255);
 }
 </style>
