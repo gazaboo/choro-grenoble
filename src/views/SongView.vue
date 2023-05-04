@@ -36,4 +36,13 @@ function filteredSong() {
      width: 80vw;
      height: 100vh;
  }
+
+ /* On screens that are 600px or less, set the background color to olive */
+ @media screen and (max-width: 600px) {
+     .musescore {
+         width: 100vw;
+         height: 120vh;
+
+     }
+ }
 </style>

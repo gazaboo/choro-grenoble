@@ -45,10 +45,9 @@ function filteredList() {
             <router-link v-else to="/">
                 <a> Home </a>
             </router-link>
-
-
         </div>
     </nav>
+
     <div class="items" v-if="props.showList">
         <SongLink :music="music" v-for="music in filteredList()" :key="music" />
     </div>
