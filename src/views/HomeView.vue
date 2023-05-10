@@ -1,5 +1,5 @@
 <template>
-  <SearchBar showList="True"></SearchBar>
+  <SearchBar showList />
 </template>
 
 <script>

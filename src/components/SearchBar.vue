@@ -1,35 +1,51 @@
 
-<script setup>
-
-import { defineProps, ref } from "vue";
+<script>
 import listeChoros from "../assets/liste_totale_choros.json";
 import SongLink from "./SongLink.vue";
 
-const props = defineProps({
-    showList: Boolean,
-});
+export default {
 
-function ignore_diacritics_case(word) {
-    return word.toLowerCase()
-        .replaceAll(/[éêè]/g, "e")
-        .replaceAll(/[áãâ]/g, "a")
-        .replaceAll(/[óôõö]/g, "o")
-        .replaceAll(/[ç]/g, "c")
-        .replaceAll(/[íï]/g, "i")
-        .replaceAll(/[ü]/g, "u")
+    props: {
+        showList: Boolean,
+    },
+
+    components: {
+        SongLink
+    },
+
+    data() {
+        return {
+            input: ""
+        }
+    },
+
+    methods: {
+        ignore_diacritics_case(word) {
+            return word.toLowerCase()
+                .replaceAll(/[éêè]/g, "e")
+                .replaceAll(/[áãâ]/g, "a")
+                .replaceAll(/[óôõö]/g, "o")
+                .replaceAll(/[ç]/g, "c")
+                .replaceAll(/[íï]/g, "i")
+                .replaceAll(/[ü]/g, "u")
+        }
+    },
+
+    computed: {
+        filteredList() {
+            let selectedList = listeChoros.data.filter((itemSong) =>
+                this.ignore_diacritics_case(itemSong.title).includes(this.ignore_diacritics_case(this.input))
+            );
+            selectedList = selectedList.filter(itemSong =>
+                Object.entries(itemSong.melody).map(entry => entry[1] != "").includes(true) ||
+                Object.entries(itemSong.contracanto).map(entry => entry[1] != "").includes(true)
+            );
+            return selectedList;
+        }
+    }
 }
 
-let input = ref("");
-function filteredList() {
-    let selectedList = listeChoros.data.filter((itemSong) =>
-        ignore_diacritics_case(itemSong.title).includes(ignore_diacritics_case(input.value))
-    );
-    selectedList = selectedList.filter(itemSong =>
-        Object.entries(itemSong.melody).map(entry => entry[1] != "").includes(true) ||
-        Object.entries(itemSong.contracanto).map(entry => entry[1] != "").includes(true)
-    );
-    return selectedList
-}
+
 </script>
 
 <template>
@@ -39,8 +55,9 @@ function filteredList() {
                 <img src="../assets/logo.jpg" alt="" width="100">
             </a>
             <a class="navbar-brand">Choro do Beco <br> Grenoble</a>
-            <form v-if="props.showList" class="d-flex flex-fill">
-                <input v-model="input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form v-if="this.showList" class="d-flex flex-fill">
+                <input v-model="input" @input="e => input = e.target.value" class="form-control me-2" type="search"
+                    placeholder="Search" aria-label="Search">
             </form>
             <router-link v-else to="/">
                 <a> Home </a>
@@ -48,10 +65,10 @@ function filteredList() {
         </div>
     </nav>
 
-    <div class="items" v-if="props.showList">
-        <SongLink :music="music" v-for="music in filteredList()" :key="music" />
+    <div class="items" v-if="showList">
+        <SongLink :music="music" v-for="music in filteredList" :key="music" />
     </div>
-    <div class="item error" v-if="input && !filteredList().length">
+    <div class="item error" v-if="input && !filteredList.length">
         <p>No results found!</p>
     </div>
 </template>
