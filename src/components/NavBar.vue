@@ -1,10 +1,10 @@
 <template>
     <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand">ChoroGrenoble</a>
-            <form class="d-flex flex-fill">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            </form>
+            <a class="navbar-brand" href="#">
+                <img src="../assets/logo.jpg" alt="" width="100">
+            </a>
+            <a class="navbar-brand">Choro do Beco <br> Grenoble</a>
         </div>
     </nav>
 </template>
