@@ -1,6 +1,6 @@
 <template>
   <NavBar />
-  <SearchBar showList />
+  <SearchBar />
 </template>
 
 <script>
