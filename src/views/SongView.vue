@@ -8,7 +8,6 @@ const route = useRoute();
 const params = route.params;
 const song = filteredSong()
 const url = song[params.theme][params.instrument]
-console.log("url", url)
 function filteredSong() {
     let song = choroSongs.data.find((choroSong) =>
         choroSong.title.toLowerCase() === params.title.toLowerCase()
@@ -18,7 +17,7 @@ function filteredSong() {
 </script>
 
 <template>
-    <SearchBar></SearchBar>
+    <SearchBar />
     <div>
         <h1> {{ song.title }} </h1>
     </div>
