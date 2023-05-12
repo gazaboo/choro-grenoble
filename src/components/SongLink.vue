@@ -26,7 +26,7 @@ export default {
             <div class="container-music-keys">
                 <span class="role"> Melody </span>
                 <router-link v-for="key in mainThemeKeys" :key="key" :to="{
-                        name: 'songView',
+                        name: 'SongView',
                         params: {
                             theme: 'melody',
                             instrument: key,
@@ -40,7 +40,7 @@ export default {
             <div v-if="secondVoiceKeys.length > 0" class="container-music-keys">
                 <span class="role"> Second Voice </span>
                 <router-link v-for="key in secondVoiceKeys" :key="key" :to="{
-                        name: 'songView',
+                        name: 'SongView',
                         params: {
                             theme: 'contracanto',
                             instrument: key,

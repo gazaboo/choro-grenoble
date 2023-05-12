@@ -4,7 +4,10 @@
             <a class="navbar-brand" href="/">
                 <img src="../assets/logo.jpg" alt="" width="100">
             </a>
+            <a class="navbar-brand" href="/samba">Sambas</a>
+            <a class="navbar-brand" href="#">Choros</a>
             <a class="navbar-brand">Choro do Beco <br> Grenoble</a>
+
         </div>
     </nav>
 </template>

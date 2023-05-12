@@ -1,0 +1,85 @@
+{
+    "data": [
+        {
+            "title": "A flor e o espinho",
+            "ton": "Dm",
+            "grille": {
+                "Refrain": [
+                    [
+                        {
+                            "id": 1,
+                            "accord": "Dm",
+                            "bass": "C",
+                            "qualite": "",
+                            "modificateur": "|:"
+                        },
+                        {
+                            "id": 2,
+                            "accord": "A",
+                            "qualite": "7",
+                            "modificateur": ""
+                        },
+                        {
+                            "accord": "%",
+                            "qualite": "",
+                            "modificateur": ""
+                        },
+                        {
+                            "accord": "D",
+                            "qualite": "6/9",
+                            "modificateur": ":|",
+                            "note": "Coda"
+                        }
+                    ],
+                    [
+                        {
+                            "accord": "%",
+                            "qualite": "",
+                            "modificateur": ""
+                        },
+                        {
+                            "accord": "D",
+                            "qualite": "6/9",
+                            "modificateur": ":|",
+                            "note": "Coda"
+                        }
+                    ]
+                ],
+                "Partie A": [
+                    {
+                        "accord": "Dm",
+                        "qualite": "",
+                        "modificateur": "|:"
+                    },
+                    {
+                        "accord": "A",
+                        "qualite": "7",
+                        "modificateur": ""
+                    },
+                    {
+                        "accord": "%",
+                        "qualite": "",
+                        "modificateur": ""
+                    },
+                    {
+                        "accord": "Dm",
+                        "qualite": "",
+                        "modificateur": ":|"
+                    }
+                ],
+                "Partie B": [
+                    {
+                        "accord": "Dm",
+                        "qualite": "",
+                        "modificateur": "|:"
+                    },
+                    {
+                        "accord": "A",
+                        "qualite": "7",
+                        "modificateur": ""
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -20,6 +20,8 @@ import { useRoute } from 'vue-router';
 
 export default {
 
+    name: 'SongView',
+
     data() {
         return {
             url: "",
