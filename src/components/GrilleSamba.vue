@@ -6,9 +6,7 @@
             <div class="grille-section">
                 <div class="ligne" v-for="line in this.grille[partie]" :key="line">
                     <div class="cell" v-for="cell in line" :key=cell>
-                        <span class="accord"> {{ cell.accord }}</span>
-                        <span class="qualite"> {{ cell.qualite }}</span>
-                        <span v-if=cell.bass class="bass"> / {{ cell.bass }}</span>
+                        <SplitMesure :cell=cell></SplitMesure>
                     </div>
                 </div>
                 <br />
@@ -19,8 +17,14 @@
 
 <script>
 import grilleSamba from "../assets/grillesSambas.json"
+import SplitMesure from "./SplitMesure.vue"
 
 export default {
+
+    components: {
+        SplitMesure
+    },
+
     data() {
         return {
             grille: [],
@@ -48,27 +52,13 @@ export default {
 
 .cell {
     border: solid black 1px;
-    padding: 1rem;
-    width: 25%;
-    height: 5rem;
+    padding: 0;
+    width: 10rem;
+    height: 10rem;
     text-align: center;
-}
+    margin-bottom: 1rem;
+    margin-right: 1rem;
 
-.accord {
-    font-family: 'Comfortaa', cursive;
-    font-size: 2rem;
-}
-
-.bass {
-    font-family: 'Comfortaa', cursive;
-    font-size: 1.5rem;
-}
-
-.qualite {
-    font-size: 1rem;
-    font-family: 'Comfortaa', cursive;
-    position: relative;
-    top: -1rem;
 }
 
 .grille-section {
@@ -90,3 +80,12 @@ export default {
     flex-direction: row;
 }
 </style>
+
+
+
+
+<!-- <div class="accord" v-for="accord in cell.accords" :key=accord>
+    <span class="accord"> {{ accord.accord }}</span>
+    <span class="qualite"> {{ accord.qualite }}</span>
+    <span v-if=accord.bass class="bass"> / {{ accord.bass }}</span>
+</div> -->
