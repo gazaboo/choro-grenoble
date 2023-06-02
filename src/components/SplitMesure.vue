@@ -1,9 +1,9 @@
 <template>
-    <div class="chord-container" v-if="cell.accords.length == 1">
+    <div class="single-chord-container" v-if="cell.accords.length == 1">
         <ChordRender :accord="cell.accords[0]"></ChordRender>
     </div>
 
-    <div class="chord-container" v-else-if="cell.accords.length == 2">
+    <div class="two-chords-container" v-else-if="cell.accords.length == 2">
         <div class="upper-left">
             <ChordRender :accord="cell.accords[0]"></ChordRender>
         </div>
@@ -26,15 +26,35 @@ export default {
 </script>
 
 <style>
-.chord-container {
+.single-chord-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
+.two-chords-container {
     position: relative;
     height: 100%;
-    overflow: hidden;
+    font-size: 2.5rem;
+}
+
+.single-chord-container .qualite {
+    font-size: 2rem;
+}
+
+.two-chords-container .qualite {
+    font-size: 1.5rem;
+}
+
+.two-chords-container .bass {
+    font-size: 1.5rem;
 }
 
 .upper-left,
 .bottom-right {
-    width: 50%;
+    width: 75%;
     height: 50%;
     position: absolute;
 }
@@ -47,19 +67,13 @@ export default {
 .bottom-right {
     bottom: 0;
     right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
 }
 
-.diagonal {
-    width: 100%;
-    height: 0;
-    border: solid black 1px;
 
-    position: absolute;
-    top: 50%;
-    left: 0;
-
-    transform: rotate(-15deg);
-}
 
 svg {
     width: 100%;

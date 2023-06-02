@@ -37,9 +37,9 @@
                             "numero_mesure": 3,
                             "accords": [
                                 {
-                                    "accord": "Dm6",
+                                    "accord": "Dm",
                                     "bass": "",
-                                    "qualite": ""
+                                    "qualite": "6"
                                 }
                             ],
                             "modificateur_cellule": ""
