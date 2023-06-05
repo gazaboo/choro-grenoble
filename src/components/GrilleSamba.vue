@@ -6,8 +6,9 @@
     <div class="controls">
         <button @click="transpose_grille(1)"> +1 </button>
         <button @click="transpose_grille(11)"> -1 </button>
-        <button @click="reset_grille()"> reset ton </button>
-
+        <button @click="toggle_sharp_bemol(to_sharp = true)"> to Sharp </button>
+        <button @click="toggle_sharp_bemol(to_sharp = false)"> to Bemol </button>
+        <button @click="reset_grille()"> Reset </button>
     </div>
     <div class="main-container">
         <div class="container-section" v-for="partie in this.parties" :key="partie">
@@ -62,22 +63,54 @@ export default {
             return isMinor ? transposed_chord + "m" : transposed_chord;
         },
 
-        transpose_grille(num_demi_tons) {
+        chord_mapper(context) {
             for (const partie in this.grille) {
                 for (const line in this.grille[partie]) {
                     for (let measure_index = 0; measure_index < this.grille[partie][line].length; measure_index++) {
                         for (let chord_index = 0; chord_index < this.grille[partie][line][measure_index].accords.length; chord_index++) {
                             let chord = this.grille[partie][line][measure_index].accords[chord_index];
-                            this.grille[partie][line][measure_index].accords[chord_index].accord = this.transpose_chord(chord.accord, num_demi_tons);
+                            this.grille[partie][line][measure_index].accords[chord_index].accord = context.fn(chord.accord, context.arg);
                             if (chord.bass) {
-                                this.grille[partie][line][measure_index].accords[chord_index].bass = this.transpose_chord(chord.bass, num_demi_tons);
+                                this.grille[partie][line][measure_index].accords[chord_index].bass = context.fn(chord.bass, context.arg);
                             }
-
                         }
                     }
                 }
             }
-        }
+        },
+
+        transpose_grille(num_demi_tons) {
+            this.chord_mapper({
+                fn: this.transpose_chord,
+                arg: num_demi_tons
+            })
+        },
+
+        sharpener(chord, to_sharp) {
+            if ((to_sharp && chord.includes("#")) ||
+                !to_sharp && chord.includes("b")) {
+                return chord
+            }
+
+            let isMinor = chord.includes("m");
+
+            let index = to_sharp ?
+                this.flat_chords.findIndex(elt => (isMinor ? elt + "m" : elt) == chord)
+                : this.sharp_chords.findIndex(elt => (isMinor ? elt + "m" : elt) == chord)
+
+            let sharp_chord = to_sharp ?
+                this.sharp_chords[index]
+                : this.flat_chords[index];
+
+            return isMinor ? sharp_chord + "m" : sharp_chord;
+        },
+
+        toggle_sharp_bemol(to_sharp) {
+            this.chord_mapper({
+                fn: this.sharpener,
+                arg: to_sharp
+            })
+        },
     }
 }
 
