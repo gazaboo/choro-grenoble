@@ -3,7 +3,6 @@
         <span class="accord"> {{ accord.accord }}</span>
         <span class="qualite"> {{ accord.qualite }}</span>
         <span v-if=accord.bass class="bass"> /{{ accord.bass }}</span>
-        &#x25B3;
     </div>
 </template>
 

@@ -3,6 +3,12 @@
         <h1> {{ title }} </h1>
         <h2> {{ tonalite }}</h2>
     </div>
+    <div class="controls">
+        <button @click="transpose_grille(1)"> +1 </button>
+        <button @click="transpose_grille(11)"> -1 </button>
+        <button @click="reset_grille()"> reset ton </button>
+
+    </div>
     <div class="main-container">
         <div class="container-section" v-for="partie in this.parties" :key="partie">
             <h2> {{ partie }} </h2>
@@ -38,32 +44,39 @@ export default {
     created() {
         this.title = grilleSamba.data[0]["title"]
         this.tonalite = grilleSamba.data[0]["tonalite"]
+        this.original_tonalite = grilleSamba.data[0]["tonalite"]
         this.grille = grilleSamba.data[0]["grille"]
+        this.original_grille = JSON.parse(JSON.stringify(this.grille));
         this.parties = Object.keys(grilleSamba.data[0]["grille"])
-        this.transpose_grille(1);
     },
 
     methods: {
+        reset_grille() {
+            this.grille = JSON.parse(JSON.stringify(this.original_grille));
+        },
+
         transpose_chord(chord, num_demi_tons) {
-            let index = this.flat_chords.findIndex(elt => elt == chord);
-            if (chord.includes("m")) {
-                index = this.flat_chords.findIndex(elt => elt + "m" == chord);
-            }
+            let isMinor = chord.includes("m");
+            let index = this.flat_chords.findIndex(elt => (isMinor ? elt + "m" : elt) == chord);
             let transposed_chord = this.flat_chords[(index + num_demi_tons) % 12];
-            return transposed_chord;
+            return isMinor ? transposed_chord + "m" : transposed_chord;
         },
 
         transpose_grille(num_demi_tons) {
             for (const partie in this.grille) {
                 for (const line in this.grille[partie]) {
-                    for (const measure of this.grille[partie][line]) {
-                        for (const accord of measure.accords) {
-                            console.log(accord.accord, this.transpose_chord(accord.accord, num_demi_tons))
+                    for (let measure_index = 0; measure_index < this.grille[partie][line].length; measure_index++) {
+                        for (let chord_index = 0; chord_index < this.grille[partie][line][measure_index].accords.length; chord_index++) {
+                            let chord = this.grille[partie][line][measure_index].accords[chord_index];
+                            this.grille[partie][line][measure_index].accords[chord_index].accord = this.transpose_chord(chord.accord, num_demi_tons);
+                            if (chord.bass) {
+                                this.grille[partie][line][measure_index].accords[chord_index].bass = this.transpose_chord(chord.bass, num_demi_tons);
+                            }
+
                         }
                     }
                 }
             }
-            return true;
         }
     }
 }
