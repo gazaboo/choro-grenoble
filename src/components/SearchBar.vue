@@ -1,8 +1,34 @@
+<template>
+    <div class="container-fluid">
+
+        <form class="d-flex flex-fill">
+            <input v-model="input" @input="e => input = e.target.value" class="form-control me-2" type="search"
+                placeholder="Search" aria-label="Search">
+        </form>
+        <div class="filters">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="top30" value="top30" v-model="listeFilters" />
+                <label class="form-check-label" for="top30">Top 30 Grenoble</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="chantiers" value="chantiers" v-model="listeFilters" />
+                <label class="form-check-label" for="chantiers">Chantiers</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="items">
+        <ChoroLink :music="music" v-for="music in filteredList" :key="music" />
+    </div>
+    <div class="item error" v-if="input && !filteredList.length">
+        <p>No results found!</p>
+    </div>
+</template>
 
 <script>
 import listeChoros from "../assets/liste_totale_choros.json";
 import listeGrenoble from "../assets/listeGrenoble.json";
-import SongLink from "./SongLink.vue";
+import ChoroLink from "./ChoroLink.vue";
 
 export default {
 
@@ -11,7 +37,7 @@ export default {
     },
 
     components: {
-        SongLink
+        ChoroLink: ChoroLink
     },
 
     data() {
@@ -71,6 +97,7 @@ export default {
             // Return only if has partition included
             selectedList = selectedList.filter(itemSong => this.has_partition(itemSong));
 
+            selectedList.sort((a, b) => (a.title > b.title) ? 1 : -1);
             return selectedList;
         }
     }
@@ -78,32 +105,7 @@ export default {
 
 </script>
 
-<template>
-    <div class="container-fluid">
 
-        <form class="d-flex flex-fill">
-            <input v-model="input" @input="e => input = e.target.value" class="form-control me-2" type="search"
-                placeholder="Search" aria-label="Search">
-        </form>
-        <div class="filters">
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="top30" value="top30" v-model="listeFilters" />
-                <label class="form-check-label" for="top30">Top 30 Grenoble</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="chantiers" value="chantiers" v-model="listeFilters" />
-                <label class="form-check-label" for="chantiers">Chantiers</label>
-            </div>
-        </div>
-    </div>
-
-    <div class="items">
-        <SongLink :music="music" v-for="music in filteredList" :key="music" />
-    </div>
-    <div class="item error" v-if="input && !filteredList.length">
-        <p>No results found!</p>
-    </div>
-</template>
   
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");

@@ -79,7 +79,7 @@ h2 {
 
 h3 {
     font-size: 0.75rem;
-    color: rgb(200, 200, 200);
+    color: rgb(218, 218, 218);
     margin: 0 0 0.75rem 0.5rem;
     padding: 0;
 }
