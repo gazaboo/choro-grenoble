@@ -11,11 +11,12 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="/samba">Samba</a>
+                        <router-link class="nav-link disabled" to="/samba">Samba</router-link>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/choro">Choro</a>
+                        <router-link class="nav-link" to="/choro">Choro</router-link>
                     </li>
+
                 </ul>
             </div>
         </div>
