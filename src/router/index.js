@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import ChoroView from '../views/ChoroView.vue'
-import SambaView from '../views/SambaView.vue'
+
 
 const routes = [
   {
@@ -12,7 +11,8 @@ const routes = [
   {
     path: '/choro',
     name: 'ChoroView',
-    component: ChoroView
+    component: () => import('../views/ChoroView.vue')
+
   },
   {
     path: '/song/:theme/:instrument/:title',
@@ -22,7 +22,7 @@ const routes = [
   {
     path: '/samba',
     name: 'SambaView',
-    component: SambaView
+    component: () => import('../views/SambaView.vue')
   }
 ]
 
