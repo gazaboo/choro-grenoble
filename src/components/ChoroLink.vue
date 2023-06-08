@@ -18,8 +18,11 @@ export default {
 
 <template>
     <div v-if="mainThemeKeys.length * mainThemeKeys.length > 0" class="itemSong">
-        <h2 v-html="music.title_clean"> </h2>
-        <h3 v-html="music.author_clean"></h3>
+        <h2 v-if="music.title_clean.includes('highlight')" v-html="music.title_clean"> </h2>
+        <h2 v-else v-html="music.title"> </h2>
+
+        <h3 v-if="music.author_clean.includes('highlight')" v-html="music.author_clean"></h3>
+        <h3 v-else v-html="music.author"></h3>
 
         <div class="container-canto-contraconto">
             <div class="container-music-keys">

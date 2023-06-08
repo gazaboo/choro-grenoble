@@ -48,8 +48,6 @@ export default {
     },
 
     created() {
-        this.filteredList = this.filterList();
-
         this.listeChoros = this.listeChoros.map((item, index) => {
             return {
                 ...item, // spread operator to copy all fields from the original object
@@ -58,6 +56,8 @@ export default {
                 author_clean: this.clean_string(item.author)
             };
         });
+
+        this.filteredList = this.filterList();
     },
 
     methods: {
