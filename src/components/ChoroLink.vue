@@ -18,9 +18,8 @@ export default {
 
 <template>
     <div v-if="mainThemeKeys.length * mainThemeKeys.length > 0" class="itemSong">
-
-        <h2> {{ music.title }} </h2>
-        <h3> {{ music.author }} </h3>
+        <h2 v-html="music.title_clean"> </h2>
+        <h3 v-html="music.author_clean"></h3>
 
         <div class="container-canto-contraconto">
             <div class="container-music-keys">
