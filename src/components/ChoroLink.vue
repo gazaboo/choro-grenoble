@@ -1,8 +1,55 @@
+<template>
+    <div class="itemSong">
+
+        <SongLink :music="music"></SongLink>
+
+        <div class="container-canto-contraconto">
+            <div class="container-music-keys">
+                <span class="role"> Melody </span>
+                <div class="links">
+                    <router-link v-for="key in this.mainThemeKeys()" :key="key" :to="{
+                            name: 'SongView',
+                            params: {
+                                theme: 'melody',
+                                instrument: key,
+                                title: music.title
+                            }
+                        }">
+                        {{ key }}
+                    </router-link>
+                </div>
+            </div>
+
+            <div v-if="this.secondVoiceKeys().length > 0" class="container-music-keys">
+                <span class="role"> Second Voice </span>
+                <div class="links">
+
+                    <router-link v-for="key in this.secondVoiceKeys()" :key="key" :to="{
+                            name: 'SongView',
+                            params: {
+                                theme: 'contracanto',
+                                instrument: key,
+                                title: music.title
+                            }
+                        }">
+                        {{ key }}
+                    </router-link>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
 <script>
+import SongLink from './SongLink.vue'
+
 export default {
-    name: 'SongLink',
-    props: ['music'],
-    computed: {
+    name: 'ChoroLink',
+    props: ['music', 'hasPartition'],
+    components: {
+        SongLink
+    },
+    methods: {
         mainThemeKeys() {
             const keys = Object.keys(this.music.melody)
             return keys.filter(key => this.music.melody[key])
@@ -16,92 +63,30 @@ export default {
 
 </script>
 
-<template>
-    <div v-if="mainThemeKeys.length * mainThemeKeys.length > 0" class="itemSong">
-        <h2 v-if="music.title_clean.includes('highlight')" v-html="music.title_clean"> </h2>
-        <h2 v-else v-html="music.title"> </h2>
-
-        <h3 v-if="music.author_clean.includes('highlight')" v-html="music.author_clean"></h3>
-        <h3 v-else v-html="music.author"></h3>
-
-        <div class="container-canto-contraconto">
-            <div class="container-music-keys">
-                <span class="role"> Melody </span>
-                <router-link v-for="key in mainThemeKeys" :key="key" :to="{
-                        name: 'SongView',
-                        params: {
-                            theme: 'melody',
-                            instrument: key,
-                            title: music.title
-                        }
-                    }">
-                    {{ key }}
-                </router-link>
-            </div>
-
-            <div v-if="secondVoiceKeys.length > 0" class="container-music-keys">
-                <span class="role"> Second Voice </span>
-                <router-link v-for="key in secondVoiceKeys" :key="key" :to="{
-                        name: 'SongView',
-                        params: {
-                            theme: 'contracanto',
-                            instrument: key,
-                            title: music.title
-                        }
-                    }">
-                    {{ key }}
-                </router-link>
-            </div>
-        </div>
-    </div>
-</template>
 
 
 <style scoped>
 /* Card */
 .itemSong {
-    background-color: rgb(97, 163, 99);
-    width: 45%;
-    max-width: 300px;
-    margin: 5px;
-    color: white;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 1px 1px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    width: 75%;
+    border-bottom: solid green 1px;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
 }
 
-/* Titre de la musique */
-h2 {
-    font-size: 1rem;
-    margin: 0.25rem 0 0 0.5rem;
-    padding: 0;
-}
-
-h3 {
-    font-size: 0.75rem;
-    color: rgb(218, 218, 218);
-    margin: 0 0 0.75rem 0.5rem;
-    padding: 0;
-}
 
 /* Container qui contient les clés disponibles */
 .container-music-keys {
-    width: 50%;
-    border-radius: 3px;
-    font-size: 0.5rem;
-    position: relative;
-
+    display: flex;
+    flex-direction: row;
 }
 
 /* Liens vers la partition */
 a {
-    display: inline-block;
-    width: 25%;
+    font-size: 0.75rem;
+    padding: 0.25rem;
     background-color: rgb(70, 104, 19);
     border-radius: 3px;
-    padding: 5px;
     margin-right: 0.5rem;
     text-decoration: none;
     cursor: pointer;
@@ -119,16 +104,18 @@ a:hover {
 .container-canto-contraconto {
     display: flex;
     flex-direction: row;
-    background-color: white;
-    width: 100%;
-    padding: 0.2rem;
+    align-items: center;
+    height: 2rem;
 }
 
 .role {
-    font-size: 0.5rem;
-    position: absolute;
-    top: -1rem;
-    left: 0.25rem;
-    color: rgb(255, 255, 255);
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+
+.links {
+    line-height: 2rem;
 }
 </style>

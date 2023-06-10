@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light custom-nav">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="../assets/logo.jpg" alt="" width="100">
@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <router-link class="nav-link disabled" to="/samba">Samba</router-link>
+                        <router-link class="nav-link" to="/samba">Samba</router-link>
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" to="/choro">Choro</router-link>
@@ -22,3 +22,9 @@
         </div>
     </nav>
 </template>
+
+<style>
+.custom-nav {
+    height: 10vh;
+}
+</style>

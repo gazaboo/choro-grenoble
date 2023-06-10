@@ -1,20 +1,26 @@
 <template>
     <NavBar />
-    <GrilleSamba />
+    <SearchBar :data-to-search=data />
 </template>
 
 <script>
-import GrilleSamba from "@/components/GrilleSamba.vue"
 import NavBar from "@/components/NavBar.vue";
+import SearchBar from '@/components/SearchBar.vue';
+import grillesSambas from "@/assets/grillesSambas.json";
 
 export default {
     name: 'SambaView',
 
     components: {
         NavBar,
-        GrilleSamba
-    }
+        SearchBar
+    },
 
+    data() {
+        return {
+            data: grillesSambas.data
+        }
+    }
 }
 
 </script>

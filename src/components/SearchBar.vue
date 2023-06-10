@@ -4,7 +4,7 @@
             <input @input="onChangedInput" class="form-control me-2" type="search"
                 placeholder="Search by song name or author..." aria-label="Search">
         </form>
-        <div class="filters">
+        <div class="otherfilters">
             <div class="form-check form-check-inline">
                 <input @input="onChangedFilters" class="form-check-input" type="checkbox" id="top30" value="top30" />
                 <label class="form-check-label" for="top30">Top 30 Grenoble</label>
@@ -14,27 +14,33 @@
                     @input="onChangedFilters" />
                 <label class="form-check-label" for="chantiers">Chantiers</label>
             </div>
+        </div>
+        <div v-if="checkPartition" class="items">
+            <ChoroLink :music="music" v-for=" music in this.filteredList" :key="music" />
+        </div>
 
-            <div class="items">
-                <ChoroLink :music="music" v-for=" music in this.filteredList" :key="music" />
-            </div>
-            <div class="item error" v-if="input && !this.filteredList.length">
-                <p>No results found!</p>
-            </div>
+        <div v-else class="items">
+            <SongLink :music="music" v-for=" music in this.filteredList" :key="music" />
+        </div>
+
+        <div class="item error" v-if="input && !this.filteredList.length">
+            <p>No results found!</p>
         </div>
     </div>
 </template>
 
 <script>
 import ChoroLink from "@/components/ChoroLink.vue";
-import listeChoros from "@/assets/liste_totale_choros.json";
 import listeGrenoble from "@/assets/listeGrenoble.json";
 import Fuse from 'fuse.js'
+import SongLink from "./SongLink.vue";
 
 export default {
 
+    props: ['dataToSearch', 'checkPartition'],
     components: {
-        ChoroLink
+        ChoroLink,
+        SongLink
     },
 
     data() {
@@ -43,12 +49,12 @@ export default {
             filteredList: [],
             listeFilters: [],
             listeGrenoble: [],
-            listeChoros: listeChoros.data
+            data: this.dataToSearch
         }
     },
 
     created() {
-        this.listeChoros = this.listeChoros.map((item, index) => {
+        this.data = this.data.map((item, index) => {
             return {
                 ...item, // spread operator to copy all fields from the original object
                 id: index + 1, // add an id field to each object
@@ -79,7 +85,7 @@ export default {
         getGrenobleSelection(name) {
             let filteredList = [];
             for (let songName of listeGrenoble[name]) {
-                let found = listeChoros.data.find(itemSong => itemSong.title == songName)
+                let found = this.data.find(itemSong => itemSong.title == songName)
                 if (found) {
                     filteredList.push(found);
                 }
@@ -164,15 +170,17 @@ export default {
             // Get full list or podium
             let selectedList = [];
             if (this.listeFilters.length == 0 || this.input == "") {
-                selectedList = this.listeChoros;
+                selectedList = this.data;
             } else {
                 for (let filter of this.listeFilters) {
                     selectedList.push(...this.getGrenobleSelection(filter));
                 }
             }
             selectedList.sort((a, b) => (a.title > b.title) ? 1 : -1);
-            // Return only if has partition included
-            selectedList = selectedList.filter(itemSong => this.has_partition(itemSong));
+
+            if (this.checkPartition) {
+                selectedList = selectedList.filter(itemSong => this.has_partition(itemSong));
+            }
 
             if (this.input) {
                 selectedList = this.filterByQuery(selectedList);
