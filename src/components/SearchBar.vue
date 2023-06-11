@@ -4,44 +4,20 @@
             <input @input="onChangedInput" class="form-control me-2" type="search"
                 placeholder="Search by song name or author..." aria-label="Search">
         </form>
-        <div class="otherfilters">
-            <div class="form-check form-check-inline">
-                <input @input="onChangedFilters" class="form-check-input" type="checkbox" id="top30" value="top30" />
-                <label class="form-check-label" for="top30">Top 30 Grenoble</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="chantiers" value="chantiers"
-                    @input="onChangedFilters" />
-                <label class="form-check-label" for="chantiers">Chantiers</label>
-            </div>
-        </div>
-        <div v-if="checkPartition" class="items">
-            <ChoroLink :music="music" v-for=" music in this.filteredList" :key="music" />
-        </div>
-
-        <div v-else class="items">
-            <SongLink :music="music" v-for=" music in this.filteredList" :key="music" />
-        </div>
-
-        <div class="item error" v-if="input && !this.filteredList.length">
-            <p>No results found!</p>
-        </div>
     </div>
 </template>
 
 <script>
-import ChoroLink from "@/components/ChoroLink.vue";
+// import ChoroLink from "@/components/ChoroLink.vue";
 import listeGrenoble from "@/assets/listeGrenoble.json";
 import Fuse from 'fuse.js'
-import SongLink from "./SongLink.vue";
+// import SongLink from "./SongLink.vue";
 
 export default {
 
     props: ['dataToSearch', 'checkPartition'],
-    components: {
-        ChoroLink,
-        SongLink
-    },
+
+    emits: ['filteredData'],
 
     data() {
         return {
@@ -70,6 +46,7 @@ export default {
         onChangedInput(event) {
             this.input = this.clean_string(event.target.value);
             this.filteredList = this.filterList();
+            this.$emit("filteredData", this.filteredList)
         },
 
         clean_string(word) {

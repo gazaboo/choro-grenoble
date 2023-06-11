@@ -72,6 +72,7 @@ export default {
     border-bottom: solid green 1px;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
+
 }
 
 

@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-sm navbar-light bg-light custom-nav">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="../assets/logo.jpg" alt="" width="100">
+                <img class="logo" src="../assets/logo.jpg" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +24,8 @@
 </template>
 
 <style>
-.custom-nav {
+.custom-nav,
+.logo {
     height: 10vh;
 }
 </style>
