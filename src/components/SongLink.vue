@@ -8,13 +8,11 @@ export default {
 
 <template>
     <div class="songInfos">
-        <!-- <h2 v-if="music.title_clean.includes('highlight')" v-html="music.title_clean"> </h2> -->
-        <!-- <h2 v-else v-html="music.title"> </h2> -->
-        <h2> {{ music.title }} </h2>
-        <h2> {{ music.author }} </h2>
+        <h2 v-if="music.title_html" v-html="music.title_html"></h2>
+        <h2 v-else> {{ music.title }}</h2>
 
-        <!-- <h3 v-if="music.author_clean.includes('highlight')" v-html="music.author_clean"></h3>
-        <h3 v-else v-html="music.author"></h3> -->
+        <h3 v-if="music.author_html" v-html="music.author_html"></h3>
+        <h3 v-else> {{ music.author }}</h3>
     </div>
 </template>
 

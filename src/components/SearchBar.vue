@@ -1,17 +1,13 @@
 <template>
-    <div class="container-fluid">
-        <form class="d-flex flex-fill">
-            <input @input="onChangedInput" class="form-control me-2" type="search"
-                placeholder="Search by song name or author..." aria-label="Search">
-        </form>
-    </div>
+    <form class="container-fluid d-flex flex-fill mx-3">
+        <input @input="onChangedInput" class="form-control mt-0" type="search"
+            placeholder="Search by song name or author..." aria-label="Search">
+    </form>
 </template>
 
 <script>
-// import ChoroLink from "@/components/ChoroLink.vue";
-import listeGrenoble from "@/assets/listeGrenoble.json";
+
 import Fuse from 'fuse.js'
-// import SongLink from "./SongLink.vue";
 
 export default {
 
@@ -23,19 +19,18 @@ export default {
         return {
             input: "",
             filteredList: [],
-            listeFilters: [],
-            listeGrenoble: [],
-            data: this.dataToSearch
+            data: []
         }
     },
 
     created() {
-        this.data = this.data.map((item, index) => {
+
+        this.data = this.dataToSearch.map((item, index) => {
             return {
                 ...item, // spread operator to copy all fields from the original object
-                id: index + 1, // add an id field to each object
-                title_clean: this.clean_string(item.title),
-                author_clean: this.clean_string(item.author)
+                id: index + 1,
+                title_html: this.clean_string(item.title),
+                author_html: this.clean_string(item.author)
             };
         });
 
@@ -59,28 +54,28 @@ export default {
                 .replaceAll(/[ü]/g, "u")
         },
 
-        getGrenobleSelection(name) {
-            let filteredList = [];
-            for (let songName of listeGrenoble[name]) {
-                let found = this.data.find(itemSong => itemSong.title == songName)
-                if (found) {
-                    filteredList.push(found);
-                }
-            }
-            return filteredList;
-        },
+        // getGrenobleSelection(name) {
+        //     let filteredList = [];
+        //     for (let songName of listeGrenoble[name]) {
+        //         let found = this.data.find(itemSong => itemSong.title == songName)
+        //         if (found) {
+        //             filteredList.push(found);
+        //         }
+        //     }
+        //     return filteredList;
+        // },
 
-        has_partition(itemSong) {
-            return Object.entries(itemSong.melody).map(entry => entry[1] != "").includes(true) ||
-                Object.entries(itemSong.contracanto).map(entry => entry[1] != "").includes(true)
-        },
+        // has_partition(itemSong) {
+        //     return Object.entries(itemSong.melody).map(entry => entry[1] != "").includes(true) ||
+        //         Object.entries(itemSong.contracanto).map(entry => entry[1] != "").includes(true)
+        // },
 
         filterByQuery(selectedList) {
             const options = {
                 includeScore: true,
                 shouldSort: true,
                 includeMatches: true,
-                keys: ['title_clean', 'author_clean']
+                keys: ['title_html', 'author_html']
             }
             const fuse = new Fuse(selectedList, options)
             let result = fuse.search(this.input)
@@ -118,7 +113,7 @@ export default {
 
             for (let elt of fuseSearchResult) {
                 elt.matches.forEach(match => {
-                    if (match.key == "title_clean") {
+                    if (match.key == "title_html") {
                         match.value = elt.item.title
                     } else {
                         match.value = elt.item.author
@@ -144,30 +139,29 @@ export default {
 
         filterList() {
 
-            // Get full list or podium
-            let selectedList = [];
-            if (this.listeFilters.length == 0 || this.input == "") {
-                selectedList = this.data;
-            } else {
-                for (let filter of this.listeFilters) {
-                    selectedList.push(...this.getGrenobleSelection(filter));
-                }
+            if (this.input == "") {
+                let clone = JSON.parse(JSON.stringify(this.data))
+                clone.forEach(elt => {
+                    elt.title_html = elt.title;
+                    elt.author_html = elt.author
+                })
+                return clone
             }
+            let selectedList = this.data;
             selectedList.sort((a, b) => (a.title > b.title) ? 1 : -1);
-
-            if (this.checkPartition) {
-                selectedList = selectedList.filter(itemSong => this.has_partition(itemSong));
-            }
 
             if (this.input) {
                 selectedList = this.filterByQuery(selectedList);
                 selectedList = this.highlight(selectedList, "highlight");
             }
 
+            for (let item of selectedList) {
+                item.title_html = item.title_html.includes("highlight") ? item.title_html : item.title;
+                item.author_html = item.author_html.includes("highlight") ? item.author_html : item.author
+            }
+
             return selectedList;
         },
-
-
     }
 }
 </script>

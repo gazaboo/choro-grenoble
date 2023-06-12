@@ -68,7 +68,6 @@ export default {
 <style scoped>
 /* Card */
 .itemSong {
-    width: 75%;
     border-bottom: solid green 1px;
     margin-bottom: 1rem;
     padding-bottom: 1rem;

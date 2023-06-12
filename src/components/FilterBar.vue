@@ -1,7 +1,12 @@
 <template>
-    <div class="filter">By Authors</div>
-    <div class="filter">By Key</div>
-    <div class="otherfilters">
+    <div class="filter">Explore</div>
+
+    <a class="custom-collapse-btn btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#grenoble"
+        aria-expanded="false" aria-controls="grenoble">
+        Grenoble
+    </a>
+
+    <div id="grenoble" class=" collapse grenobleFilters">
         <div class="form-check form-check-inline">
             <input v-model="filters.podium" id="podium" class="form-check-input" type="checkbox" />
             <label class="form-check-label" for="podium">Top 30 Grenoble</label>
@@ -12,9 +17,18 @@
         </div>
     </div>
 
-    <div class="form-check form-check-inline" v-for="author of authors" :key="author">
-        <input type="checkbox" class="btn-check" v-model="filters.selectedAuthors" :id="author[0]" :value="author[0]">
-        <label :for="author[0]" class="btn btn-sm btn-outline-primary"> {{ author }} </label>
+    <a class="custom-collapse-btn btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#authors"
+        aria-expanded="false" aria-controls="authors">
+        By Authors
+    </a>
+    <div class="collapse authors-container" id="authors">
+        <div class="form-check form-check-inline" v-for="author of authors" :key="author">
+            <input type="checkbox" class="btn-check" v-model="filters.selectedAuthors" :id="author[0]" :value="author[0]">
+            <label :for="author[0]" class="custom-btn btn btn-sm btn-outline-primary">
+                <span class="author"> {{ author[0] }} </span>
+                <span class="author"> ({{ author[1] }}) </span>
+            </label>
+        </div>
     </div>
 </template>
 
@@ -62,7 +76,23 @@ export default {
 </script>
 
 <style>
-label {
+.custom-collapse-btn {
+    display: block;
+    margin: 1rem 0;
+}
+
+.custom-btn {
     font-size: 0.5rem;
+}
+
+.authors-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.authors-container>div {
+    padding: 0;
+    margin: 0.1rem;
 }
 </style>
