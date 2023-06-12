@@ -1,4 +1,5 @@
 <template>
+    <NavBar />
     <div class="infos">
         <h1> {{ title }} </h1>
         <h2> {{ tonalite }}</h2>
@@ -24,14 +25,19 @@
 </template>
 
 <script>
-import grilleSamba from "../assets/grillesSambas.json"
-import SplitMesure from "./SplitMesure.vue"
 
+import grilleSamba from "@/assets/grillesSambas.json"
+import SplitMesure from "@/components/SplitMesure.vue"
+import NavBar from "@/components/NavBar.vue"
 export default {
 
+    name: 'GrilleSambaView',
+
     components: {
-        SplitMesure
+        SplitMesure,
+        NavBar
     },
+
 
     data() {
         return {

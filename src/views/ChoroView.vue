@@ -21,11 +21,6 @@
 
 <script>
 
-onresize = (event) => {
-  console.log(event)
-
-};
-
 // @ is an alias to /src
 import SearchBar from '@/components/SearchBar.vue';
 import NavBar from '@/components/NavBar.vue';

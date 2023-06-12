@@ -11,7 +11,7 @@ import Fuse from 'fuse.js'
 
 export default {
 
-    props: ['dataToSearch', 'checkPartition'],
+    props: ['dataToSearch'],
 
     emits: ['filteredData'],
 

@@ -25,6 +25,11 @@ const routes = [
     component: () => import('../views/SambaView.vue')
   },
   {
+    path: '/samba/:title',
+    name: 'GrilleSambaView',
+    component: () => import('../views/GrilleSambaView.vue')
+  },
+  {
     path: '/*',
     name: '404',
     component: HomeView

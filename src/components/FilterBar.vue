@@ -1,5 +1,5 @@
 <template>
-    <div class="filter">Explore</div>
+    <h2>Explore</h2>
 
     <a class="custom-collapse-btn btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#grenoble"
         aria-expanded="false" aria-controls="grenoble">
@@ -82,7 +82,7 @@ export default {
 }
 
 .custom-btn {
-    font-size: 0.5rem;
+    font-size: 1rem;
 }
 
 .authors-container {

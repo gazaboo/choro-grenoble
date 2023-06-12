@@ -109,7 +109,7 @@ a:hover {
 }
 
 .role {
-    font-size: 0.75rem;
+    font-size: 1rem;
     display: inline-flex;
     align-items: center;
     margin-right: 0.5rem;

@@ -1,26 +1,76 @@
 <template>
-    <NavBar />
-    <SearchBar :data-to-search=data />
+  <div class="main-container">
+    <div class="nav_bar row">
+      <NavBar />
+    </div>
+    <div class="search_bar row">
+      <SearchBar @filtered-data="updatedSelection" :data-to-search=data :check-partition=true />
+    </div>
+    <div class="bottom row">
+      <div class="col-4 filters">
+        <FilterBar @changed-selection="updatedSelection" :data="data"></FilterBar>
+      </div>
+      <div class="col-8 results">
+        <div class="container-fluid songs">
+          <SambaLink :music="music" v-for=" music in this.filteredData" :key="music" class="itemSong" />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue";
+
+// @ is an alias to /src
 import SearchBar from '@/components/SearchBar.vue';
-import grillesSambas from "@/assets/grillesSambas.json";
+import NavBar from '@/components/NavBar.vue';
+import listeSambas from "@/assets/grillesSambas.json";
+import FilterBar from '@/components/FilterBar.vue';
+import SambaLink from '@/components/SambaLink.vue';
 
 export default {
-    name: 'SambaView',
+  name: 'HomeView',
+  components: {
+    SearchBar,
+    NavBar,
+    SambaLink,
+    FilterBar,
+  },
 
-    components: {
-        NavBar,
-        SearchBar
+  data() {
+    return {
+      data: listeSambas.data,
+      filteredData: [],
+    }
+  },
+
+  created() {
+    this.filteredData = this.data.sort((a, b) => (a.title > b.title) ? 1 : -1);
+  },
+
+  methods: {
+
+    updatedSelection(filteredData) {
+      this.filteredData = filteredData;
     },
 
-    data() {
-        return {
-            data: grillesSambas.data
-        }
-    }
+  }
 }
 
+
 </script>
+
+<style>
+.filters,
+.results {
+  height: 80vh;
+  overflow: scroll;
+}
+
+.itemSong {
+  border-bottom: solid green 1px;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+
+}
+</style>
