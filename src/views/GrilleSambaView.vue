@@ -26,38 +26,53 @@
 
 <script>
 
-import grilleSamba from "@/assets/grillesSambas.json"
+import grillesSambas from "@/assets/grillesSambas.json"
 import SplitMesure from "@/components/SplitMesure.vue"
 import NavBar from "@/components/NavBar.vue"
+import { useRoute } from 'vue-router';
+
 export default {
 
     name: 'GrilleSambaView',
+
+    props: ['dataGrille'],
 
     components: {
         SplitMesure,
         NavBar
     },
 
-
     data() {
         return {
             grille: [],
             parties: [],
             flat_chords: ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"],
-            sharp_chords: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+            sharp_chords: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"],
+            title: "",
         }
     },
 
     created() {
-        this.title = grilleSamba.data[0]["title"]
-        this.tonalite = grilleSamba.data[0]["tonalite"]
-        this.original_tonalite = grilleSamba.data[0]["tonalite"]
-        this.grille = grilleSamba.data[0]["grille"]
+        const route = useRoute();
+        const params = route.params;
+        this.title = params.title;
+        const song = this.getSong();
+        this.tonalite = song["tonalite"]
+        this.original_tonalite = song["tonalite"]
+        this.grille = song["grille"]
         this.original_grille = JSON.parse(JSON.stringify(this.grille));
-        this.parties = Object.keys(grilleSamba.data[0]["grille"])
+        this.parties = Object.keys(song["grille"])
     },
 
     methods: {
+
+        getSong() {
+            let song = Object.values(grillesSambas).find((itemSong) =>
+                itemSong.title.toLowerCase() === this.title.toLowerCase()
+            );
+            return song
+        },
+
         reset_grille() {
             this.grille = JSON.parse(JSON.stringify(this.original_grille));
         },

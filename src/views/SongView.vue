@@ -39,11 +39,6 @@ export default {
         this.title = params.title;
         const song = this.getSong();
         this.url = song[params.theme][params.instrument];
-
-        console.log("Test -------> ", this.title);
-        console.log("Test -------> ", song);
-        console.log("params ---> ", params);
-        console.log("url ------->", this.url)
     },
     methods: {
         getSong() {

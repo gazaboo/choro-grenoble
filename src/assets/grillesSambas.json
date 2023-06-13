@@ -1,232 +1,2366 @@
 {
-    "data": [
-        {
-            "title": "A flor e o espinho",
-            "author": "Nelson Cavaquinho",
-            "tonalite": "Dm",
-            "grille": {
-                "Refrain": {
-                    "ligne 1": [
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                },
-                                {
-                                    "accord": "A",
-                                    "bass": "",
-                                    "qualite": "7"
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 2,
-                            "accords": [
-                                {
-                                    "accord": "A",
-                                    "bass": "",
-                                    "qualite": "7"
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 3,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "",
-                                    "qualite": "6"
-                                }
-                            ],
-                            "modificateur_cellule": ""
-                        },
-                        {
-                            "numero_mesure": 4,
-                            "accords": [
-                                {
-                                    "accord": "G",
-                                    "bass": "B",
-                                    "qualite": "6"
-                                }
-                            ],
-                            "modificateur_cellule": ""
-                        }
-                    ],
-                    "ligne 2": [
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        }
-                    ]
-                },
-                "Partie A": {
-                    "ligne 1": [
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        }
-                    ],
-                    "ligne 2": [
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        }
-                    ]
-                },
-                "Partie B": {
-                    "ligne 1": [
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        }
-                    ],
-                    "ligne 2": [
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        },
-                        {
-                            "numero_mesure": 1,
-                            "accords": [
-                                {
-                                    "accord": "Dm",
-                                    "bass": "C",
-                                    "qualite": ""
-                                }
-                            ],
-                            "modificateur_cellule": "|:"
-                        }
-                    ]
-                }
+    "A flor e o espinho - Nelson Cavaquinho": {
+        "title": "A flor e o espinho",
+        "author": "Nelson Cavaquinho",
+        "tonalite": "Dm",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 3,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "",
+                                "qualite": "6"
+                            }
+                        ],
+                        "modificateur_cellule": ""
+                    },
+                    {
+                        "numero_mesure": 4,
+                        "accords": [
+                            {
+                                "accord": "G",
+                                "bass": "B",
+                                "qualite": "6"
+                            }
+                        ],
+                        "modificateur_cellule": ""
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie B": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
             }
         }
-    ]
+    },
+    "O poder da criacao": {
+        "title": "O poder da criacao",
+        "author": "Paulo Nogueira",
+        "tonalite": "A",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 3,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "",
+                                "qualite": "6"
+                            }
+                        ],
+                        "modificateur_cellule": ""
+                    },
+                    {
+                        "numero_mesure": 4,
+                        "accords": [
+                            {
+                                "accord": "G",
+                                "bass": "B",
+                                "qualite": "6"
+                            }
+                        ],
+                        "modificateur_cellule": ""
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie B": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "A Amizade - Fundo de Quintal": {
+        "title": "A Amizade",
+        "author": "Fundo de Quintal",
+        "tonalite": "C",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 3,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "",
+                                "qualite": "6"
+                            }
+                        ],
+                        "modificateur_cellule": ""
+                    },
+                    {
+                        "numero_mesure": 4,
+                        "accords": [
+                            {
+                                "accord": "G",
+                                "bass": "B",
+                                "qualite": "6"
+                            }
+                        ],
+                        "modificateur_cellule": ""
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie B": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "A Luz de Tieta - Caetano Veloso": {
+        "title": "A Luz de Tieta",
+        "author": "Caetano Veloso",
+        "tonalite": "Cm",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "A Menina Dança - Os Novos Baianos": {
+        "title": "A Menina Dança",
+        "author": "Os Novos Baianos",
+        "tonalite": "F",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "A Voz do Morro - Zé Keti": {
+        "title": "A Voz do Morro",
+        "author": "Zé Keti",
+        "tonalite": "A",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Acreditar - Roberto Ribeiro": {
+        "title": "Acreditar",
+        "author": "Roberto Ribeiro",
+        "tonalite": "C",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Agua de Beber - Tom Jobim": {
+        "title": "Agua de Beber",
+        "author": "Tom Jobim",
+        "tonalite": "Bm",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Aguas de Março - Tom Jobim": {
+        "title": "Aguas de Março",
+        "author": "Tom Jobim",
+        "tonalite": "Bb",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Alguem me Avisou - Ivone Lara": {
+        "title": "Alguem me Avisou",
+        "author": "Ivone Lara",
+        "tonalite": "D",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Apesar de Você - Chico Buarque": {
+        "title": "Apesar de Você",
+        "author": "Chico Buarque",
+        "tonalite": "D",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Argumento - Paulinho da Viola": {
+        "title": "Argumento",
+        "author": "Paulinho da Viola",
+        "tonalite": "D",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "As Rosas não Falam - Cartola": {
+        "title": "As Rosas não Falam",
+        "author": "Cartola",
+        "tonalite": "Dm",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Berimbau / Consolação - Baden Powell": {
+        "title": "Berimbau / Consolação",
+        "author": "Baden Powell",
+        "tonalite": "Dm",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Besta é Tu - Os Novos Baianos": {
+        "title": "Besta é Tu",
+        "author": "Os Novos Baianos",
+        "tonalite": "E",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Bloco na Rua - Sergio Sampaio": {
+        "title": "Bloco na Rua",
+        "author": "Sergio Sampaio",
+        "tonalite": "Cm",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Brasil Pandeiro - Assis Valente": {
+        "title": "Brasil Pandeiro",
+        "author": "Assis Valente",
+        "tonalite": "B",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    },
+    "Brigas Nunca Mais - Vinicius de Moraes": {
+        "title": "Brigas Nunca Mais",
+        "author": "Vinicius de Moraes",
+        "tonalite": "E",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            },
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 2,
+                        "accords": [
+                            {
+                                "accord": "A",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ],
+                "ligne 2": [
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "Dm",
+                                "bass": "C",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    }
+                ]
+            }
+        }
+    }
 }

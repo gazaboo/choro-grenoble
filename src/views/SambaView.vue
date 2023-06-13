@@ -39,13 +39,13 @@ export default {
 
   data() {
     return {
-      data: listeSambas.data,
-      filteredData: [],
+      data: Object.values(listeSambas),
+      filteredData: []
     }
   },
 
   created() {
-    this.filteredData = this.data.sort((a, b) => (a.title > b.title) ? 1 : -1);
+    this.filteredData = this.data.sort((a, b) => (a > b) ? 1 : -1);
   },
 
   methods: {
