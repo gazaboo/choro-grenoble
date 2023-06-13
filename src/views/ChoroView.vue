@@ -3,15 +3,15 @@
     <div class="nav_bar row">
       <NavBar />
     </div>
-    <div class="search_bar row">
-      <SearchBar @filtered-data="updatedSelection" :data-to-search=data :check-partition=true />
-    </div>
-    <div class="bottom row">
-      <div class="col-4 filters">
+    <div class="row">
+      <div class="col-md-4 filters">
         <FilterBar @changed-selection="updatedSelection" :data="data"></FilterBar>
       </div>
-      <div class="col-8 results">
-        <div class="container-fluid songs">
+      <div class="col-md-8 results">
+        <div class="row search_bar ">
+          <SearchBar @filtered-data="updatedSelection" :data-to-search=data :check-partition=true />
+        </div>
+        <div class="row container-fluid songs">
           <ChoroLink :music="music" v-for=" music in this.filteredData" :key="music" />
         </div>
       </div>
@@ -64,10 +64,13 @@ export default {
 
 </script>
 
-<style>
-.filters,
+<style lang="scss">
 .results {
   height: 80vh;
+  overflow: scroll;
+}
+
+.filters {
   overflow: scroll;
 }
 </style>

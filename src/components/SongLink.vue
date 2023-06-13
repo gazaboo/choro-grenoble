@@ -15,4 +15,12 @@ export default {
     </div>
 </template>
 
-<style  scoped></style>
+<style  scoped>
+h3 {
+    font-size: 1.2rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+</style>

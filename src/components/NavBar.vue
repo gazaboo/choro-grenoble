@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-light bg-light justify-content-start">
+    <nav class="navbar navbar-light bg-white justify-content-start">
         <a class="navbar-brand" href="#">
             <img class="logo img-fluid" src="../assets/logo.jpg" alt="">
         </a>
