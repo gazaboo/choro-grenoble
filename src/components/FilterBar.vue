@@ -1,44 +1,25 @@
 <template>
-    <div class="filter-panel">
+    <div class="filter-bar">
 
-        <div class="d-flex flex-row flex-md-column filter-bar">
-
-            <h3>Explore</h3>
-
-
-            <div class="d-flex flex-row flex-md-column filter-list gap-5">
-
-                <a class="custom-collapse-btn btn btn-primary order-md-1" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#grenoble" aria-expanded="false" aria-controls="grenoble">
-                    Grenoble
-                </a>
-                <a class="custom-collapse-btn btn btn-primary order-md-3" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#authors" aria-expanded="false" aria-controls="authors">
-                    By Authors
-                </a>
-                <div class="w-100"></div>
-                <div id="grenoble" class=" collapse grenobleFilters col-md-6">
-                    <div class="form-check form-check-inline">
-                        <input v-model="filters.podium" id="podium" class="form-check-input" type="checkbox" />
-                        <label class="form-check-label" for="podium">Top 30 Grenoble</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input v-model="filters.chantiers" id="chantiers" class="form-check-input" type="checkbox" />
-                        <label class="form-check-label" for="chantiers">Chantiers</label>
-                    </div>
-                </div>
-
-
-                <div class="collapse authors-container order-md-4" id="authors">
-                    <div class="form-check form-check-inline" v-for="author of authors" :key="author">
-                        <input type="checkbox" class="btn-check" v-model="filters.selectedAuthors" :id="author[0]"
-                            :value="author[0]">
-                        <label :for="author[0]" class="custom-btn btn btn-sm btn-outline-primary">
-                            <span class="author"> {{ author[0] }} </span>
-                            <span class="author"> ({{ author[1] }}) </span>
-                        </label>
-                    </div>
-                </div>
+        <div class="filter-bar-buttons">
+            <span class="filter-bar-title">Explore</span>
+            <a class="custom-collapse-btn order-md-3" type="button" data-bs-toggle="collapse" data-bs-target="#authors"
+                aria-expanded="false" aria-controls="authors">
+                Authors
+            </a>
+            <a class="custom-collapse-btn order-md-1 disabled" type="button" data-bs-toggle="collapse"
+                data-bs-target="#grenoble" aria-expanded="false" aria-controls="grenoble">
+                Key
+            </a>
+        </div>
+        <div class="authors-container collapse order-md-4" id="authors">
+            <div class="form-check form-check-inline author-link" v-for="author of authors" :key="author">
+                <input type="checkbox" class="btn-check" v-model="filters.selectedAuthors" :id="author[0]"
+                    :value="author[0]">
+                <label :for="author[0]" class="author-pill">
+                    <span class="author"> {{ author[0] }} </span>
+                    <span class="author"> ({{ author[1] }}) </span>
+                </label>
             </div>
         </div>
     </div>
@@ -88,29 +69,66 @@ export default {
 </script>
 
 <style lang="scss">
-h3 {
+.author-pill {
+    background-color: rgb(142, 142, 255);
+    color: white;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    flex-basis: auto;
+    padding: 0.25em 0.5em 0.25em 0.5em;
+
+    &:hover {
+        background-color: lightblue;
+    }
+}
+
+.filter-bar-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.filter-bar-title {
     display: inline-flex;
     align-items: center;
     padding-right: 1rem;
+    font-size: 1rem;
+    margin: 0;
 }
 
 .custom-collapse-btn {
     display: block;
-    margin: 1rem 0;
-}
-
-.custom-btn {
-    font-size: 1rem;
+    padding: 0.5rem;
+    margin: 1rem;
+    background-color: #d7d7d7;
+    text-decoration: none;
+    color: black;
 }
 
 .authors-container {
+    background-color: #fff;
+    padding-bottom: 1em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
 .authors-container>div {
+    display: flex;
+    flex-direction: row;
     padding: 0;
     margin: 0.1rem;
+}
+
+.filter-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 1em;
+    gap: 1em;
+
+    @media (min-width: 768px) {
+        flex-direction: column;
+    }
+
 }
 </style>

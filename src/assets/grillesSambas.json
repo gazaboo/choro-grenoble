@@ -1030,14 +1030,9 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
-                                "bass": "C",
-                                "qualite": ""
-                            },
-                            {
-                                "accord": "A",
+                                "accord": "C",
                                 "bass": "",
-                                "qualite": "7"
+                                "qualite": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1046,7 +1041,51 @@
                         "numero_mesure": 2,
                         "accords": [
                             {
-                                "accord": "A",
+                                "accord": "G",
+                                "bass": "",
+                                "qualite": "7"
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 3,
+                        "accords": [
+                            {
+                                "accord": "C",
+                                "bass": "",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": ""
+                    },
+                    {
+                        "numero_mesure": 4,
+                        "accords": [
+                            {
+                                "accord": "%",
+                                "bass": "",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": ""
+                    },
+                    {
+                        "numero_mesure": 5,
+                        "accords": [
+                            {
+                                "accord": "%",
+                                "bass": "",
+                                "qualite": ""
+                            }
+                        ],
+                        "modificateur_cellule": ""
+                    },
+                    {
+                        "numero_mesure": 6,
+                        "accords": [
+                            {
+                                "accord": "C",
                                 "bass": "",
                                 "qualite": "7"
                             }
@@ -1060,7 +1099,7 @@
                         "accords": [
                             {
                                 "accord": "Dm",
-                                "bass": "C",
+                                "bass": "",
                                 "qualite": ""
                             }
                         ],
