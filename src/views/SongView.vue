@@ -19,18 +19,11 @@
                     allowfullscreen></iframe>
             </div>
             <div v-if="!this.youtube.length">
-                No Video
+                No Video yet
             </div>
         </div>
     </div>
-
-
     <iframe class="musescore" :src="this.url" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
-    <!-- <div v-for="video in song.youtube" :key="video">
-        <iframe width="560" height="315" :src="video" title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-    </div> -->
 </template>
 
 <script>
