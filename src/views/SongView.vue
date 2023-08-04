@@ -3,8 +3,29 @@
     <div>
         <h1> {{ this.title }} </h1>
     </div>
-    <iframe class="musescore" :src="this.url" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
 
+    <div class="filter-bar">
+        <div class="filter-bar-buttons">
+            <span class="filter-bar-title">Explore</span>
+            <a class="custom-collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#authors"
+                aria-expanded="false" aria-controls="authors">
+                Youtube
+            </a>
+        </div>
+        <div class="authors-container collapse" id="authors">
+            <div class="form-check form-check-inline author-link" v-for="url of this.youtube" :key="url">
+                <iframe width="560" height="315" :src="url" title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+            <div v-if="!this.youtube.length">
+                No Video
+            </div>
+        </div>
+    </div>
+
+
+    <iframe class="musescore" :src="this.url" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
     <!-- <div v-for="video in song.youtube" :key="video">
         <iframe width="560" height="315" :src="video" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -39,6 +60,7 @@ export default {
         this.title = params.title;
         const song = this.getSong();
         this.url = song[params.theme][params.instrument];
+        this.youtube = song.youtube.filter(url => url != "");
     },
     methods: {
         getSong() {
@@ -46,7 +68,7 @@ export default {
                 itemSong.title.toLowerCase() === this.title.toLowerCase()
             );
             return song
-        }
+        },
     }
 }
 </script>
