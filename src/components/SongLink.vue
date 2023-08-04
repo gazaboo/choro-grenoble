@@ -18,9 +18,11 @@ export default {
 <style  scoped>
 h3 {
     font-size: 1.2rem;
+    margin: 0.25rem 0;
 }
 
 h4 {
     font-size: 1rem;
+    margin: 0.25rem 0;
 }
 </style>

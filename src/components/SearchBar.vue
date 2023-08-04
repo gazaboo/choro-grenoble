@@ -1,14 +1,13 @@
 <template>
-    <form class="container-fluid d-flex flex-fill mx-3">
+    <form class="container-fluid d-flex flex-fill">
         <input @input="onChangedInput" class="form-control mt-0" type="search"
             placeholder="Search by song name or author..." aria-label="Search">
     </form>
 </template>
 
+
 <script>
-
 import Fuse from 'fuse.js'
-
 export default {
 
     props: ['dataToSearch'],
@@ -168,6 +167,10 @@ export default {
 
  
 <style>
+form {
+    padding: 0 !important;
+}
+
 .items {
     display: flex;
     flex-wrap: wrap;
@@ -180,24 +183,25 @@ export default {
     color: white;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-        rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+        rgba(18, 187, 35, 0.06) 0px 1px 2px 0px;
     background-color: tomato;
 }
 
 .highlight {
-    color: aquamarine;
+    font-weight: 900;
+    color: rgb(58, 117, 0);
 }
 
 input {
     display: block;
-    margin: 20px auto;
+    margin: 0;
     padding: 10px 45px;
     background-size: 15px 15px;
     font-size: 16px;
     border: none;
     border-radius: 5px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: rgba(22, 193, 36, 0.25) 0px 2px 5px -1px,
+        rgba(32, 167, 23, 0.3) 0px 1px 3px -1px;
 }
 
 

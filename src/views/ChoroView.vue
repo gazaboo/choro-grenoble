@@ -1,13 +1,11 @@
 <template>
   <div class="main-container">
-    <NavBar class="row nav_bar" />
-    <div class="row">
-      <FilterBar class="col-md-4 filters" @changed-selection="updatedSelection" :data="data"></FilterBar>
-      <div class="col-md-8 results">
-        <SearchBar class="search_bar " @filtered-data="updatedSelection" :data-to-search=data :check-partition=true />
-        <div class="container-fluid">
-          <ChoroLink :music="music" v-for=" music in this.filteredData" :key="music" />
-        </div>
+    <NavBar />
+    <SearchBar @filtered-data="updatedSelection" :data-to-search=data :check-partition=true />
+    <FilterBar @changed-selection="updatedSelection" :data="data"></FilterBar>
+    <div class="row results">
+      <div class="container-fluid">
+        <ChoroLink :music="music" v-for=" music in this.filteredData" :key="music" />
       </div>
     </div>
   </div>

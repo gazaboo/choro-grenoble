@@ -1,8 +1,6 @@
 <template>
-    <nav class="navbar navbar-light bg-white justify-content-start">
-        <a class="navbar-brand" href="#">
-            <img class="logo img-fluid" src="../assets/logo.jpg" alt="">
-        </a>
+    <nav id="nav" class="navbar navbar-light bg-white">
+        <img class="navbar-brand logo img-fluid" src="../assets/logo.jpg" alt="">
 
         <ul class="navbar-nav flex-row">
             <li class="nav-item">
@@ -15,9 +13,16 @@
     </nav>
 </template>
 
-<style>
+<style scoped>
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0;
+}
+
 .logo {
-    width: 5rem;
+    width: 4rem;
 }
 
 li {

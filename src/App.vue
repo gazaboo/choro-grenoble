@@ -6,14 +6,19 @@ export default {
 </script>
 
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <style>
-html,
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
 body {
-  margin: 5px
+  min-height: 100vh;
+  margin: 0 1rem;
 }
 </style>
