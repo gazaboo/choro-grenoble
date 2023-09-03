@@ -11,7 +11,7 @@
             <ChordRender :accord="cell.accords[1]"></ChordRender>
         </div>
         <svg>
-            <line x1="0" y1="100%" x2="100%" y2="0" style="stroke:rgb(0,0,0); stroke-width:2" />
+            <line x1="0" y1="100%" x2="100%" y2="0" style="stroke:rgb(0,0,0, 0.5); stroke-width:1" />
         </svg>
     </div>
 </template>
@@ -25,43 +25,41 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+$base-font-size: 2em;
+$two-chords-font-size: 0.9 * $base-font-size;
+
+.single-chord-container,
+.two-chords-container {
+    border: solid rgb(0, 0, 0) 1px;
+    margin-top: -1px;
+    margin-left: -1px;
+}
+
 .single-chord-container {
-    height: 100%;
+    font-size: $base-font-size;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: $base-font-size;
 }
 
 .two-chords-container {
+    font-size: $two-chords-font-size;
     position: relative;
-    height: 100%;
-    font-size: 2.5rem;
-}
-
-.single-chord-container .qualite {
-    font-size: 2rem;
-}
-
-.two-chords-container .qualite {
-    font-size: 1.5rem;
-}
-
-.two-chords-container .bass {
-    font-size: 1.5rem;
 }
 
 .upper-left,
 .bottom-right {
-    width: 75%;
-    height: 50%;
     position: absolute;
+    width: 100%;
+    height: 50%;
 }
 
-.upper-left {
-    top: 0;
-    left: 0;
+
+.upper-left .chord {
+    position: relative;
+    top: -0.2em;
 }
 
 .bottom-right {
@@ -69,11 +67,9 @@ export default {
     right: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 1rem;
+    justify-content: end;
+    padding-right: 10%;
 }
-
-
 
 svg {
     width: 100%;

@@ -10,19 +10,19 @@ const routes = [
   },
   {
     path: '/choro',
-    name: 'ChoroView',
-    component: () => import('../views/ChoroView.vue')
+    name: 'ChoroSongListView',
+    component: () => import('../views/ChoroSongListView.vue')
 
   },
   {
     path: '/song/:theme/:instrument/:title',
-    name: 'SongView',
-    component: () => import('../views/SongView.vue')
+    name: 'ChoroSongView',
+    component: () => import('../views/ChoroSongView.vue')
   },
   {
     path: '/samba',
-    name: 'SambaView',
-    component: () => import('../views/SambaView.vue')
+    name: 'SambaSongListView',
+    component: () => import('../views/SambaSongListView.vue')
   },
   {
     path: '/samba/:title',

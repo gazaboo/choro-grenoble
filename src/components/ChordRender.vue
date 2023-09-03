@@ -1,37 +1,74 @@
 <template>
     <div class="chord">
         <span class="accord"> {{ accord.accord }}</span>
-        <span class="qualite"> {{ accord.qualite }}</span>
-        <span v-if=accord.bass class="bass"> /{{ accord.bass }}</span>
+        <div class="chord-infos">
+            <span class="extension"> {{ accord.extensions }}</span>
+            <span class="qualite"> {{ accord.qualite }}</span>
+        </div>
+        <span v-if=accord.bass :class="[accord.qualite ? 'bass' : 'closedBass']"> /{{ accord.bass }}</span>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['accord']
+    props: ['accord'],
+    data() {
+        return {
+            offset_extension: this.accord.extensions && !this.accord.qualite ? "-0.5em" : "0.15em",
+            offset_qualite: !this.accord.extensions && this.accord.qualite ? "0.4em" : "-0.15em",
+        }
+    }
 }
+
 
 </script>
 
-<style>
-.accord {
+<style lang="scss">
+$primary-size: 1em;
+$secondary-size : 0.5em;
+
+
+.chord {
     font-family: 'Comfortaa', cursive;
-    /* font-size: 2.5rem; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
 }
 
+.chord-infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.accord {
+    font-size: 1em;
+}
+
+.extension {
+    font-size: $secondary-size;
+    position: relative;
+    top: v-bind(offset_extension);
+}
 
 .qualite {
-    font-size: 1.5rem;
-    font-family: 'Comfortaa', cursive;
+    font-size: $secondary-size;
     position: relative;
-    top: -1rem;
+    top: v-bind(offset_qualite);
+}
+
+.bass,
+.closedBass {
+    position: relative;
+    font-size: 0.7em;
 }
 
 .bass {
-    font-family: 'Comfortaa', cursive;
-    font-size: 2rem;
-    position: relative;
-    left: -0.5rem;
-    top: 0.5rem;
+    top: 0.15em;
+}
+
+.closedBass {
+    top: 0.25em;
 }
 </style>

@@ -1,24 +1,15 @@
 <template>
   <div class="main-container">
-    <div class="nav_bar row">
-      <NavBar />
-    </div>
-    <div class="search_bar row">
-      <SearchBar @filtered-data="updatedSelection" :data-to-search=data :check-partition=true />
-    </div>
-    <div class="bottom row">
-      <div class="col-4 filters">
-        <FilterBar @changed-selection="updatedSelection" :data="data"></FilterBar>
-      </div>
-      <div class="col-8 results">
-        <div class="container-fluid songs">
-          <SambaLink :music="music" v-for=" music in this.filteredData" :key="music" class="itemSong" />
-        </div>
+    <NavBar />
+    <SearchBar @filtered-data="updatedSelection" :data-to-search=data :check-partition=true />
+    <FilterBar @changed-selection="updatedSelection" :data="data"></FilterBar>
+    <div class="row results">
+      <div class="container-fluid">
+        <SambaLink :music="music" v-for=" music in this.filteredData" :key="music" />
       </div>
     </div>
   </div>
 </template>
-
 <script>
 
 // @ is an alias to /src
@@ -29,7 +20,7 @@ import FilterBar from '@/components/FilterBar.vue';
 import SambaLink from '@/components/SambaLink.vue';
 
 export default {
-  name: 'HomeView',
+  name: 'SambaView',
   components: {
     SearchBar,
     NavBar,

@@ -34,7 +34,7 @@ import { useRoute } from 'vue-router';
 
 export default {
 
-    name: 'SongView',
+    name: 'ChoroSongView',
 
     data() {
         return {

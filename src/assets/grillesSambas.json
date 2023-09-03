@@ -10,14 +10,15 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": "6"
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -27,8 +28,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -37,9 +39,10 @@
                         "numero_mesure": 3,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "",
-                                "qualite": "6"
+                                "extensions": "6"
                             }
                         ],
                         "modificateur_cellule": ""
@@ -49,8 +52,9 @@
                         "accords": [
                             {
                                 "accord": "G",
+                                "qualite": "",
                                 "bass": "B",
-                                "qualite": "6"
+                                "extensions": "6"
                             }
                         ],
                         "modificateur_cellule": ""
@@ -61,9 +65,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -72,9 +77,28 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
+                            }
+                        ],
+                        "modificateur_cellule": "|:"
+                    },
+                    {
+                        "numero_mesure": 1,
+                        "accords": [
+                            {
+                                "accord": "D",
+                                "qualite": "m",
+                                "bass": "C",
+                                "extensions": "6"
+                            },
+                            {
+                                "accord": "A",
+                                "qualite": "m",
+                                "bass": "G",
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -87,9 +111,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -98,9 +123,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -109,9 +135,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -120,9 +147,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -133,9 +161,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -144,9 +173,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -159,9 +189,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -170,9 +201,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -181,9 +213,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -192,9 +225,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -205,9 +239,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -216,9 +251,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -240,12 +276,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -255,8 +291,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -267,7 +304,7 @@
                             {
                                 "accord": "Dm",
                                 "bass": "",
-                                "qualite": "6"
+                                "extensions": "6"
                             }
                         ],
                         "modificateur_cellule": ""
@@ -277,8 +314,9 @@
                         "accords": [
                             {
                                 "accord": "G",
+                                "qualite": "",
                                 "bass": "B",
-                                "qualite": "6"
+                                "extensions": "6"
                             }
                         ],
                         "modificateur_cellule": ""
@@ -289,9 +327,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -300,9 +339,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -315,9 +355,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -326,9 +367,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -337,9 +379,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -348,9 +391,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -361,9 +405,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -372,9 +417,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -387,9 +433,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -398,9 +445,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -409,9 +457,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -420,9 +469,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -433,9 +483,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -444,9 +495,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -468,12 +520,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -483,8 +535,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -495,7 +548,7 @@
                             {
                                 "accord": "Dm",
                                 "bass": "",
-                                "qualite": "6"
+                                "extensions": "6"
                             }
                         ],
                         "modificateur_cellule": ""
@@ -505,8 +558,9 @@
                         "accords": [
                             {
                                 "accord": "G",
+                                "qualite": "",
                                 "bass": "B",
-                                "qualite": "6"
+                                "extensions": "6"
                             }
                         ],
                         "modificateur_cellule": ""
@@ -517,9 +571,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -528,9 +583,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -543,9 +599,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -554,9 +611,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -565,9 +623,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -576,9 +635,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -589,9 +649,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -600,9 +661,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -615,9 +677,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -626,9 +689,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -637,9 +701,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -648,9 +713,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -661,9 +727,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -672,9 +739,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -696,12 +764,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -711,8 +779,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -723,9 +792,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -734,9 +804,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -749,9 +820,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -760,9 +832,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -773,9 +846,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -784,9 +858,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -808,12 +883,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -823,8 +898,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -835,9 +911,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -846,9 +923,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -861,9 +939,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -872,9 +951,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -885,9 +965,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -896,9 +977,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -920,12 +1002,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -935,8 +1017,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -947,9 +1030,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -958,9 +1042,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -973,9 +1058,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -984,9 +1070,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -997,9 +1084,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1008,9 +1096,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1032,7 +1121,7 @@
                             {
                                 "accord": "C",
                                 "bass": "",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1043,7 +1132,7 @@
                             {
                                 "accord": "G",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1054,7 +1143,7 @@
                             {
                                 "accord": "C",
                                 "bass": "",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": ""
@@ -1065,7 +1154,7 @@
                             {
                                 "accord": "%",
                                 "bass": "",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": ""
@@ -1076,7 +1165,7 @@
                             {
                                 "accord": "%",
                                 "bass": "",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": ""
@@ -1087,7 +1176,7 @@
                             {
                                 "accord": "C",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1100,7 +1189,7 @@
                             {
                                 "accord": "Dm",
                                 "bass": "",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1109,9 +1198,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1124,9 +1214,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1135,9 +1226,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1148,9 +1240,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1159,9 +1252,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1183,12 +1277,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1198,8 +1292,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1210,9 +1305,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1221,9 +1317,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1236,9 +1333,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1247,9 +1345,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1260,9 +1359,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1271,9 +1371,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1295,12 +1396,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1310,8 +1411,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1322,9 +1424,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1333,9 +1436,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1348,9 +1452,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1359,9 +1464,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1372,9 +1478,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1383,9 +1490,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1407,12 +1515,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1422,8 +1530,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1434,9 +1543,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1445,9 +1555,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1460,9 +1571,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1471,9 +1583,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1484,9 +1597,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1495,9 +1609,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1519,12 +1634,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1534,8 +1649,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1546,9 +1662,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1557,9 +1674,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1572,9 +1690,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1583,9 +1702,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1596,9 +1716,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1607,9 +1728,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1631,12 +1753,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1646,8 +1768,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1658,9 +1781,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1669,9 +1793,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1684,9 +1809,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1695,9 +1821,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1708,9 +1835,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1719,9 +1847,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1743,12 +1872,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1758,8 +1887,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1770,9 +1900,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1781,9 +1912,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1796,9 +1928,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1807,9 +1940,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1820,9 +1954,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1831,9 +1966,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1855,12 +1991,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1870,8 +2006,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1882,9 +2019,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1893,9 +2031,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1908,9 +2047,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1919,9 +2059,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1932,9 +2073,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1943,9 +2085,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1967,12 +2110,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1982,8 +2125,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -1994,9 +2138,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2005,9 +2150,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2020,9 +2166,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2031,9 +2178,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2044,9 +2192,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2055,9 +2204,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2079,12 +2229,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2094,8 +2244,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2106,9 +2257,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2117,9 +2269,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2132,9 +2285,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2143,9 +2297,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2156,9 +2311,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2167,9 +2323,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2191,12 +2348,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2206,8 +2363,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2218,9 +2376,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2229,9 +2388,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2244,9 +2404,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2255,9 +2416,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2268,9 +2430,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2279,9 +2442,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2303,12 +2467,12 @@
                             {
                                 "accord": "Dm",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             },
                             {
                                 "accord": "A",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2318,8 +2482,9 @@
                         "accords": [
                             {
                                 "accord": "A",
+                                "qualite": "",
                                 "bass": "",
-                                "qualite": "7"
+                                "extensions": "7"
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2330,9 +2495,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2341,9 +2507,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2356,9 +2523,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2367,9 +2535,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2380,9 +2549,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"
@@ -2391,9 +2561,10 @@
                         "numero_mesure": 1,
                         "accords": [
                             {
-                                "accord": "Dm",
+                                "accord": "D",
+                                "qualite": "m",
                                 "bass": "C",
-                                "qualite": ""
+                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"

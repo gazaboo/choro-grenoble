@@ -16,7 +16,7 @@
             <h2> {{ partie }} </h2>
             <div class="grille-section">
                 <div class="ligne" v-for="line in this.grille[partie]" :key="line">
-                    <SplitMesure class="cell" :cell=cell v-for="cell in line" :key=cell></SplitMesure>
+                    <MesureContainer class="measure" :cell=cell v-for="cell in line" :key=cell></MesureContainer>
                 </div>
                 <br />
             </div>
@@ -27,9 +27,9 @@
 <script>
 
 import grillesSambas from "@/assets/grillesSambas.json"
-import SplitMesure from "@/components/SplitMesure.vue"
 import NavBar from "@/components/NavBar.vue"
 import { useRoute } from 'vue-router';
+import MesureContainer from "@/components/MesureContainer.vue";
 
 export default {
 
@@ -38,8 +38,8 @@ export default {
     props: ['dataGrille'],
 
     components: {
-        SplitMesure,
-        NavBar
+        NavBar,
+        MesureContainer
     },
 
     data() {
@@ -137,7 +137,9 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang='scss' >
+$nbre-measure-per-line: 4;
+
 .infos {
     display: flex;
     flex-direction: row;
@@ -149,19 +151,18 @@ export default {
     flex-wrap: wrap;
     flex-direction: column;
     align-content: flex-start;
-    width: 80vw;
-    border: solid black 1px;
+    width: 100vw;
+    border: solid rgb(0, 0, 0) 1px;
+    padding: 1vw;
 }
 
-.cell {
-    border: solid black 1px;
-    padding: 0;
-    width: 10rem;
-    height: 10rem;
-    text-align: center;
-    margin-bottom: 1rem;
-
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-width : 640px) {
+    .main-container {
+        width: 80vw;
+    }
 }
+
 
 .grille-section {
     display: flex;
@@ -180,5 +181,10 @@ export default {
 .ligne {
     display: flex;
     flex-direction: row;
+    height: 4em;
+}
+
+.ligne>div {
+    width: 100% / $nbre-measure-per-line;
 }
 </style>
