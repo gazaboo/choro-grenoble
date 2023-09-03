@@ -1,14 +1,14 @@
 <template>
-    <div class="single-chord-container" v-if="cell.accords.length == 1">
-        <ChordRender :accord="cell.accords[0]"></ChordRender>
+    <div class="single-chord-container" v-if="measure.length == 1">
+        <ChordRender :accord="measure[0]"></ChordRender>
     </div>
 
-    <div class="two-chords-container" v-else-if="cell.accords.length == 2">
+    <div class="two-chords-container" v-else>
         <div class="upper-left">
-            <ChordRender :accord="cell.accords[0]"></ChordRender>
+            <ChordRender :accord="measure[0]"></ChordRender>
         </div>
         <div class="bottom-right">
-            <ChordRender :accord="cell.accords[1]"></ChordRender>
+            <ChordRender :accord="measure[1]"></ChordRender>
         </div>
         <svg>
             <line x1="0" y1="100%" x2="100%" y2="0" style="stroke:rgb(0,0,0, 0.5); stroke-width:1" />
@@ -20,20 +20,24 @@
 import ChordRender from "./ChordRender.vue";
 
 export default {
-    props: ["cell"],
+    props: ["measure"],
     components: { ChordRender }
 }
 </script>
 
 <style lang="scss">
 $base-font-size: 2em;
-$two-chords-font-size: 0.9 * $base-font-size;
+$two-chords-font-size: 0.7 * $base-font-size;
+$size: 4rem;
 
 .single-chord-container,
 .two-chords-container {
+    width: 4.5rem;
+    height: 3rem;
     border: solid rgb(0, 0, 0) 1px;
     margin-top: -1px;
     margin-left: -1px;
+    margin-bottom: 10px;
 }
 
 .single-chord-container {
@@ -41,7 +45,6 @@ $two-chords-font-size: 0.9 * $base-font-size;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: $base-font-size;
 }
 
 .two-chords-container {
@@ -68,7 +71,7 @@ $two-chords-font-size: 0.9 * $base-font-size;
     display: flex;
     align-items: center;
     justify-content: end;
-    padding-right: 10%;
+    padding-right: 3%;
 }
 
 svg {

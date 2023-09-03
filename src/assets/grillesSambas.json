@@ -6,6 +6,176 @@
         "grille": {
             "Refrain": {
                 "ligne 1": [
+                    [
+                        "Dm/C",
+                        "A7"
+                    ],
+                    [
+                        "Dm6/C"
+                    ],
+                    [
+                        "G6/B"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "A7"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Dm7"
+                    ],
+                    [
+                        "%"
+                    ]
+                ],
+                "ligne 2": [
+                    [
+                        "Dm"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Gm"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "A7"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Dm"
+                    ],
+                    [
+                        "%"
+                    ]
+                ]
+            },
+            "Partie A": {
+                "ligne 1": [
+                    [
+                        "Dm"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Gm"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "A7"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Dm"
+                    ],
+                    [
+                        "%"
+                    ]
+                ],
+                "ligne 2": [
+                    [
+                        "Dm"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Gm"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "A7"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Dm"
+                    ],
+                    [
+                        "%"
+                    ]
+                ]
+            },
+            "Partie B": {
+                "ligne 1": [
+                    [
+                        "Dm"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Gm"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "A7"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Dm"
+                    ],
+                    [
+                        "%"
+                    ]
+                ],
+                "ligne 2": [
+                    [
+                        "Dm"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Gm"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "A7"
+                    ],
+                    [
+                        "%"
+                    ],
+                    [
+                        "Dm"
+                    ],
+                    [
+                        "%"
+                    ]
+                ]
+            }
+        }
+    },
+    "O poder da criacao": {
+        "title": "O poder da criacao",
+        "author": "Paulo Nogueira",
+        "tonalite": "A",
+        "grille": {
+            "Refrain": {
+                "ligne 1": [
                     {
                         "numero_mesure": 1,
                         "accords": [
@@ -99,250 +269,6 @@
                                 "qualite": "m",
                                 "bass": "G",
                                 "extensions": "7"
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    }
-                ]
-            },
-            "Partie A": {
-                "ligne 1": [
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    }
-                ],
-                "ligne 2": [
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    }
-                ]
-            },
-            "Partie B": {
-                "ligne 1": [
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    }
-                ],
-                "ligne 2": [
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    }
-                ]
-            }
-        }
-    },
-    "O poder da criacao": {
-        "title": "O poder da criacao",
-        "author": "Paulo Nogueira",
-        "tonalite": "A",
-        "grille": {
-            "Refrain": {
-                "ligne 1": [
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "Dm",
-                                "bass": "C",
-                                "extensions": ""
-                            },
-                            {
-                                "accord": "A",
-                                "bass": "",
-                                "extensions": "7"
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 2,
-                        "accords": [
-                            {
-                                "accord": "A",
-                                "qualite": "",
-                                "bass": "",
-                                "extensions": "7"
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 3,
-                        "accords": [
-                            {
-                                "accord": "Dm",
-                                "bass": "",
-                                "extensions": "6"
-                            }
-                        ],
-                        "modificateur_cellule": ""
-                    },
-                    {
-                        "numero_mesure": 4,
-                        "accords": [
-                            {
-                                "accord": "G",
-                                "qualite": "",
-                                "bass": "B",
-                                "extensions": "6"
-                            }
-                        ],
-                        "modificateur_cellule": ""
-                    }
-                ],
-                "ligne 2": [
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
-                            }
-                        ],
-                        "modificateur_cellule": "|:"
-                    },
-                    {
-                        "numero_mesure": 1,
-                        "accords": [
-                            {
-                                "accord": "D",
-                                "qualite": "m",
-                                "bass": "C",
-                                "extensions": ""
                             }
                         ],
                         "modificateur_cellule": "|:"

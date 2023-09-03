@@ -1,11 +1,11 @@
 <template>
     <div class="chord">
-        <span class="accord"> {{ accord.accord }}</span>
+        <span class="accord"> {{ chord }}</span>
         <div class="chord-infos">
-            <span class="extension"> {{ accord.extensions }}</span>
-            <span class="qualite"> {{ accord.qualite }}</span>
+            <span class="extension"> {{ extensions }}</span>
+            <span class="qualite"> {{ qualite }}</span>
         </div>
-        <span v-if=accord.bass :class="[accord.qualite ? 'bass' : 'closedBass']"> /{{ accord.bass }}</span>
+        <span v-if=this.bass :class="[accord.qualite ? 'bass' : 'closedBass']"> /{{ this.bass }}</span>
     </div>
 </template>
 
@@ -14,9 +14,30 @@ export default {
     props: ['accord'],
     data() {
         return {
-            offset_extension: this.accord.extensions && !this.accord.qualite ? "-0.5em" : "0.15em",
-            offset_qualite: !this.accord.extensions && this.accord.qualite ? "0.4em" : "-0.15em",
+            chord: this.accord[0],
+            qualite: this.accord.includes("m") ? "m" : undefined,
+            bass: this.accord.includes("/") ? this.accord.split("/")[1] : null,
+            hasExtensions: /[^a-z/%]/gi.test(this.accord)
         }
+    },
+    computed: {
+        extensions() {
+            return this.hasExtensions ? this.accord.replaceAll(/[a-z/%]/gi, '') : undefined;
+        },
+
+        offsetExtension() {
+            if (this.hasExtensions && this.qualite) {
+                return "0.2em";
+            }
+            return this.hasExtensions && !this.qualite ? "-0.5em" : "0.125em";
+        },
+
+        offsetQualite() {
+            return !this.hasExtensions && this.qualite ? "0.25em" : "-0.4em";
+        }
+
+        // console.log(this.possibleExtension);
+        // console.log(this.possibleExtension.length);
     }
 }
 
@@ -24,12 +45,20 @@ export default {
 </script>
 
 <style lang="scss">
-$primary-size: 1em;
+$primary-size: 0.5em;
 $secondary-size : 0.5em;
 
+@import url('https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Comic+Neue:wght@300&family=Coming+Soon&family=Delius&family=Handlee&family=Klee+One&family=Neucha&family=Shadows+Into+Light&family=Shadows+Into+Light+Two&family=Yomogi&display=swap');
 
 .chord {
-    font-family: 'Comfortaa', cursive;
+
+    // font-family: 'Annie Use Your Telescope', cursive;
+    font-family: 'Comic Neue', cursive;
+    // font-family: 'Delius', cursive;
+    // font-family: 'Klee One', cursive;
+    // font-family: 'Neucha', cursive;
+    // font-family: 'Yomogi', cursive;
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -49,13 +78,13 @@ $secondary-size : 0.5em;
 .extension {
     font-size: $secondary-size;
     position: relative;
-    top: v-bind(offset_extension);
+    top: v-bind(offsetExtension);
 }
 
 .qualite {
     font-size: $secondary-size;
     position: relative;
-    top: v-bind(offset_qualite);
+    top: v-bind(offsetQualite);
 }
 
 .bass,

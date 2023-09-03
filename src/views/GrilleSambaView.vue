@@ -16,7 +16,8 @@
             <h2> {{ partie }} </h2>
             <div class="grille-section">
                 <div class="ligne" v-for="line in this.grille[partie]" :key="line">
-                    <MesureContainer class="measure" :cell=cell v-for="cell in line" :key=cell></MesureContainer>
+                    <MesureContainer class="measure" :measure=measure v-for="measure in line" :key=measure>
+                    </MesureContainer>
                 </div>
                 <br />
             </div>
@@ -181,10 +182,6 @@ $nbre-measure-per-line: 4;
 .ligne {
     display: flex;
     flex-direction: row;
-    height: 4em;
-}
-
-.ligne>div {
-    width: 100% / $nbre-measure-per-line;
+    // height: 4em;
 }
 </style>
