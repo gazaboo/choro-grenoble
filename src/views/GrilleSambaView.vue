@@ -69,8 +69,8 @@ export default {
         this.parties = Object.keys(songData["grille"]);
         this.doubleBarsLeft = songData["doubleBarsLeft"];
         this.doubleBarsRight = songData["doubleBarsRight"];
+        this.boites = songData["boites"];
         this.grille = this.addMetaDataToMeasures();
-        console.log(this.grille);
     },
 
     methods: {
@@ -105,6 +105,9 @@ export default {
         },
 
         addMetaDataToMeasures() {
+            console.log("inside boite", this.boites)
+            console.log("inside", this.grille)
+
             let flatData = this.getFlatCopy(this.grille);
 
             // Add Id to all chords
@@ -112,15 +115,23 @@ export default {
                 item.id = i + 1;
             });
 
-            // Check for double bars
             for (const key in flatData) {
                 let val = flatData[key];
+
+                // Check for double bars
                 if (this.doubleBarsLeft.includes(val.id)) {
                     val.hasDoubleBarLeft = true;
                 }
 
                 if (this.doubleBarsRight && this.doubleBarsRight.includes(val.id)) {
                     val.hasDoubleBarRight = true;
+                }
+
+                // Check for boxes
+                let indexesOfBoites = Object.keys(this.boites);
+                if (indexesOfBoites.includes(String(val.id))) {
+                    val.hasBox = true;
+                    val.boxMessage = this.boites[val.id];
                 }
             }
             return this.getUnflatCopy(flatData);

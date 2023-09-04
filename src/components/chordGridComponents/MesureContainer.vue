@@ -1,9 +1,7 @@
 <template>
     <div class="single-chord-container" v-if="measure.length == 1">
         <ChordRender :chord="measure[0]"></ChordRender>
-
         <CellMetaInfoComponent :measure=measure></CellMetaInfoComponent>
-
     </div>
 
     <div class="two-chords-container" v-else>
