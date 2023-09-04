@@ -1,12 +1,12 @@
 <template>
     <div class="single-chord-container" v-if="measure.length == 1">
         <ChordRender :chord="measure[0]"></ChordRender>
-        <CellMetaInfoComponent :measure=measure></CellMetaInfoComponent>
+        <CellMetaInfo :measure=measure></CellMetaInfo>
     </div>
 
     <div class="two-chords-container" v-else>
 
-        <CellMetaInfoComponent :measure=measure></CellMetaInfoComponent>
+        <CellMetaInfo :measure=measure></CellMetaInfo>
 
         <div class="upper-left">
             <ChordRender :chord="measure[0]"></ChordRender>
@@ -22,11 +22,11 @@
 
 <script>
 import ChordRender from "./ChordRender.vue";
-import CellMetaInfoComponent from "./CellMetaInfoComponent.vue";
+import CellMetaInfo from "./CellMetaInfo.vue";
 
 export default {
     props: ["measure"],
-    components: { ChordRender, CellMetaInfoComponent },
+    components: { ChordRender, CellMetaInfo },
 }
 
 </script>

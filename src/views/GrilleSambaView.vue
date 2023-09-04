@@ -105,9 +105,6 @@ export default {
         },
 
         addMetaDataToMeasures() {
-            console.log("inside boite", this.boites)
-            console.log("inside", this.grille)
-
             let flatData = this.getFlatCopy(this.grille);
 
             // Add Id to all chords
