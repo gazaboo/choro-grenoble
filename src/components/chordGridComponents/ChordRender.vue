@@ -1,25 +1,18 @@
 <template>
     <div class="chord">
-        <span class="accord"> {{ chord }}</span>
+        <span class="accord"> {{ chord.fundamental }}</span>
         <div class="chord-infos">
-            <span class="extension"> {{ extensions }}</span>
-            <span class="qualite"> {{ qualite }}</span>
+            <span class="extension"> {{ chord.extensions }}</span>
+            <span class="qualite"> {{ chord.qualite }}</span>
         </div>
-        <span v-if=this.bass :class="[accord.qualite ? 'bass' : 'closedBass']"> /{{ this.bass }}</span>
+        <span v-if=chord.bass :class="[true ? 'bass' : 'closedBass']"> /{{ chord.bass }}</span>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['accord'],
-    data() {
-        return {
-            chord: this.accord[0],
-            qualite: this.accord.includes("m") ? "m" : undefined,
-            bass: this.accord.includes("/") ? this.accord.split("/")[1] : null,
-            hasExtensions: /[^a-z/%]/gi.test(this.accord)
-        }
-    },
+    props: ['chord'],
+
     computed: {
         extensions() {
             return this.hasExtensions ? this.accord.replaceAll(/[a-z/%]/gi, '') : undefined;

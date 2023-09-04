@@ -3,6 +3,26 @@
         "title": "A flor e o espinho",
         "author": "Nelson Cavaquinho",
         "tonalite": "Dm",
+        "doubleBarsLeft": [
+            1,
+            4,
+            7
+        ],
+        "doubleBarsRight": [
+            3,
+            6,
+            11
+        ],
+        "boites": [
+            [
+                15,
+                "1."
+            ],
+            [
+                16,
+                "2."
+            ]
+        ],
         "grille": {
             "Refrain": {
                 "ligne 1": [

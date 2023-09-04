@@ -1,14 +1,20 @@
 <template>
     <div class="single-chord-container" v-if="measure.length == 1">
-        <ChordRender :accord="measure[0]"></ChordRender>
+        <ChordRender :chord="measure[0]"></ChordRender>
+
+        <CellMetaInfoComponent :measure=measure></CellMetaInfoComponent>
+
     </div>
 
     <div class="two-chords-container" v-else>
+
+        <CellMetaInfoComponent :measure=measure></CellMetaInfoComponent>
+
         <div class="upper-left">
-            <ChordRender :accord="measure[0]"></ChordRender>
+            <ChordRender :chord="measure[0]"></ChordRender>
         </div>
         <div class="bottom-right">
-            <ChordRender :accord="measure[1]"></ChordRender>
+            <ChordRender :chord="measure[1]"></ChordRender>
         </div>
         <svg>
             <line x1="0" y1="100%" x2="100%" y2="0" style="stroke:rgb(0,0,0, 0.5); stroke-width:1" />
@@ -18,11 +24,13 @@
 
 <script>
 import ChordRender from "./ChordRender.vue";
+import CellMetaInfoComponent from "./CellMetaInfoComponent.vue";
 
 export default {
     props: ["measure"],
-    components: { ChordRender }
+    components: { ChordRender, CellMetaInfoComponent },
 }
+
 </script>
 
 <style lang="scss">
@@ -32,6 +40,7 @@ $size: 4rem;
 
 .single-chord-container,
 .two-chords-container {
+    position: relative;
     width: 4.5rem;
     height: 3rem;
     border: solid rgb(0, 0, 0) 1px;
@@ -77,5 +86,10 @@ $size: 4rem;
 svg {
     width: 100%;
     height: 100%;
+}
+
+.double-bar {
+    position: absolute;
+    right: 0;
 }
 </style>
