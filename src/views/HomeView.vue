@@ -11,7 +11,7 @@
         The aim is to provide a fast and readable way of playing music
     </p>
     <h2> Contact </h2>
-    <p> Do you have any remark reagarding copyrights ?</p>
+    <p> Do you have any remark regarding copyrights ?</p>
     <p> Do you have music sheets you want to be included ?</p>
     <p> Do you want to collaborate ?</p>
 
