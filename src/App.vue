@@ -9,7 +9,7 @@ export default {
   <router-view />
 </template>
 
-<style>
+<style lang="scss">
 * {
   padding: 0;
   margin: 0;
@@ -18,5 +18,16 @@ export default {
 
 body {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#app {
+  width: 90vw;
+
+  @media (min-width: 375px) {
+    width: 80vw;
+  }
 }
 </style>

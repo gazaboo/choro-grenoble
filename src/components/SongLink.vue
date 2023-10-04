@@ -15,7 +15,7 @@ export default {
     </div>
 </template>
 
-<style  scoped>
+<style scoped lang="scss">
 h3 {
     font-size: 1.2rem;
     margin: 0.25rem 0;
@@ -24,5 +24,17 @@ h3 {
 h4 {
     font-size: 1rem;
     margin: 0.25rem 0;
+    color: rgb(75, 75, 75);
+}
+
+.songInfos {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+
+    @media (min-width: 500px) {
+        flex-direction: row;
+        column-gap: 10px;
+    }
 }
 </style>

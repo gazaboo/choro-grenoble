@@ -1,5 +1,6 @@
 <template>
     <NavBar />
+
     <h1>Warning</h1>
     <p> This is a work in progress. Be patient ;) </p>
     <h2> Choro </h2>
@@ -30,3 +31,9 @@ export default {
 }
 
 </script>
+
+<style scoped>
+p {
+    margin: 10px 0;
+}
+</style>

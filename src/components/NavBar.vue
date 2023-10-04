@@ -3,9 +3,9 @@
         <img class="navbar-brand logo img-fluid" src="../assets/logo.jpg" alt="">
 
         <ul class="navbar-nav flex-row">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <router-link class="nav-link" to="/samba">Samba</router-link>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <router-link class="nav-link" to="/choro">Choro</router-link>
             </li>
