@@ -1,6 +1,9 @@
 <template>
     <nav id="nav" class="navbar navbar-light bg-white">
-        <img class="navbar-brand logo img-fluid" src="../assets/logo.jpg" alt="">
+        <router-link class="nav-link" to="/">
+            <img class="navbar-brand logo img-fluid" src="../assets/logo.jpg" alt="">
+        </router-link>
+
 
         <ul class="navbar-nav flex-row">
             <!-- <li class="nav-item">

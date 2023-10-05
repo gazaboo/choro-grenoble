@@ -1,17 +1,17 @@
 <template>
     <NavBar />
-    <div>
+    <!-- <div>
         <h1> {{ this.title }} </h1>
-    </div>
+    </div> -->
 
     <div class="filter-bar">
-        <div class="filter-bar-buttons">
+        <!-- <div class="filter-bar-buttons">
             <span class="filter-bar-title">Explore</span>
             <a class="custom-collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#authors"
                 aria-expanded="false" aria-controls="authors">
                 Youtube
             </a>
-        </div>
+        </div> -->
         <div class="authors-container collapse" id="authors">
             <div class="form-check form-check-inline author-link" v-for="url of this.youtube" :key="url">
                 <iframe width="560" height="315" :src="url" title="YouTube video player" frameborder="0"
@@ -68,15 +68,16 @@ export default {
 
 
 
-<style> .musescore {
+<style lang="scss"> .musescore {
      width: 80vw;
-     height: 100vh;
- }
+     height: 90vh;
 
- @media screen and (max-width: 600px) {
-     .musescore {
-         width: 100vw;
-         height: 120vh;
+     @media screen and (max-width: 600px) {
+         position: absolute;
+         left: 2vw;
+         width: 95vw;
+         height: 130vh;
+
      }
  }
 </style>

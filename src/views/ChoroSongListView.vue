@@ -5,7 +5,8 @@
     <FilterBar @changed-selection="updatedSelection" :data="data"></FilterBar>
     <div class="row results">
       <div class="container-fluid">
-        <ChoroLink :music="music" v-for=" music in this.filteredData" :key="music" />
+        <ChoroLink v-for="(music, index) in this.filteredData" :id="index" :music="music" :key="music"
+          @click="saveId(index)" />
       </div>
     </div>
   </div>
@@ -50,6 +51,27 @@ export default {
       return Object.entries(itemSong.melody).map(entry => entry[1] != "").includes(true) ||
         Object.entries(itemSong.contracanto).map(entry => entry[1] != "").includes(true)
     },
+
+    saveId(id) {
+      localStorage.ref = id;
+    }
+  },
+
+  // beforeRouteLeave(to, from, next) {
+  //   console.log('Leaving from', from.path, 'to', to.path);
+  //   localStorage.ref = to.path.split('/').pop()
+  //   console.log(localStorage.ref)
+  //   next()
+  // },
+
+  mounted() {
+    if (localStorage.ref) {
+      this.ref = localStorage.ref;
+      const element = document.getElementById(this.ref);
+      if (element) {
+        element.scrollIntoView({ behavior: 'auto', block: "center" });
+      }
+    }
   }
 }
 
