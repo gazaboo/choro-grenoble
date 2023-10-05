@@ -188,8 +188,8 @@ form {
 }
 
 .highlight {
-    font-weight: 900;
-    color: rgb(58, 117, 0);
+    font-weight: 700;
+    color: rgba(46, 91, 1, 0.685);
 }
 
 input {

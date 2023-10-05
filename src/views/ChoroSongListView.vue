@@ -45,6 +45,7 @@ export default {
 
     updatedSelection(filteredData) {
       this.filteredData = filteredData;
+      this.backToTop();
     },
 
     has_partition(itemSong) {
@@ -54,15 +55,15 @@ export default {
 
     saveId(id) {
       localStorage.ref = id;
+    },
+
+    backToTop() {
+      const element = document.getElementById('0');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: "center" });
+      }
     }
   },
-
-  // beforeRouteLeave(to, from, next) {
-  //   console.log('Leaving from', from.path, 'to', to.path);
-  //   localStorage.ref = to.path.split('/').pop()
-  //   console.log(localStorage.ref)
-  //   next()
-  // },
 
   mounted() {
     if (localStorage.ref) {
