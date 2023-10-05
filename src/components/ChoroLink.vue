@@ -65,15 +65,23 @@ export default {
 
 
 
-<style scoped>
+<style scoped lang="scss">
 /* Card */
 .itemSong {
     border-bottom: solid green 1px;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
 
+    @media (min-width: 600px) {
+        flex-direction: row;
+        column-gap: 10px;
+        justify-content: space-between;
+        ;
+    }
 }
-
 
 /* Container qui contient les clés disponibles */
 .container-music-keys {
