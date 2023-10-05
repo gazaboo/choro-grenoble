@@ -70,6 +70,11 @@ export default {
       const element = document.getElementById(this.ref);
       if (element) {
         element.scrollIntoView({ behavior: 'auto', block: "center" });
+        element.classList.add('blink')
+        setTimeout(() => {
+          this.disabled = false
+        }, 500)
+        // element.classList.remove('blink')
       }
     }
   }
@@ -82,5 +87,15 @@ export default {
 .results {
   height: 80vh;
   overflow: scroll;
+}
+
+.blink {
+  animation: blinker 0.45s ease-in-out;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
 </style>
