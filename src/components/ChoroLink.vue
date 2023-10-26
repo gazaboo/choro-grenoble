@@ -51,8 +51,9 @@ export default {
     },
     methods: {
         mainThemeKeys() {
-            const keys = Object.keys(this.music.melody)
-            return keys.filter(key => this.music.melody[key])
+            // const keys = Object.keys(this.music.melody)
+            // return keys.filter(key => this.music.melody[key])
+            return ['C'] // J'enlève les autres instruments car la transposition ne marche pas encore
         },
         secondVoiceKeys() {
             const keys = Object.keys(this.music.melody)

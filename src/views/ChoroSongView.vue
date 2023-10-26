@@ -1,28 +1,18 @@
 <template>
     <NavBar />
-    <!-- <div>
-        <h1> {{ this.title }} </h1>
-    </div> -->
+    <!-- <div v-for='(key, url) of others' :key='key' class="buttons"> {{ key }} {{ url }}</div> -->
 
-    <div class="filter-bar">
-        <!-- <div class="filter-bar-buttons">
-            <span class="filter-bar-title">Explore</span>
-            <a class="custom-collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#authors"
-                aria-expanded="false" aria-controls="authors">
-                Youtube
-            </a>
-        </div> -->
-        <div class="authors-container collapse" id="authors">
-            <div class="form-check form-check-inline author-link" v-for="url of this.youtube" :key="url">
-                <iframe width="560" height="315" :src="url" title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
-            </div>
-            <div v-if="!this.youtube.length">
-                No Video yet
-            </div>
-        </div>
-    </div>
+    <router-link v-for="key of otherKeys" :key="key" :to="{
+        name: 'ChoroSongView',
+        params: {
+            theme: 'melody',
+            instrument: key,
+            title: this.title
+        }
+    }">
+        {{ key }}
+    </router-link>
+
     <iframe class="musescore" :src="this.url" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
 </template>
 
@@ -39,7 +29,8 @@ export default {
     data() {
         return {
             url: "",
-            title: ""
+            title: "",
+            otherUrls: []
         }
     },
 
@@ -53,8 +44,15 @@ export default {
         this.title = params.title;
         const song = this.getSong();
         this.url = song[params.theme][params.instrument];
+        console.log(song)
         this.youtube = song.youtube.filter(url => url != "");
+        delete song[params.theme][params.instrument];
+
+        this.otherKeys = Object.keys(song[params.theme])
+        console.log(this.otherKeys)
+
     },
+
     methods: {
         getSong() {
             let song = listeChoros.data.find((itemSong) =>
@@ -81,3 +79,21 @@ export default {
      }
  }
 </style>
+
+        <!-- <div class="filter-bar-buttons">
+            <span class="filter-bar-title">Explore</span>
+            <a class="custom-collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#authors"
+                aria-expanded="false" aria-controls="authors">
+                Youtube
+            </a>
+        </div> -->
+        <!-- <div class="authors-container collapse" id="authors">
+            <div class="form-check form-check-inline author-link" v-for="url of this.youtube" :key="url">
+                <iframe width="560" height="315" :src="url" title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+            <div v-if="!this.youtube.length">
+                No Video yet
+            </div>
+        </div> -->
