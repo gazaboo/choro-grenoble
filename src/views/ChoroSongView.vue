@@ -12,8 +12,7 @@
     }">
         {{ key }}
     </router-link>
-
-    <iframe id="musescore" class="musescore" :src="this.url" frameborder="0" allowfullscreen
+    <iframe ref="musescore" class="musescore" :src="this.url" frameborder="0" allowfullscreen
         allow="autoplay; fullscreen"></iframe>
 </template>
 
@@ -38,7 +37,6 @@ export default {
     components: {
         NavBar
     },
-
     created() {
         const route = useRoute();
         const params = route.params;
@@ -46,6 +44,22 @@ export default {
         const song = this.getSong();
         this.url = song[params.theme][params.instrument];
         this.youtube = song.youtube.filter(url => url != "");
+    },
+
+    mounted() {
+        const musescoreFrame = this.$refs.musescore;
+
+        // Add a load event listener to the iframe
+        musescoreFrame.addEventListener("load", () => {
+            // Delay the execution of your code
+            setTimeout(() => {
+                // Access the iframe content
+                const contentDoc = musescoreFrame.contentDocument;
+
+                // Now you can manipulate the content inside the iframe
+                console.log(contentDoc);
+            }, 2000); // Adjust the delay time as needed
+        });
     },
 
     methods: {

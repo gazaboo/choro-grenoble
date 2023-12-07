@@ -5,8 +5,8 @@ import HomeView from '../views/HomeView.vue'
 const routes = [
   {
     path: '/',
-    name: 'HomeView',
-    component: HomeView
+    name: 'Home',
+    component: () => import('../views/ChoroSongListView.vue')
   },
   {
     path: '/choro',
