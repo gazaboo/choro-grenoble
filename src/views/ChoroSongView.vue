@@ -13,7 +13,8 @@
         {{ key }}
     </router-link>
 
-    <iframe class="musescore" :src="this.url" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
+    <iframe id="musescore" class="musescore" :src="this.url" frameborder="0" allowfullscreen
+        allow="autoplay; fullscreen"></iframe>
 </template>
 
 <script>
@@ -44,7 +45,6 @@ export default {
         this.title = params.title;
         const song = this.getSong();
         this.url = song[params.theme][params.instrument];
-        console.log(song)
         this.youtube = song.youtube.filter(url => url != "");
     },
 
@@ -54,7 +54,7 @@ export default {
                 itemSong.title.toLowerCase() === this.title.toLowerCase()
             );
             return song
-        },
+        }
     }
 }
 </script>
