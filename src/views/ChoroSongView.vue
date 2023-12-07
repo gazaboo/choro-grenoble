@@ -46,11 +46,6 @@ export default {
         this.url = song[params.theme][params.instrument];
         console.log(song)
         this.youtube = song.youtube.filter(url => url != "");
-        delete song[params.theme][params.instrument];
-
-        this.otherKeys = Object.keys(song[params.theme])
-        console.log(this.otherKeys)
-
     },
 
     methods: {

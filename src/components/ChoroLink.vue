@@ -5,7 +5,7 @@
 
         <div class="container-canto-contraconto">
             <div class="container-music-keys">
-                <span class="role"> Melody </span>
+                <span class="role"> Melodia </span>
                 <div class="links">
                     <router-link v-for="key in this.mainThemeKeys()" :key="key" :to="{
                         name: 'ChoroSongView',
@@ -51,9 +51,8 @@ export default {
     },
     methods: {
         mainThemeKeys() {
-            // const keys = Object.keys(this.music.melody)
-            // return keys.filter(key => this.music.melody[key])
-            return ['C'] // J'enlève les autres instruments car la transposition ne marche pas encore
+            const keys = Object.keys(this.music.melody)
+            return keys.filter(key => this.music.melody[key])
         },
         secondVoiceKeys() {
             const keys = Object.keys(this.music.melody)
