@@ -1,17 +1,10 @@
 <template>
     <NavBar />
-    <!-- <div v-for='(key, url) of others' :key='key' class="buttons"> {{ key }} {{ url }}</div> -->
 
-    <router-link v-for="key of otherKeys" :key="key" :to="{
-        name: 'ChoroSongView',
-        params: {
-            theme: 'melody',
-            instrument: key,
-            title: this.title
-        }
-    }">
-        {{ key }}
-    </router-link>
+
+    <a :href=this.github> 
+        <button class="btn"> Download</button>
+    </a>
     <iframe ref="musescore" class="musescore" :src="this.url" frameborder="0" allowfullscreen
         allow="autoplay; fullscreen"></iframe>
 </template>
@@ -40,29 +33,26 @@ export default {
     created() {
         const route = useRoute();
         const params = route.params;
+        console.log(params)
         this.title = params.title;
         const song = this.getSong();
         this.url = song[params.theme][params.instrument];
         this.youtube = song.youtube.filter(url => url != "");
+        
+        let url = 'https://github.com/gazaboo/choro-db/raw/main/'
+        if (params.instrument === 'Eb'){
+            url = url + `Saxophone_Eb/${song.author} - ${song.title} - Theme - Saxophone Eb.mxl`
+        } else if (params.instrument === 'Bb'){
+            url = url + `Clarinet_Bb/${song.author} - ${song.title} - Theme - Clarinet Bb.mxl`
+        } else if (params.instrument === 'C'){
+            url = url + `C/${song.author} - ${song.title} - Theme - C.mxl`
+        }
+        url = url.replaceAll(' ', '%20')
+        this.github = url
+        console.log(this.github)
     },
 
     mounted() {
-        var iframe = document.getElementsByClassName('hei_M')
-        console.log(" IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII ");
-        console.log(iframe)
-        const musescoreFrame = this.$refs.musescore;
-
-        // Add a load event listener to the iframe
-        musescoreFrame.addEventListener("load", () => {
-            // Delay the execution of your code
-            setTimeout(() => {
-                // Access the iframe content
-                const contentDoc = musescoreFrame.contentDocument;
-
-                // Now you can manipulate the content inside the iframe
-                console.log(contentDoc);
-            }, 2000); // Adjust the delay time as needed
-        });
     },
 
     methods: {
@@ -90,22 +80,18 @@ export default {
 
      }
  }
-</style>
 
-        <!-- <div class="filter-bar-buttons">
-            <span class="filter-bar-title">Explore</span>
-            <a class="custom-collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#authors"
-                aria-expanded="false" aria-controls="authors">
-                Youtube
-            </a>
-        </div> -->
-        <!-- <div class="authors-container collapse" id="authors">
-            <div class="form-check form-check-inline author-link" v-for="url of this.youtube" :key="url">
-                <iframe width="560" height="315" :src="url" title="YouTube video player" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen></iframe>
-            </div>
-            <div v-if="!this.youtube.length">
-                No Video yet
-            </div>
-        </div> -->
+ .btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+</style>

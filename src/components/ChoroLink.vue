@@ -12,7 +12,8 @@
                         params: {
                             theme: 'melody',
                             instrument: key,
-                            title: music.title
+                            title: music.title,
+                            author: music.author
                         }
                     }">
                         {{ key }}
