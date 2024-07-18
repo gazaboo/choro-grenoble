@@ -47,6 +47,9 @@ export default {
     },
 
     mounted() {
+        var iframe = document.getElementsByClassName('hei_M')
+        console.log(" IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII ");
+        console.log(iframe)
         const musescoreFrame = this.$refs.musescore;
 
         // Add a load event listener to the iframe
