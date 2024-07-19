@@ -1,4 +1,5 @@
 <template>
+    <button @click="toggleCompactMode">compact</button>
     <div>
       <div ref="osmdContainer" class="osmd-container"></div>
     </div>
@@ -59,7 +60,6 @@
           
           let xmlFile;
           for (const fileName in zipContents.files) {
-            console.log(fileName)
             if (fileName.endsWith('.musicxml') || fileName.endsWith('.mxml')) {
               // console.log(fileName)
               xmlFile = zipContents.files[fileName];
@@ -70,8 +70,19 @@
           this.mxlContent = await xmlFile.async('string');
           const blob = new Blob([this.mxlContent], { type: 'application/xml' });
           const fileUrl = URL.createObjectURL(blob);
-          console.log(fileUrl)
           this.osmd = new OpenSheetMusicDisplay(this.$refs.osmdContainer);
+
+          this.osmd.setOptions({
+            autoResize: true,
+            drawTitle: true,
+          })
+
+          if (this.compact) {
+            this.osmd.setOptions({
+              drawingParameters: "compacttight"
+            })
+          } 
+
           await this.osmd.load(fileUrl);
           this.osmd.render();
           
@@ -82,7 +93,21 @@
           console.error('Error stack:', error.stack);
         }
         }
+      }, 
+
+      toggleCompactMode(){
+        this.isCompactMode = !this.isCompactMode;
+        if (this.osmd && this.isCompactMode) {
+          this.osmd.setOptions({ drawingParameters: "compacttight" });
+        } else {
+          this.osmd.setOptions({ 
+            drawingParameters: "default"
+          });
+        }
+        this.osmd.render();
       }
+
+
     }
   }
   </script>

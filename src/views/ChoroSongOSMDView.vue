@@ -5,7 +5,7 @@
         <button class="btn"> Download</button>
     </a>
 
-    <MxlViewer  :path=this.path />
+    <MxlViewer :path=this.path />
 
 </template>
 
@@ -31,7 +31,8 @@ export default {
             title: "",
             otherUrls: [],
             path:"",
-            song:undefined
+            song:undefined,
+            compact:true
         }
     },
 
@@ -65,7 +66,7 @@ export default {
                 itemSong.title.toLowerCase() === this.title.toLowerCase()
             );
             return song
-        }
+        },
     }
 }
 </script>
