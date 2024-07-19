@@ -15,9 +15,14 @@ const routes = [
 
   },
   {
-    path: '/song/:theme/:instrument/:title',
-    name: 'ChoroSongView',
-    component: () => import('../views/ChoroSongView.vue')
+    path: '/mscore/:theme/:instrument/:title',
+    name: 'ChoroSongMuseScoreView',
+    component: () => import('../views/ChoroSongMuseScoreView.vue')
+  },
+  {
+    path: '/mxml/:theme/:instrument/:title',
+    name: 'ChoroSongOSMDView',
+    component: () => import('../views/ChoroSongOSMDView.vue')
   },
   {
     path: '/samba',

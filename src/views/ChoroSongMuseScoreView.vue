@@ -1,10 +1,10 @@
 <template>
     <NavBar />
 
-
     <a :href=this.github> 
         <button class="btn"> Download</button>
     </a>
+
     <iframe ref="musescore" class="musescore" :src="this.url" frameborder="0" allowfullscreen
         allow="autoplay; fullscreen"></iframe>
 </template>
@@ -17,7 +17,7 @@ import { useRoute } from 'vue-router';
 
 export default {
 
-    name: 'ChoroSongView',
+    name: 'ChoroSongMuseScoreView',
 
     data() {
         return {
@@ -33,7 +33,6 @@ export default {
     created() {
         const route = useRoute();
         const params = route.params;
-        console.log(params)
         this.title = params.title;
         const song = this.getSong();
         this.url = song[params.theme][params.instrument];
@@ -49,7 +48,10 @@ export default {
         }
         url = url.replaceAll(' ', '%20')
         this.github = url
-        console.log(this.github)
+
+
+
+
     },
 
     mounted() {

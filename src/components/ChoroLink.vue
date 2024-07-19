@@ -8,7 +8,7 @@
                 <span class="role"> Melodia </span>
                 <div class="links">
                     <router-link v-for="key in this.mainThemeKeys()" :key="key" :to="{
-                        name: 'ChoroSongView',
+                        name: 'ChoroSongMuseScoreView',
                         params: {
                             theme: 'melody',
                             instrument: key,
@@ -18,6 +18,20 @@
                     }">
                         {{ key }}
                     </router-link>
+
+                    <router-link :to="{
+                        name: 'ChoroSongOSMDView',
+                        params: {
+                            theme: 'melody',
+                            instrument: 'C',
+                            title: music.title,
+                            author: music.author
+                        }
+                    }">
+                        OSMD 
+                    </router-link>
+
+
                 </div>
             </div>
 
@@ -26,7 +40,7 @@
                 <div class="links">
 
                     <router-link v-for="key in this.secondVoiceKeys()" :key="key" :to="{
-                        name: 'ChoroSongView',
+                        name: 'ChoroSongMuseScoreView',
                         params: {
                             theme: 'contracanto',
                             instrument: key,

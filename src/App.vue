@@ -1,3 +1,8 @@
+<template>
+  <router-view />
+</template>
+
+
 <script>
 
 export default {
@@ -5,9 +10,6 @@ export default {
 }
 </script>
 
-<template>
-  <router-view />
-</template>
 
 <style lang="scss">
 * {
@@ -23,11 +25,4 @@ body {
   align-items: center;
 }
 
-#app {
-  width: 90vw;
-
-  @media (min-width: 375px) {
-    width: 80vw;
-  }
-}
 </style>
