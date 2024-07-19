@@ -102,6 +102,11 @@
         } else {
           this.osmd.setOptions({ 
             drawingParameters: "default"
+
+            // Pur enlever les chords : 
+            // https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/blob/develop/src/MusicalScore/Graphical/EngravingRules.ts
+            // this.RenderChordSymbols = true;
+            // Faut aller voir comment on fait, j'ai copié vite fait pour pas oublier
           });
         }
         this.osmd.render();
