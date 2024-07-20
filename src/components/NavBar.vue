@@ -24,8 +24,13 @@ nav {
     padding: 0;
 }
 
+.nav-link {
+    padding: 0;
+    margin-left: 10px;
+}
+
 .logo {
-    width: 4rem;
+    width: 3rem;
 }
 
 li {
