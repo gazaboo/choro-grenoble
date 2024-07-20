@@ -9,6 +9,9 @@
       </button>
     </div>
     <div id="control-buttons">
+      <button @click="transposeUp">Transpose Up</button>
+      <button @click="transposeDown">Transpose Down</button>
+
       <button>
         <i class="material-icons">download</i>
       </button>
@@ -37,7 +40,7 @@
 </template>
 
 <script>
-import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
+import { OpenSheetMusicDisplay, TransposeCalculator } from 'opensheetmusicdisplay';
 import JSZip from 'jszip';
 import { FingerprintSpinner } from 'epic-spinners'
 import NavBar from '@/components/NavBar.vue';
@@ -68,7 +71,8 @@ export default {
       otherUrls: [],
       path: "",
       song: undefined,
-      compact: true
+      compact: true,
+      transposeValue: 0,
     }
   },
 
@@ -79,18 +83,10 @@ export default {
     this.song = this.getSong();
     this.url = this.song[params.theme][params.instrument];
     this.youtube = this.song.youtube.filter(url => url != "");
-    this.path = 'C/' + this.song.author + ' - ' + this.song.title + ' - Theme - ' + params.instrument + '.mxl'
-
-    let url = 'https://github.com/gazaboo/choro-db/raw/main/'
-    if (params.instrument === 'Eb') {
-      url = url + `Saxophone_Eb/${this.song.author} - ${this.song.title} - Theme - Saxophone Eb.mxl`
-    } else if (params.instrument === 'Bb') {
-      url = url + `Clarinet_Bb/${this.song.author} - ${this.song.title} - Theme - Clarinet Bb.mxl`
-    } else if (params.instrument === 'C') {
-      url = url + `C/${this.song.author} - ${this.song.title} - Theme - C.mxl`
-    }
-    url = url.replaceAll(' ', '%20')
-    this.github = url
+    this.path = `${params.instrument}/${this.song.author} - ${this.song.title} - Theme - ${params.instrument}.mxl`;
+    console.log(this.path)
+    // url = url.replaceAll(' ', '%20')
+    // this.github = url
   },
 
   async mounted() {
@@ -103,12 +99,34 @@ export default {
       drawingParameters: "compacttight",
     })
 
+    this.osmd.TransposeCalculator = new TransposeCalculator();
     this.osmd.render();
     this.isLoading = false;
   },
 
 
   methods: {
+
+    transposeUp() {
+      this.transpose(1);
+    },
+
+    transposeDown() {
+      this.transpose(-1);
+    },
+
+    async transpose(val) {
+      if (this.osmd) {
+        this.transposeValue += val;
+        this.isLoading = true;
+        this.osmd.Sheet.Transpose = this.transposeValue; // e.g. -2 for 2 semitones downwards
+        await new Promise(resolve => setTimeout(resolve, 10));
+
+        this.osmd.updateGraphic();
+        this.osmd.render();
+        this.isLoading = false;
+      }
+    },
 
     getSong() {
       let song = listeChoros.data.find((itemSong) =>
@@ -123,6 +141,7 @@ export default {
       const repo = 'choro-db';
       const encodedPath = encodeURIComponent(this.path);
       const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedPath}`;
+      console.log(url);
 
       if (this.mxmlCache[url]) {
         return this.mxmlCache[url];
@@ -171,8 +190,7 @@ export default {
       this.isLoading = true;
       this.osmd.Zoom += 0.1;
 
-      // Je sais pas trop pourquoi mais sinon 
-      // le spinner n'apparait pas
+      // Obligatoire sinon le spinner n'apparait pas (je sais pas pourquoi)
       await new Promise(resolve => setTimeout(resolve, 10));
 
       this.osmd.render();
@@ -183,8 +201,7 @@ export default {
       this.isLoading = true;
       this.osmd.Zoom -= 0.1;
 
-      // Je sais pas trop pourquoi mais sinon 
-      // le spinner n'apparait pas
+      // Obligatoire sinon le spinner n'apparait pas (je sais pas pourquoi)
       await new Promise(resolve => setTimeout(resolve, 10));
 
       this.osmd.render();
@@ -209,8 +226,7 @@ export default {
     async toggleCompactMode() {
 
       this.isLoading = true;
-      // Je sais pas trop pourquoi mais sinon 
-      // le spinner n'apparait pas
+      // Obligatoire sinon le spinner n'apparait pas (je sais pas pourquoi)
       await new Promise(resolve => setTimeout(resolve, 10));
 
       this.isCompactMode = !this.isCompactMode;
@@ -266,7 +282,7 @@ $primary-color: rgb(0, 189, 0);
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -281,17 +297,19 @@ $primary-color: rgb(0, 189, 0);
   right: 0px;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   z-index: 9999;
 }
 
 #control-buttons {
   opacity: 0;
-  transform: translateX(-200px);
-  transition: opacity 0.5s ease, transform 0.3s ease;
+  transform: translateX(200px);
+  transition: opacity 0.3s ease, transform 0.2s ease;
   display: flex;
   flex-direction: column;
   background-color: rgb(103, 218, 103);
   z-index: 9999;
+  border-radius: 5%;
 }
 
 #control-buttons.show {
@@ -315,9 +333,6 @@ button {
   justify-content: center;
 }
 
-
-
-/* Darker background on mouse-over */
 button:hover {
   background-color: $primary-color;
 }

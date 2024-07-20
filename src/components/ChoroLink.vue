@@ -1,31 +1,15 @@
 <template>
-    <button class="itemSong">
+    <button @click="toggleMuseScores" class="itemSong">
 
         <SongLink :music="music"></SongLink>
+        <transition name="fade">
 
-        <div class="container-canto-contracanto">
-            <div class="container-musescores">
-                <span class="role"> MuseScore </span>
-                <div class="links">
-                    <router-link v-for="key in this.mainThemeKeys()" :key="key" :to="{
-                        name: 'ChoroSongMuseScoreView',
-                        params: {
-                            theme: 'melody',
-                            instrument: key,
-                            title: music.title,
-                            author: music.author
-                        }
-                    }">
-                        {{ key }}
-                    </router-link>
-                </div>
+            <div v-if="showMuseScores" lass="container-canto-contracanto">
                 <div class="container-musescores">
-
-                    <span class="role"> OSMD </span>
+                    <span class="role"> MuseScore </span>
                     <div class="links">
-
                         <router-link v-for="key in this.mainThemeKeys()" :key="key" :to="{
-                            name: 'ChoroSongOSMDView',
+                            name: 'ChoroSongMuseScoreView',
                             params: {
                                 theme: 'melody',
                                 instrument: key,
@@ -36,27 +20,49 @@
                             {{ key }}
                         </router-link>
                     </div>
+                    <div class="container-musescores">
 
+                        <span class="role"> OSMD </span>
+                        <div class="links">
+
+                            <router-link v-for="key in this.mainThemeKeys()" :key="key" :to="{
+                                name: 'ChoroSongOSMDView',
+                                params: {
+                                    theme: 'melody',
+                                    instrument: key,
+                                    title: music.title,
+                                    author: music.author
+                                }
+                            }">
+                                {{ key }}
+                            </router-link>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div v-if="this.secondVoiceKeys().length > 0" class="container-musescores">
+                    <span class="role"> Second Voice </span>
+                    <div class="links">
+
+                        <router-link v-for="key in this.secondVoiceKeys()" :key="key" :to="{
+                            name: 'ChoroSongMuseScoreView',
+                            params: {
+                                theme: 'contracanto',
+                                instrument: key,
+                                title: music.title
+                            }
+                        }">
+                            {{ key }}
+                        </router-link>
+                    </div>
                 </div>
             </div>
+        </transition>
 
-            <div v-if="this.secondVoiceKeys().length > 0" class="container-musescores">
-                <span class="role"> Second Voice </span>
-                <div class="links">
 
-                    <router-link v-for="key in this.secondVoiceKeys()" :key="key" :to="{
-                        name: 'ChoroSongMuseScoreView',
-                        params: {
-                            theme: 'contracanto',
-                            instrument: key,
-                            title: music.title
-                        }
-                    }">
-                        {{ key }}
-                    </router-link>
-                </div>
-            </div>
-        </div>
+
+
     </button>
 </template>
 
@@ -69,6 +75,13 @@ export default {
     components: {
         SongLink
     },
+
+    data() {
+        return {
+            showMuseScores: false,
+        }
+    },
+
     methods: {
         mainThemeKeys() {
             const keys = Object.keys(this.music.melody)
@@ -77,6 +90,10 @@ export default {
         secondVoiceKeys() {
             const keys = Object.keys(this.music.melody)
             return keys.filter(key => this.music.contracanto[key])
+        },
+        toggleMuseScores() {
+            console.log("toggleMuseScores called");
+            this.showMuseScores = !this.showMuseScores;
         }
     }
 }
@@ -99,10 +116,8 @@ export default {
     align-items: baseline;
 
     @media (min-width: 600px) {
-        flex-direction: row;
         column-gap: 10px;
         justify-content: space-between;
-        ;
     }
 }
 
@@ -152,5 +167,19 @@ a:hover {
 
 .links {
     line-height: 2rem;
+}
+
+.fade-enter-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-leave-active {
+    transition: opacity 0s ease, transform 0s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+    transform: translateY(-20px);
 }
 </style>
