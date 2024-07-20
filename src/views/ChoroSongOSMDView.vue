@@ -1,7 +1,7 @@
 <template>
     <NavBar />
-    
-    <a :href=this.github> 
+
+    <a :href=this.github>
         <button class="btn"> Download</button>
     </a>
 
@@ -30,9 +30,9 @@ export default {
             url: "",
             title: "",
             otherUrls: [],
-            path:"",
-            song:undefined,
-            compact:true
+            path: "",
+            song: undefined,
+            compact: true
         }
     },
 
@@ -44,13 +44,13 @@ export default {
         this.url = this.song[params.theme][params.instrument];
         this.youtube = this.song.youtube.filter(url => url != "");
         this.path = 'C/' + this.song.author + ' - ' + this.song.title + ' - Theme - ' + params.instrument + '.mxl'
-        
+
         let url = 'https://github.com/gazaboo/choro-db/raw/main/'
-        if (params.instrument === 'Eb'){
+        if (params.instrument === 'Eb') {
             url = url + `Saxophone_Eb/${this.song.author} - ${this.song.title} - Theme - Saxophone Eb.mxl`
-        } else if (params.instrument === 'Bb'){
+        } else if (params.instrument === 'Bb') {
             url = url + `Clarinet_Bb/${this.song.author} - ${this.song.title} - Theme - Clarinet Bb.mxl`
-        } else if (params.instrument === 'C'){
+        } else if (params.instrument === 'C') {
             url = url + `C/${this.song.author} - ${this.song.title} - Theme - C.mxl`
         }
         url = url.replaceAll(' ', '%20')
@@ -73,30 +73,31 @@ export default {
 
 
 
-<style lang="scss"> .musescore {
-     width: 80vw;
-     height: 90vh;
+<style scoped>
+.musescore {
+    width: 80vw;
+    height: 90vh;
 
-     @media screen and (max-width: 600px) {
-         position: absolute;
-         left: 2vw;
-         width: 95vw;
-         height: 130vh;
+    @media screen and (max-width: 600px) {
+        position: absolute;
+        left: 2vw;
+        width: 95vw;
+        height: 130vh;
 
-     }
- }
+    }
+}
 
- .btn {
-  background-color: DodgerBlue;
-  border: none;
-  color: white;
-  padding: 0.25rem 0.75rem;
-  cursor: pointer;
-  font-size: 20px;
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 /* Darker background on mouse-over */
 .btn:hover {
-  background-color: RoyalBlue;
+    background-color: RoyalBlue;
 }
 </style>
