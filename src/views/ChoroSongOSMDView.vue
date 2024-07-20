@@ -11,7 +11,7 @@
         <i class="material-icons">menu</i>
       </button>
     </div>
-    <div id="control-buttons">
+    <div id="control-buttons" :class="{ 'show': showControls }">
       <button @click="transposeToCLarinet">
         <i class="material-icons">air</i>
         Clarinet Version
@@ -117,7 +117,6 @@ export default {
     this.url = this.song[params.theme][params.instrument];
     this.youtube = this.song.youtube.filter(url => url != "");
     this.path = `${params.instrument}/${this.song.author} - ${this.song.title} - Theme - ${params.instrument}.mxl`;
-    console.log(this.song)
   },
 
   async mounted() {
@@ -173,7 +172,6 @@ export default {
     },
 
     async transpose(val) {
-      console.log('transposing')
       if (this.osmd) {
         this.transposeValue = val;
         this.isLoading = true;
@@ -199,7 +197,6 @@ export default {
       const repo = 'choro-db';
       const encodedPath = encodeURIComponent(this.path);
       const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedPath}`;
-      console.log(url);
 
       if (this.mxmlCache[url]) {
         return this.mxmlCache[url];
@@ -240,8 +237,6 @@ export default {
 
     toggleControls() {
       this.showControls = !this.showControls;
-      const control = document.getElementById('control-buttons');
-      control.classList.toggle('show', this.showControls);
     },
 
     async zoomIn() {
@@ -291,10 +286,6 @@ export default {
       if (this.osmd && this.compact) {
         this.osmd.setOptions({
           drawingParameters: "compacttight",
-          spacingBetweenSystemLines: 19,
-          spacingBetweenStaffLines: 1,
-          pageFormat: "Endless",
-          scale: 6
         });
         this.osmd.Zoom = 0.75;
         this.osmd.updateGraphic();
@@ -367,9 +358,9 @@ $primary-color: rgb(0, 189, 0);
 }
 
 #control-buttons {
-  opacity: 0;
+  display: none;
   transform: translateX(200px);
-  transition: opacity 0.3s ease, transform 0.2s ease;
+  transition: display 0.3s ease, transform 0.2s ease;
   display: flex;
   flex-direction: column;
   background-color: rgb(103, 218, 103);
@@ -378,8 +369,8 @@ $primary-color: rgb(0, 189, 0);
 }
 
 #control-buttons.show {
-  opacity: 1;
-  transform: translateX(0);
+  display: flex;
+  transform: translateX(-5px);
 }
 
 .material-icons,

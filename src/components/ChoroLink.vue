@@ -3,7 +3,6 @@
 
         <SongLink :music="music"></SongLink>
         <transition name="fade">
-
             <div v-if="showMuseScores" lass="container-canto-contracanto">
                 <div class="container-musescores">
                     <span class="role"> MuseScore </span>
@@ -19,27 +18,27 @@
                         }">
                             {{ key }}
                         </router-link>
+                        <span class="info"> Play sound, Loop and Slowdown</span>
                     </div>
-                    <div class="container-musescores">
 
-                        <span class="role"> Music Sheet </span>
-                        <div class="links">
-
-                            <router-link :to="{
-                                name: 'ChoroSongOSMDView',
-                                params: {
-                                    theme: 'melody',
-                                    instrument: 'C',
-                                    title: music.title,
-                                }
-                            }">
-                                Sheet
-                            </router-link>
-                        </div>
-
-                    </div>
                 </div>
+                <div class="container-musescores">
+                    <div class="links">
 
+                        <router-link :to="{
+                            name: 'ChoroSongOSMDView',
+                            params: {
+                                theme: 'melody',
+                                instrument: 'C',
+                                title: music.title,
+                            }
+                        }">
+                            <span class="role"> Music Sheet </span>
+                        </router-link>
+                        <span class="info">Better for screens. All transpositions available.</span>
+                    </div>
+
+                </div>
                 <div v-if="this.secondVoiceKeys().length > 0" class="container-musescores">
                     <span class="role"> Second Voice </span>
                     <div class="links">
@@ -133,7 +132,7 @@ export default {
 /* Liens vers la partition */
 a {
     font-size: 0.75rem;
-    padding: 0.25rem;
+    padding: 0.3rem;
     background-color: rgb(70, 104, 19);
     border-radius: 3px;
     margin-right: 0.5rem;
@@ -158,7 +157,7 @@ a:hover {
 }
 
 .role {
-    font-size: 1rem;
+    font-size: 0.9rem;
     display: inline-flex;
     align-items: center;
     margin-right: 0.5rem;
@@ -180,5 +179,11 @@ a:hover {
 .fade-leave-to {
     opacity: 0;
     transform: translateY(-20px);
+}
+
+.info {
+    font-size: small;
+    font-style: italic;
+    color: #545454;
 }
 </style>
