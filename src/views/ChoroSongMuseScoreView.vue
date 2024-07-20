@@ -1,9 +1,5 @@
 <template>
-    <NavBar />
-
-    <a :href=this.github> 
-        <button class="btn"> Download</button>
-    </a>
+    <NavBar class="top_left" />
 
     <iframe ref="musescore" class="musescore" :src="this.url" frameborder="0" allowfullscreen
         allow="autoplay; fullscreen"></iframe>
@@ -37,21 +33,6 @@ export default {
         const song = this.getSong();
         this.url = song[params.theme][params.instrument];
         this.youtube = song.youtube.filter(url => url != "");
-        
-        let url = 'https://github.com/gazaboo/choro-db/raw/main/'
-        if (params.instrument === 'Eb'){
-            url = url + `Saxophone_Eb/${song.author} - ${song.title} - Theme - Saxophone Eb.mxl`
-        } else if (params.instrument === 'Bb'){
-            url = url + `Clarinet_Bb/${song.author} - ${song.title} - Theme - Clarinet Bb.mxl`
-        } else if (params.instrument === 'C'){
-            url = url + `C/${song.author} - ${song.title} - Theme - C.mxl`
-        }
-        url = url.replaceAll(' ', '%20')
-        this.github = url
-
-
-
-
     },
 
     mounted() {
@@ -70,30 +51,40 @@ export default {
 
 
 
-<style lang="scss"> .musescore {
-     width: 80vw;
-     height: 90vh;
+<style lang="scss">
+.top_left {
+    width: 10vw;
+    position: fixed;
+    left: 0;
+}
 
-     @media screen and (max-width: 600px) {
-         position: absolute;
-         left: 2vw;
-         width: 95vw;
-         height: 130vh;
+.musescore {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 90vw;
+    height: 90vh;
 
-     }
- }
+    @media screen and (max-width: 600px) {
+        position: absolute;
+        left: 2vw;
+        width: 95vw;
+        height: 130vh;
 
- .btn {
-  background-color: DodgerBlue;
-  border: none;
-  color: white;
-  padding: 0.25rem 0.75rem;
-  cursor: pointer;
-  font-size: 20px;
+    }
+}
+
+.btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    font-size: 20px;
 }
 
 /* Darker background on mouse-over */
 .btn:hover {
-  background-color: RoyalBlue;
+    background-color: RoyalBlue;
 }
 </style>

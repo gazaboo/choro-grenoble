@@ -24,16 +24,12 @@ nav {
     padding: 0;
 }
 
-.nav-link {
+/* .nav-link {
     padding: 0;
     margin-left: 10px;
-}
+} */
 
 .logo {
     width: 3rem;
-}
-
-li {
-    padding-left: 2rem;
 }
 </style>
