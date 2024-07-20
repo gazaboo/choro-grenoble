@@ -1,11 +1,11 @@
 <template>
-    <div class="itemSong">
+    <button class="itemSong">
 
         <SongLink :music="music"></SongLink>
 
-        <div class="container-canto-contraconto">
-            <div class="container-music-keys">
-                <span class="role"> Melodia </span>
+        <div class="container-canto-contracanto">
+            <div class="container-musescores">
+                <span class="role"> MuseScore </span>
                 <div class="links">
                     <router-link v-for="key in this.mainThemeKeys()" :key="key" :to="{
                         name: 'ChoroSongMuseScoreView',
@@ -18,24 +18,29 @@
                     }">
                         {{ key }}
                     </router-link>
+                </div>
+                <div class="container-musescores">
 
-                    <router-link :to="{
-                        name: 'ChoroSongOSMDView',
-                        params: {
-                            theme: 'melody',
-                            instrument: 'C',
-                            title: music.title,
-                            author: music.author
-                        }
-                    }">
-                        OSMD 
-                    </router-link>
+                    <span class="role"> OSMD </span>
+                    <div class="links">
 
+                        <router-link v-for="key in this.mainThemeKeys()" :key="key" :to="{
+                            name: 'ChoroSongOSMDView',
+                            params: {
+                                theme: 'melody',
+                                instrument: key,
+                                title: music.title,
+                                author: music.author
+                            }
+                        }">
+                            {{ key }}
+                        </router-link>
+                    </div>
 
                 </div>
             </div>
 
-            <div v-if="this.secondVoiceKeys().length > 0" class="container-music-keys">
+            <div v-if="this.secondVoiceKeys().length > 0" class="container-musescores">
                 <span class="role"> Second Voice </span>
                 <div class="links">
 
@@ -52,7 +57,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </button>
 </template>
 
 <script>
@@ -83,9 +88,12 @@ export default {
 <style scoped lang="scss">
 /* Card */
 .itemSong {
+    width: 100%;
+    background-color: #fff;
+    border: none;
     border-bottom: solid green 1px;
-    margin-bottom: 1rem;
     padding-bottom: 1rem;
+    padding-top: 1rem;
     display: flex;
     flex-direction: column;
     align-items: baseline;
@@ -98,8 +106,12 @@ export default {
     }
 }
 
+.itemSong:hover {
+    background-color: rgba(0, 255, 0, 0.03);
+}
+
 /* Container qui contient les clés disponibles */
-.container-music-keys {
+.container-musescores {
     display: flex;
     flex-direction: row;
 }
@@ -124,7 +136,7 @@ a:hover {
 
 
 
-.container-canto-contraconto {
+.container-canto-contracnto {
     display: flex;
     flex-direction: row;
     align-items: center;
