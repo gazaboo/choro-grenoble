@@ -1,6 +1,9 @@
 <template>
   <div id="navbar-with-controls">
     <NavBar />
+    <span v-if="compact" class="song-info">
+      {{ this.title }} - {{ this.author }}
+    </span>
   </div>
   <div id="control">
     <div class="burger" @click="toggleControls">
@@ -9,25 +12,51 @@
       </button>
     </div>
     <div id="control-buttons">
-      <button @click="transposeUp">Transpose Up</button>
-      <button @click="transposeDown">Transpose Down</button>
-      <button @click="transposeToCLarinet">Clarinet</button>
-      <button @click="transposeToSaxophone">Sax</button>
-      <button @click="resetTranspose">C</button>
-      <button>
-        <i class="material-icons">download</i>
+      <button @click="transposeToCLarinet">
+        <i class="material-icons">air</i>
+        Clarinet Version
+      </button>
+      <button @click="transposeToSaxophone">
+        <i class="material-icons">air</i>
+        Sax Version
+      </button>
+      <button @click="resetTranspose">
+        <i class="material-symbols-rounded">
+          cadence
+        </i>
+        C Version
       </button>
       <button @click="zoomIn">
         <i class="material-icons">zoom_in</i>
+        Zoom In
       </button>
       <button @click="zoomOut">
         <i class=" material-icons">zoom_out</i>
+        Zoom Out
+      </button>
+      <button @click="transposeUp">
+        <span class="material-symbols-rounded">
+          arrow_warm_up
+        </span>
+        Transpose Up
+      </button>
+      <button @click="transposeDown">
+        <span class="material-symbols-rounded">
+          arrow_cool_down
+        </span>
+        Transpose Down
+      </button>
+      <button>
+        <i class="material-icons">download</i>
+        Download
       </button>
       <button @click="removeChords">
         <i class="material-icons">music_note</i>
+        Remove chords
       </button>
       <button @click="toggleCompactMode">
         <i class="material-icons">format_line_spacing</i>
+        Compact Mode
       </button>
     </div>
   </div>
@@ -84,9 +113,11 @@ export default {
     this.title = params.title;
     this.key = params.instrument;
     this.song = this.getSong();
+    this.author = this.song.author;
     this.url = this.song[params.theme][params.instrument];
     this.youtube = this.song.youtube.filter(url => url != "");
     this.path = `${params.instrument}/${this.song.author} - ${this.song.title} - Theme - ${params.instrument}.mxl`;
+    console.log(this.song)
   },
 
   async mounted() {
@@ -256,8 +287,8 @@ export default {
       // Obligatoire sinon le spinner n'apparait pas (je sais pas pourquoi)
       await new Promise(resolve => setTimeout(resolve, 10));
 
-      this.isCompactMode = !this.isCompactMode;
-      if (this.osmd && this.isCompactMode) {
+      this.compact = !this.compact;
+      if (this.osmd && this.compact) {
         this.osmd.setOptions({
           drawingParameters: "compacttight",
           spacingBetweenSystemLines: 19,
@@ -288,11 +319,18 @@ $primary-color: rgb(0, 189, 0);
 #navbar-with-controls {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 
 #main-container {
   position: relative;
   // top: -20px;
+}
+
+.song-info {
+  font-size: 1.2rem;
+  margin-right: 4rem;
+
 }
 
 .osmd-container {
@@ -344,7 +382,8 @@ $primary-color: rgb(0, 189, 0);
   transform: translateX(0);
 }
 
-.material-icons {
+.material-icons,
+.material-symbols-rounded {
   color: $primary-color;
 }
 
@@ -357,7 +396,7 @@ button {
   border-radius: 7px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 button:hover {
