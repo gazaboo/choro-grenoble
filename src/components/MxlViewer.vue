@@ -1,5 +1,10 @@
 <template>
-    <button @click="toggleCompactMode">compact</button>
+    <button @click="toggleCompactMode">Compact</button>
+    <button @click="zoomOut">Zoom Out</button>
+    <button @click="zoomIn">Zoom In</button>
+    <button @click="removeChords">Chords</button>
+
+
     <div>
       <div ref="osmdContainer" class="osmd-container"></div>
     </div>
@@ -20,13 +25,15 @@
     data() {
       return {
         osmd: null,
-        fileName: ''
+        fileName: '',
       }
     },
 
-    mounted() {
-      this.fetchAndDisplayMXL();
+    async mounted() {
+      await this.fetchAndDisplayMXL();
+      this.toggleCompactMode();
     },
+
     
     methods: {
       async fetchAndDisplayMXL() {
@@ -95,24 +102,34 @@
         }
       }, 
 
+      zoomIn(){
+          this.osmd.Zoom += 0.1;
+          this.osmd.render();
+      },
+
+      zoomOut(){
+          this.osmd.Zoom -= 0.1;
+          this.osmd.render();
+      },
+
+      removeChords(){
+        const text = document.getElementsByClassName('vf-text');
+          Array.prototype.map.call( text, function(el) {
+            el.style.display = 'none';
+          })
+      },
+
       toggleCompactMode(){
         this.isCompactMode = !this.isCompactMode;
         if (this.osmd && this.isCompactMode) {
           this.osmd.setOptions({ drawingParameters: "compacttight" });
+          this.osmd.render()
         } else {
           this.osmd.setOptions({ 
-            drawingParameters: "default"
-
-            // Pur enlever les chords : 
-            // https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/blob/develop/src/MusicalScore/Graphical/EngravingRules.ts
-            // this.RenderChordSymbols = true;
-            // Faut aller voir comment on fait, j'ai copié vite fait pour pas oublier
+            drawingParameters: "default",
           });
         }
-        this.osmd.render();
       }
-
-
     }
   }
   </script>
