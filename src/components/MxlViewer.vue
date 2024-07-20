@@ -3,6 +3,16 @@
     <button @click="zoomOut">Zoom Out</button>
     <button @click="zoomIn">Zoom In</button>
     <button @click="removeChords">Chords</button>
+    <button @click="load">load</button>
+
+    <div v-if="isLoading" class="loading-overlay">
+      <fingerprint-spinner
+        :animation-duration="1500"
+        :size="100"
+        :color="'#ff1d5e'"
+      />
+    </div>
+
 
 
     <div>
@@ -13,9 +23,15 @@
   <script>
   import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
   import JSZip from 'jszip';
+  import { FingerprintSpinner } from 'epic-spinners'
+
 
   export default {
     name: 'MxlViewer',
+    components: {
+      FingerprintSpinner
+    },
+
     props: {
       path: {
         type: String,
@@ -26,17 +42,19 @@
       return {
         osmd: null,
         fileName: '',
+        isLoading: true,
       }
     },
 
     async mounted() {
-      await this.fetchAndDisplayMXL();
+      this.osmd = await this.fetchMXL();
       this.toggleCompactMode();
+      this.isLoading = false;
     },
 
     
     methods: {
-      async fetchAndDisplayMXL() {
+      async fetchMXL() {
         try {
 
           const owner = 'gazaboo';
@@ -68,7 +86,6 @@
           let xmlFile;
           for (const fileName in zipContents.files) {
             if (fileName.endsWith('.musicxml') || fileName.endsWith('.mxml')) {
-              // console.log(fileName)
               xmlFile = zipContents.files[fileName];
               break;
             }
@@ -77,6 +94,7 @@
           this.mxlContent = await xmlFile.async('string');
           const blob = new Blob([this.mxlContent], { type: 'application/xml' });
           const fileUrl = URL.createObjectURL(blob);
+          
           this.osmd = new OpenSheetMusicDisplay(this.$refs.osmdContainer);
 
           this.osmd.setOptions({
@@ -90,21 +108,23 @@
             })
           } 
 
-          await this.osmd.load(fileUrl);
-          this.osmd.render();
-          
+          await this.osmd.load(fileUrl);          
           URL.revokeObjectURL(fileUrl);
+          return this.osmd; 
+
         } catch (error) {
           console.error('Error:', error);
-          if (error.stack) {
-          console.error('Error stack:', error.stack);
-        }
+          this.isLoading = false;
         }
       }, 
 
-      zoomIn(){
-          this.osmd.Zoom += 0.1;
-          this.osmd.render();
+      async zoomIn(){
+        this.osmd.Zoom += 0.1;
+        this.osmd.render();
+        },
+
+      load(){
+          this.isLoading = true;
       },
 
       zoomOut(){
@@ -123,13 +143,17 @@
         this.isCompactMode = !this.isCompactMode;
         if (this.osmd && this.isCompactMode) {
           this.osmd.setOptions({ drawingParameters: "compacttight" });
+          this.osmd.updateGraphic();
           this.osmd.render()
         } else {
           this.osmd.setOptions({ 
             drawingParameters: "default",
           });
+          this.osmd.updateGraphic();
+          this.osmd.render()
         }
       }
+
     }
   }
   </script>
@@ -140,4 +164,32 @@
     height: 90vh; /* Adjust as needed */
     overflow: auto;
   }
-  </style>
+  
+
+  .loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+</style>
