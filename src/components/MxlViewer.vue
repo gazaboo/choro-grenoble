@@ -57,78 +57,82 @@ export default {
       fileName: '',
       isLoading: true,
       showControls: false,
+      mxmlCache: {},
     }
   },
 
   async mounted() {
     this.osmd = await this.fetchMXL();
-    this.toggleCompactMode();
+    this.osmd.render();
     this.isLoading = false;
   },
 
 
   methods: {
     async fetchMXL() {
-      try {
 
-        const owner = 'gazaboo';
-        const repo = 'choro-db';
-        const encodedPath = encodeURIComponent(this.path);
-        const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedPath}`;
+      const owner = 'gazaboo';
+      const repo = 'choro-db';
+      const encodedPath = encodeURIComponent(this.path);
+      const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodedPath}`;
 
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-
-        this.fileName = data.name;
-
-        // Decode the Base64 content
-        const binaryString = atob(data.content);
-
-        // Convert binary string to Uint8Array
-        const bytes = new Uint8Array(binaryString.length);
-        for (let i = 0; i < binaryString.length; i++) {
-          bytes[i] = binaryString.charCodeAt(i);
-        }
-
-        // Decompress the MXL file
-        const zip = new JSZip();
-        const zipContents = await zip.loadAsync(bytes);
-
-        let xmlFile;
-        for (const fileName in zipContents.files) {
-          if (fileName.endsWith('.musicxml') || fileName.endsWith('.mxml')) {
-            xmlFile = zipContents.files[fileName];
-            break;
+      if (this.mxmlCache[url]) {
+        return this.mxmlCache[url];
+      } else {
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
           }
-        }
+          const data = await response.json();
 
-        this.mxlContent = await xmlFile.async('string');
-        const blob = new Blob([this.mxlContent], { type: 'application/xml' });
-        const fileUrl = URL.createObjectURL(blob);
+          this.fileName = data.name;
 
-        this.osmd = new OpenSheetMusicDisplay(this.$refs.osmdContainer);
+          // Decode the Base64 content
+          const binaryString = atob(data.content);
 
-        this.osmd.setOptions({
-          autoResize: true,
-          drawTitle: true,
-        })
+          // Convert binary string to Uint8Array
+          const bytes = new Uint8Array(binaryString.length);
+          for (let i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+          }
 
-        if (this.compact) {
+          // Decompress the MXL file
+          const zip = new JSZip();
+          const zipContents = await zip.loadAsync(bytes);
+
+          let xmlFile;
+          for (const fileName in zipContents.files) {
+            if (fileName.endsWith('.musicxml') || fileName.endsWith('.mxml')) {
+              xmlFile = zipContents.files[fileName];
+              break;
+            }
+          }
+
+          this.mxlContent = await xmlFile.async('string');
+          const blob = new Blob([this.mxlContent], { type: 'application/xml' });
+          const fileUrl = URL.createObjectURL(blob);
+
+          this.osmd = new OpenSheetMusicDisplay(this.$refs.osmdContainer);
+          await this.osmd.load(fileUrl);
+
+          this.osmd.Zoom = 0.75;
           this.osmd.setOptions({
-            drawingParameters: "compacttight"
+            autoResize: true,
+            drawTitle: true,
+            drawingParameters: "compacttight",
           })
+
+          this.osmd.updateGraphic();
+          URL.revokeObjectURL(fileUrl);
+
+          this.mxmlCache[url] = this.osmd;
+          return this.osmd;
+
+        } catch (error) {
+          console.error('Error:', error);
+          this.isLoading = false;
         }
-
-        await this.osmd.load(fileUrl);
-        URL.revokeObjectURL(fileUrl);
-        return this.osmd;
-
-      } catch (error) {
-        console.error('Error:', error);
-        this.isLoading = false;
       }
     },
 
@@ -162,7 +166,13 @@ export default {
     toggleCompactMode() {
       this.isCompactMode = !this.isCompactMode;
       if (this.osmd && this.isCompactMode) {
-        this.osmd.setOptions({ drawingParameters: "compacttight" });
+        this.osmd.setOptions({
+          drawingParameters: "compacttight",
+          spacingBetweenSystemLines: 19,
+          spacingBetweenStaffLines: 1,
+          pageFormat: "Endless",
+          scale: 6
+        });
         this.osmd.Zoom = 0.75;
         this.osmd.updateGraphic();
         this.osmd.render()
