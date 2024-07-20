@@ -11,7 +11,9 @@
     <div id="control-buttons">
       <button @click="transposeUp">Transpose Up</button>
       <button @click="transposeDown">Transpose Down</button>
-
+      <button @click="transposeToCLarinet">Clarinet</button>
+      <button @click="transposeToSaxophone">Sax</button>
+      <button @click="resetTranspose">C</button>
       <button>
         <i class="material-icons">download</i>
       </button>
@@ -80,13 +82,11 @@ export default {
     const route = useRoute();
     const params = route.params;
     this.title = params.title;
+    this.key = params.instrument;
     this.song = this.getSong();
     this.url = this.song[params.theme][params.instrument];
     this.youtube = this.song.youtube.filter(url => url != "");
     this.path = `${params.instrument}/${this.song.author} - ${this.song.title} - Theme - ${params.instrument}.mxl`;
-    console.log(this.path)
-    // url = url.replaceAll(' ', '%20')
-    // this.github = url
   },
 
   async mounted() {
@@ -100,24 +100,51 @@ export default {
     })
 
     this.osmd.TransposeCalculator = new TransposeCalculator();
-    this.osmd.render();
+    await this.osmd.render();
     this.isLoading = false;
   },
 
 
   methods: {
-
-    transposeUp() {
-      this.transpose(1);
+    async waitForOSMDInitialization() {
+      while (!this.osmd || !this.osmd.Sheet) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
     },
 
+    transposeUp() {
+      this.transposeValue += 1;
+      this.transpose(this.transposeValue);
+    },
+
+
     transposeDown() {
-      this.transpose(-1);
+      this.transposeValue -= 1;
+      this.transpose(this.transposeValue);
+    },
+
+    transposeToCLarinet() {
+      if (this.transposeValue != 2) {
+        this.transpose(2);
+      }
+    },
+
+    transposeToSaxophone() {
+      if (this.transposeValue != 6) {
+        this.transpose(6);
+      }
+    },
+
+    resetTranspose() {
+      if (this.transposeValue != 0) {
+        this.transpose(0);
+      }
     },
 
     async transpose(val) {
+      console.log('transposing')
       if (this.osmd) {
-        this.transposeValue += val;
+        this.transposeValue = val;
         this.isLoading = true;
         this.osmd.Sheet.Transpose = this.transposeValue; // e.g. -2 for 2 semitones downwards
         await new Promise(resolve => setTimeout(resolve, 10));
