@@ -25,16 +25,15 @@
                         <span class="role"> OSMD </span>
                         <div class="links">
 
-                            <router-link v-for="key in this.mainThemeKeys()" :key="key" :to="{
+                            <router-link :to="{
                                 name: 'ChoroSongOSMDView',
                                 params: {
                                     theme: 'melody',
-                                    instrument: key,
+                                    instrument: 'C',
                                     title: music.title,
-                                    author: music.author
                                 }
                             }">
-                                {{ key }}
+                                OMSD
                             </router-link>
                         </div>
 
