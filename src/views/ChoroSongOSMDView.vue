@@ -1,6 +1,13 @@
 <template>
-  <NavBar />
+  <div id="navbar-with-controls">
+    <NavBar />
+  </div>
   <div id="control">
+    <div class="burger" @click="toggleControls">
+      <button>
+        <i class="material-icons">menu</i>
+      </button>
+    </div>
     <div id="control-buttons">
       <button>
         <i class="material-icons">download</i>
@@ -18,19 +25,14 @@
         <i class="material-icons">format_line_spacing</i>
       </button>
     </div>
-    <div class="burger" @click="toggleControls">
-      <button>
-        <i class="material-icons">menu</i>
-      </button>
-    </div>
   </div>
 
-  <div v-if="isLoading" class="loading-overlay">
+  <div v-if="isLoading || isZooming" class="loading-overlay">
     <fingerprint-spinner :animation-duration="1500" :size="100" :color="'rgb(0, 189, 0)'" />
   </div>
 
-  <div id="main-container">
-    <div ref="osmdContainer" class="osmd-container"></div>
+  <div v-show="!isZooming" id="main-container">
+    <div v-show="!isZooming" ref="osmdContainer" class="osmd-container" :class="{ 'hidden': isZooming }"></div>
   </div>
 </template>
 
@@ -58,6 +60,7 @@ export default {
       osmd: null,
       fileName: '',
       isLoading: true,
+      isZooming: false,
       showControls: false,
       mxmlCache: {},
       url: "",
@@ -164,14 +167,28 @@ export default {
       control.classList.toggle('show', this.showControls);
     },
 
-    zoomIn() {
+    async zoomIn() {
+      this.isLoading = true;
       this.osmd.Zoom += 0.1;
+
+      // Je sais pas trop pourquoi mais sinon 
+      // le spinner n'apparait pas
+      await new Promise(resolve => setTimeout(resolve, 10));
+
       this.osmd.render();
+      this.isLoading = false;
     },
 
-    zoomOut() {
+    async zoomOut() {
+      this.isLoading = true;
       this.osmd.Zoom -= 0.1;
+
+      // Je sais pas trop pourquoi mais sinon 
+      // le spinner n'apparait pas
+      await new Promise(resolve => setTimeout(resolve, 10));
+
       this.osmd.render();
+      this.isLoading = false;
     },
 
     removeChords() {
@@ -189,7 +206,13 @@ export default {
       })
     },
 
-    toggleCompactMode() {
+    async toggleCompactMode() {
+
+      this.isLoading = true;
+      // Je sais pas trop pourquoi mais sinon 
+      // le spinner n'apparait pas
+      await new Promise(resolve => setTimeout(resolve, 10));
+
       this.isCompactMode = !this.isCompactMode;
       if (this.osmd && this.isCompactMode) {
         this.osmd.setOptions({
@@ -209,6 +232,7 @@ export default {
         this.osmd.updateGraphic();
         this.osmd.render()
       }
+      this.isLoading = false;
     }
 
   }
@@ -217,6 +241,11 @@ export default {
 
 <style scoped lang="scss">
 $primary-color: rgb(0, 189, 0);
+
+#navbar-with-controls {
+  display: flex;
+  justify-content: space-between;
+}
 
 #main-container {
   position: relative;
@@ -227,6 +256,8 @@ $primary-color: rgb(0, 189, 0);
   width: 100vw;
   height: 90vh;
   overflow: auto;
+  z-index: 0;
+  opacity: 1;
 }
 
 
@@ -240,6 +271,8 @@ $primary-color: rgb(0, 189, 0);
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 15%, rgba(255, 255, 255, 0) 100%);
+  opacity: 1;
 }
 
 #control {
@@ -247,6 +280,8 @@ $primary-color: rgb(0, 189, 0);
   top: 0px;
   right: 0px;
   display: flex;
+  flex-direction: column;
+  z-index: 9999;
 }
 
 #control-buttons {
@@ -254,7 +289,9 @@ $primary-color: rgb(0, 189, 0);
   transform: translateX(-200px);
   transition: opacity 0.5s ease, transform 0.3s ease;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  background-color: rgb(103, 218, 103);
+  z-index: 9999;
 }
 
 #control-buttons.show {
