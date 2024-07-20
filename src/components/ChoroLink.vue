@@ -22,7 +22,7 @@
                     </div>
                     <div class="container-musescores">
 
-                        <span class="role"> OSMD </span>
+                        <span class="role"> Music Sheet </span>
                         <div class="links">
 
                             <router-link :to="{
@@ -33,7 +33,7 @@
                                     title: music.title,
                                 }
                             }">
-                                OMSD
+                                Sheet
                             </router-link>
                         </div>
 
