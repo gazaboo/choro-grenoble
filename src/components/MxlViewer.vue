@@ -1,4 +1,5 @@
 <template>
+
   <div id="control">
     <div id="control-buttons">
       <button>
@@ -51,6 +52,7 @@ export default {
       required: true
     }
   },
+
   data() {
     return {
       osmd: null,
@@ -62,14 +64,22 @@ export default {
   },
 
   async mounted() {
-    this.osmd = await this.fetchMXL();
+    this.osmd = await this.fetchOSMDObject();
+
+    this.osmd.Zoom = 0.75;
+    this.osmd.setOptions({
+      autoResize: true,
+      drawTitle: true,
+      drawingParameters: "compacttight",
+    })
+
     this.osmd.render();
     this.isLoading = false;
   },
 
 
   methods: {
-    async fetchMXL() {
+    async fetchOSMDObject() {
 
       const owner = 'gazaboo';
       const repo = 'choro-db';
@@ -81,33 +91,18 @@ export default {
       } else {
         try {
           const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const data = await response.json();
 
+          if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
+
+          const data = await response.json();
           this.fileName = data.name;
 
-          // Decode the Base64 content
-          const binaryString = atob(data.content);
+          const fileContent = await fetch(data.download_url).then(res => res.arrayBuffer());
 
-          // Convert binary string to Uint8Array
-          const bytes = new Uint8Array(binaryString.length);
-          for (let i = 0; i < binaryString.length; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-          }
-
-          // Decompress the MXL file
-          const zip = new JSZip();
-          const zipContents = await zip.loadAsync(bytes);
-
-          let xmlFile;
-          for (const fileName in zipContents.files) {
-            if (fileName.endsWith('.musicxml') || fileName.endsWith('.mxml')) {
-              xmlFile = zipContents.files[fileName];
-              break;
-            }
-          }
+          const zip = await JSZip.loadAsync(fileContent);
+          const xmlFile = Object.values(zip.files).find(file =>
+            file.name.endsWith('.musicxml') || file.name.endsWith('.mxml')
+          );
 
           this.mxlContent = await xmlFile.async('string');
           const blob = new Blob([this.mxlContent], { type: 'application/xml' });
@@ -116,14 +111,6 @@ export default {
           this.osmd = new OpenSheetMusicDisplay(this.$refs.osmdContainer);
           await this.osmd.load(fileUrl);
 
-          this.osmd.Zoom = 0.75;
-          this.osmd.setOptions({
-            autoResize: true,
-            drawTitle: true,
-            drawingParameters: "compacttight",
-          })
-
-          this.osmd.updateGraphic();
           URL.revokeObjectURL(fileUrl);
 
           this.mxmlCache[url] = this.osmd;
@@ -139,14 +126,10 @@ export default {
     toggleControls() {
       this.showControls = !this.showControls;
       const control = document.getElementById('control-buttons');
-      if (this.showControls) {
-        control.classList.add('show');
-      } else {
-        control.classList.remove('show');
-      }
+      control.classList.toggle('show', this.showControls);
     },
 
-    async zoomIn() {
+    zoomIn() {
       this.osmd.Zoom += 0.1;
       this.osmd.render();
     },
@@ -158,8 +141,16 @@ export default {
 
     removeChords() {
       const text = document.getElementsByClassName('vf-text');
+      let visibility = undefined
+      if (text[0].style.display === '' || text[0].style.display === 'none') {
+        visibility = 'block';
+      }
+      else {
+        visibility = 'none';
+      }
+
       Array.prototype.map.call(text, function (el) {
-        el.style.display = 'none';
+        el.style.display = visibility;
       })
     },
 
