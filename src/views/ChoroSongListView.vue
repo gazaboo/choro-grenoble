@@ -1,12 +1,15 @@
 <template>
-  <div class="main-container">
-    <NavBar />
-    <SearchBar @filtered-data="updatedSelection" :data-to-search=data :check-partition=true />
-    <FilterBar @changed-selection="updatedSelection" :data="data"></FilterBar>
-    <div class="row results">
-      <div class="container-fluid">
-        <ChoroLink v-for="(music, index) in this.filteredData" :id="index" :music="music" :key="music"
-          @click="saveId(index)" />
+  <div class="choro-song-list-container">
+    <div class="background-image"></div>
+    <div class="content-wrapper">
+      <NavBar :showHome="true" :showInfo="true" />
+      <SearchBar @filtered-data="updatedSelection" :data-to-search="data" :check-partition="true" class="search-bar" />
+      <FilterBar @changed-selection="updatedSelection" :data="data" class="filter-bar"></FilterBar>
+      <div class="results-container">
+        <div class="container-fluid">
+          <ChoroLink v-for="(music, index) in this.filteredData" :id="index" :music="music" :key="music"
+            @click="saveId(index)" />
+        </div>
       </div>
     </div>
   </div>
@@ -80,14 +83,59 @@ export default {
     }
   }
 }
-
-
 </script>
 
-<style lang="scss">
-.results {
-  height: 80vh;
-  overflow: scroll;
+
+<style scoped lang="scss">
+.choro-song-list-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url('@/assets/main_page.jpeg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px);
+  z-index: -1;
+}
+
+.content-wrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-bar {
+  margin-bottom: 10px;
+}
+
+.search-filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.search-bar,
+.filter-bar {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.results-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .blink {

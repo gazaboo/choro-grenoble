@@ -1,6 +1,6 @@
 <template>
   <div id="navbar-with-controls">
-    <NavBar />
+    <NavBar :showHome="false" :showInfo="false" />
     <span v-if="compact" class="song-info">
       {{ this.title }} - {{ this.author }}
     </span>

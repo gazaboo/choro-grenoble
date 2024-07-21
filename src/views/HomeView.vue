@@ -1,39 +1,76 @@
 <template>
-    <NavBar />
-
-    <h1>Warning</h1>
-    <p> This is a work in progress. Be patient ;) </p>
-    <h2> Choro </h2>
-    <p> All sheet music can be read using the MuseScore reader.</p>
-    <p> You can read the music sheet, loop some parts or change speed.</p>
-    <p> I am currently adding more music sheet for Bb and Eb instruments.</p>
-    <h2> Samba </h2>
-    <p> This part is still at initial stage.
-        The aim is to provide a fast and readable way of playing music
-    </p>
-    <h2> Contact </h2>
-    <p> Do you have any remark regarding copyrights ?</p>
-    <p> Do you have music sheets you want to be included ?</p>
-    <p> Do you want to collaborate ?</p>
-
-    <p><em>Contact : florian.dadouchi@gmail.com </em></p>
+    <div class="home-container">
+        <div class="background-image"></div>
+        <h1 class="title">CHORO</h1>
+        <div class="button-container">
+            <router-link to="/choro" class="button">Song List</router-link>
+            <router-link to="/info" class="button">Info</router-link>
+        </div>
+    </div>
 </template>
-  
-<script>
-// @ is an alias to /src
-import NavBar from '@/components/NavBar.vue';
 
+<script>
 export default {
     name: 'HomeView',
-    components: {
-        NavBar
-    }
 }
-
 </script>
 
 <style scoped>
-p {
-    margin: 10px 0;
+.home-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('@/assets/main_page.jpeg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+    transform: scale(1.1);
+    z-index: -1;
+}
+
+.title {
+    font-size: 20vw;
+    font-weight: 800;
+    text-shadow: 4px 4px 4px #000000;
+    color: white;
+    opacity: 0.7;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 4vw;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+    background-color: rgba(218, 218, 218, 0.4);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    text-decoration: none;
+    text-shadow: 4px 4px 4px #000000;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
 }
 </style>

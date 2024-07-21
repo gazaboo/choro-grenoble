@@ -6,13 +6,17 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../views/ChoroSongListView.vue')
+    component: () => import('../views/HomeView.vue')
   },
   {
     path: '/choro',
     name: 'ChoroSongListView',
     component: () => import('../views/ChoroSongListView.vue')
-
+  },
+  {
+    path: '/info',
+    name: 'InfoView',
+    component: () => import('../views/InfoView.vue')
   },
   {
     path: '/mscore/:theme/:instrument/:title',
