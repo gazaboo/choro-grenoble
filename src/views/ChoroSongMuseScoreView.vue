@@ -7,27 +7,14 @@
             </button>
         </div>
         <div id="control-buttons" :class="{ 'show': showControls }">
-            <div class="container-fluid">
-                <router-link v-for="key in this.otherKeys" :key="key" :to="{
-                    name: 'ChoroSongMuseScoreView',
-                    params: {
-                        theme: 'melody',
-                        instrument: key,
-                        title: this.title,
-                        author: this.author
-                    },
-                }">
-                    MuseScore for {{ key }}
-                </router-link>
-            </div>
-
-            <button>
-                <i class="material-icons">format_line_spacing</i>
-                Compact Mode
-            </button>
+            <select v-model="currentKey" multiple>
+                <option v-for="key in ['C', 'Eb', 'Bb']" :key="key">
+                    {{ key }}
+                </option>
+            </select>
         </div>
     </div>
-    <iframe ref="musescore" class="musescore" :src="this.currentUrl" frameborder="0" allowfullscreen
+    <iframe :key="currentUrl" ref="musescore" class="musescore" :src="currentUrl" frameborder="0" allowfullscreen
         allow="autoplay; fullscreen"></iframe>
 </template>
 
@@ -47,6 +34,8 @@ export default {
             title: "",
             otherKeys: [],
             showControls: false,
+            currentKey: 'C',
+            part: "melody",
         }
     },
 
@@ -57,19 +46,22 @@ export default {
         const route = useRoute();
         const params = route.params;
         this.title = params.title;
-
-        const song = this.getSong();
-
-        console.log(song)
-        this.currentUrl = song[params.theme][params.instrument];
-        const currentKey = params.instrument
-
-        this.youtube = song.youtube.filter(url => url != "");
-
-        this.otherKeys = ['C', 'Eb', 'Bb'].filter(item => item !== currentKey);
+        this.song = this.getSong();
+        this.part = params.theme;
+        this.currentUrl = this.song[params.theme][params.instrument];
+        this.currentKey = params.instrument;
+        this.youtube = this.song.youtube.filter(url => url != "");
     },
-
-    mounted() {
+    computed: {
+        currentUrl() {
+            return this.song[this.part][this.currentKey];
+        },
+    },
+    watch: {
+        currentKey(newKey) {
+            console.log('Current key changed to:', newKey);
+            // You can perform any other actions here when the key changes
+        }
     },
 
     methods: {
@@ -81,7 +73,17 @@ export default {
         },
         toggleControls() {
             this.showControls = !this.showControls;
-            console.log(this.showControls)
+        },
+
+        updateMuseScore(key) {
+
+            console.log('key', key)
+            this.currentKey = key;
+            console.log('key', key)
+
+            console.log('currentUrl', this.currentUrl);
+            this.currentUrl = this.song[this.part][this.currentInstrument];
+            console.log('currentUrl', this.currentUrl);
         },
     }
 }
@@ -144,7 +146,7 @@ $primary-color: rgb(0, 189, 0);
     color: $primary-color;
 }
 
-a,
+option,
 button {
     text-decoration: none;
     color: black;
@@ -159,12 +161,12 @@ button {
     justify-content: space-between;
 }
 
-a:hover,
+option:hover,
 button:hover {
     background-color: $primary-color;
 }
 
-a:hover .material-icons,
+option:hover .material-icons,
 button:hover .material-icons {
     color: rgb(255, 255, 255);
 }
@@ -172,5 +174,10 @@ button:hover .material-icons {
 .material-icons,
 .material-symbols-rounded {
     color: $primary-color;
+}
+
+select {
+    background-color: #0094000f;
+
 }
 </style>
