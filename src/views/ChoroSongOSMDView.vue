@@ -12,6 +12,10 @@
       </button>
     </div>
     <div id="control-buttons" :class="{ 'show': showControls }">
+      <router-link :to="{ name: 'ChoroSongListView' }">
+        <i class="material-icons">arrow_back</i>
+        <span class="role"> Return to List </span>
+      </router-link>
       <button @click="transposeToCLarinet">
         <i class="material-icons">air</i>
         Clarinet Version
@@ -378,6 +382,16 @@ $primary-color: rgb(0, 189, 0);
   color: $primary-color;
 }
 
+a {
+  display: flex;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a,
 button {
   border: solid 2px $primary-color;
   background-color: white;
@@ -390,10 +404,12 @@ button {
   justify-content: space-between;
 }
 
+a:hover,
 button:hover {
   background-color: $primary-color;
 }
 
+a:hover .material-icons,
 button:hover .material-icons {
   color: rgb(255, 255, 255);
 }

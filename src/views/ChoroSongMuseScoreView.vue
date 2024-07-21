@@ -1,17 +1,19 @@
 <template>
-    <NavBar class="top_left" />
     <div id="control">
-        <div class="burger" @click="toggleControls">
-            <button>
-                <i class="material-icons">menu</i>
-            </button>
-        </div>
+        <button class="burger" @click="toggleControls">
+            <i class="material-icons">menu</i>
+        </button>
         <div id="control-buttons" :class="{ 'show': showControls }">
             <select v-model="currentKey" multiple>
                 <option v-for="key in ['C', 'Eb', 'Bb']" :key="key">
                     {{ key }}
                 </option>
             </select>
+
+            <router-link :to="{ name: 'ChoroSongListView' }">
+                <i class="material-icons">arrow_back</i>
+                <span class="role"> Return to List </span>
+            </router-link>
         </div>
     </div>
     <iframe :key="currentUrl" ref="musescore" class="musescore" :src="currentUrl" frameborder="0" allowfullscreen
@@ -20,7 +22,6 @@
 
 <script>
 
-import NavBar from "@/components/NavBar.vue";
 import listeChoros from "../assets/liste_totale_choros.json";
 import { useRoute } from 'vue-router';
 
@@ -39,9 +40,6 @@ export default {
         }
     },
 
-    components: {
-        NavBar
-    },
     created() {
         const route = useRoute();
         const params = route.params;
@@ -76,14 +74,8 @@ export default {
         },
 
         updateMuseScore(key) {
-
-            console.log('key', key)
             this.currentKey = key;
-            console.log('key', key)
-
-            console.log('currentUrl', this.currentUrl);
             this.currentUrl = this.song[this.part][this.currentInstrument];
-            console.log('currentUrl', this.currentUrl);
         },
     }
 }
@@ -94,10 +86,9 @@ export default {
 <style scoped lang="scss">
 $primary-color: rgb(0, 189, 0);
 
-.top_left {
-    width: 10vw;
-    position: fixed;
-    right: 0;
+
+body {
+    filter: blur(5px)
 }
 
 .musescore {
@@ -105,20 +96,23 @@ $primary-color: rgb(0, 189, 0);
     left: 0;
     top: 0;
     width: 90vw;
-    height: 90vh;
+    height: 100vh;
+}
 
-    @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
+    .musescore {
         position: absolute;
-        left: 2vw;
-        width: 95vw;
-        height: 130vh;
+        left: -8px;
+        top: -8px;
+        width: 102vw;
+        height: 100vh;
     }
 }
 
 #control {
     position: fixed;
-    top: 0px;
-    right: 0px;
+    top: 5px;
+    right: 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -141,11 +135,14 @@ $primary-color: rgb(0, 189, 0);
     transform: translateX(-5px);
 }
 
+
 .material-icons,
 .material-symbols-rounded {
     color: $primary-color;
+    font-size: 1.5rem;
 }
 
+a,
 option,
 button {
     text-decoration: none;
@@ -161,12 +158,13 @@ button {
     justify-content: space-between;
 }
 
+a:hover,
 option:hover,
 button:hover {
     background-color: $primary-color;
 }
 
-option:hover .material-icons,
+a:hover .material-icons option:hover .material-icons,
 button:hover .material-icons {
     color: rgb(255, 255, 255);
 }
@@ -178,6 +176,5 @@ button:hover .material-icons {
 
 select {
     background-color: #0094000f;
-
 }
 </style>

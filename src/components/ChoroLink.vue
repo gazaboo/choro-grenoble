@@ -5,18 +5,17 @@
         <transition name="fade">
             <div v-if="showMuseScores" lass="container-canto-contracanto">
                 <div class="container-musescores">
-                    <span class="role"> MuseScore </span>
                     <div class="links">
-                        <router-link v-for="key in this.mainThemeKeys()" :key="key" :to="{
+                        <router-link :to="{
                             name: 'ChoroSongMuseScoreView',
                             params: {
                                 theme: 'melody',
-                                instrument: key,
+                                instrument: 'C',
                                 title: music.title,
                                 author: music.author
                             }
                         }">
-                            {{ key }}
+                            <span class="role"> Muse Score </span>
                         </router-link>
                         <span class="info"> Play sound, Loop and Slowdown</span>
                     </div>
@@ -24,7 +23,6 @@
                 </div>
                 <div class="container-musescores">
                     <div class="links">
-
                         <router-link :to="{
                             name: 'ChoroSongOSMDView',
                             params: {
@@ -39,7 +37,7 @@
                     </div>
 
                 </div>
-                <div v-if="this.secondVoiceKeys().length > 0" class="container-musescores">
+                <!-- <div v-if="this.secondVoiceKeys().length > 0" class="container-musescores">
                     <span class="role"> Second Voice </span>
                     <div class="links">
 
@@ -54,7 +52,7 @@
                             {{ key }}
                         </router-link>
                     </div>
-                </div>
+                </div> -->
             </div>
         </transition>
 
