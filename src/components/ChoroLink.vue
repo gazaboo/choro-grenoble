@@ -1,95 +1,67 @@
 <template>
-    <button @click="toggleMuseScores" class="itemSong">
-
-        <SongLink :music="music"></SongLink>
-        <transition name="fade">
-            <div v-if="showMuseScores" lass="container-canto-contracanto">
-                <div class="container-musescores">
-                    <div class="links">
-                        <router-link :to="{
-                            name: 'ChoroSongMuseScoreView',
-                            params: {
-                                theme: 'melody',
-                                instrument: 'C',
-                                title: music.title,
-                                author: music.author
-                            }
-                        }">
-                            <span class="role"> Muse Score </span>
-                        </router-link>
-                        <span class="info"> Play sound, Loop and Slowdown</span>
-                    </div>
-
-                </div>
-                <div class="container-musescores">
-                    <div class="links">
-                        <router-link :to="{
-                            name: 'ChoroSongOSMDView',
-                            params: {
-                                theme: 'melody',
-                                instrument: 'C',
-                                title: music.title,
-                            }
-                        }">
-                            <span class="role"> Music Sheet </span>
-                        </router-link>
-                        <span class="info">Better for screens. All transpositions available.</span>
-                    </div>
-
-                </div>
-                <!-- <div v-if="this.secondVoiceKeys().length > 0" class="container-musescores">
-                    <span class="role"> Second Voice </span>
-                    <div class="links">
-
-                        <router-link v-for="key in this.secondVoiceKeys()" :key="key" :to="{
-                            name: 'ChoroSongMuseScoreView',
-                            params: {
-                                theme: 'contracanto',
-                                instrument: key,
-                                title: music.title
-                            }
-                        }">
-                            {{ key }}
-                        </router-link>
-                    </div>
-                </div> -->
+    <button @click="toggleMuseScores" class="main-container">
+        <span class="song-number"> {{ this.id }} </span>
+        <div class="song-infos">
+            <div class="title-author">
+                <h3> {{ music.title }}</h3>
+                <h4> {{ music.author }}</h4>
             </div>
-        </transition>
+            <transition name="fade">
+                <div v-if="showLinks" class="container-osmd-mscore">
+                    <div class="container-links">
+                        <div class="link">
+                            <router-link :to="{
+                                name: 'ChoroSongMuseScoreView',
+                                params: {
+                                    theme: 'melody',
+                                    instrument: 'C',
+                                    title: music.title,
+                                    author: music.author
+                                }
+                            }">
+                                Muse Score
+                            </router-link>
+                            <span class="info"> Play sound, Loop and Slowdown</span>
+                        </div>
 
+                    </div>
+                    <div class="container-links">
+                        <div class="link">
+                            <router-link :to="{
+                                name: 'ChoroSongOSMDView',
+                                params: {
+                                    theme: 'melody',
+                                    instrument: 'C',
+                                    title: music.title,
+                                }
+                            }">
+                                Music Sheet
+                            </router-link>
+                            <span class="info">Better for screens. </span>
+                        </div>
 
-
-
+                    </div>
+                </div>
+            </transition>
+        </div>
     </button>
 </template>
 
 <script>
-import SongLink from './SongLink.vue'
 
 export default {
     name: 'ChoroLink',
-    props: ['music', 'hasPartition'],
-    components: {
-        SongLink
-    },
+    props: ['music', 'id'],
 
     data() {
         return {
-            showMuseScores: false,
+            showLinks: false,
         }
     },
 
     methods: {
-        mainThemeKeys() {
-            const keys = Object.keys(this.music.melody)
-            return keys.filter(key => this.music.melody[key])
-        },
-        secondVoiceKeys() {
-            const keys = Object.keys(this.music.melody)
-            return keys.filter(key => this.music.contracanto[key])
-        },
         toggleMuseScores() {
-            console.log("toggleMuseScores called");
-            this.showMuseScores = !this.showMuseScores;
+            this.showLinks = !this.showLinks;
         }
     }
 }
@@ -100,36 +72,72 @@ export default {
 
 <style scoped lang="scss">
 /* Card */
-.itemSong {
+.main-container {
     width: 100%;
-    background-color: #fff;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0.6) 50%);
     border: none;
     border-bottom: solid green 1px;
     padding-bottom: 1rem;
     padding-top: 1rem;
+    padding: 1rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: baseline;
+    gap: 1rem;
 
-    @media (min-width: 600px) {
-        column-gap: 10px;
-        justify-content: space-between;
+    @media (min-width: 576px) {
+        gap: 2rem;
     }
 }
 
-.itemSong:hover {
-    background-color: rgba(0, 255, 0, 0.03);
+.container-osmd-mscore {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    gap: 0.5rem;
 }
 
-/* Container qui contient les clés disponibles */
-.container-musescores {
+
+// Media query to detect laptops and make hover effect
+@media (pointer:fine) {
+    .main-container:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        transform: scale(1.02);
+    }
+
+    .main-container:hover .song-infos h3 {
+        font-size: 2rem;
+    }
+
+    .main-container:hover .song-infos h4 {
+        font-size: 1.5rem;
+    }
+}
+
+.title-author {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    column-gap: 1rem;
+    flex-wrap: wrap;
+}
+
+
+.container-links {
     display: flex;
     flex-direction: row;
 }
 
+.song-number {
+    color: grey;
+    font-size: 1.2rem;
+}
+
 /* Liens vers la partition */
 a {
-    font-size: 0.75rem;
+    font-size: 0.9rem;
     padding: 0.3rem;
     background-color: rgb(70, 104, 19);
     border-radius: 3px;
@@ -145,15 +153,6 @@ a:hover {
     background-color: rgb(56, 175, 58);
 }
 
-
-
-.container-canto-contracnto {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 2rem;
-}
-
 .role {
     font-size: 0.9rem;
     display: inline-flex;
@@ -161,9 +160,9 @@ a:hover {
     margin-right: 0.5rem;
 }
 
-.links {
-    line-height: 2rem;
-}
+// .link {
+//     line-height: 2rem;
+// }
 
 .fade-enter-active {
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -183,5 +182,34 @@ a:hover {
     font-size: small;
     font-style: italic;
     color: #545454;
+
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin: 0.25rem 0;
+    white-space: nowrap;
+}
+
+h4 {
+    font-size: 1rem;
+    margin: 0.25rem 0;
+    color: rgb(75, 75, 75);
+    // white-space: nowrap;
+}
+
+h3,
+h4 {
+    text-shadow:
+        1px 1px 2px rgba(255, 225, 0, 0.126),
+        // 1px -1px 2px rgba(255, 255, 255, 0.9),
+        // -1px 1px 2px rgba(255, 255, 255, 0.9),
+        // -1px -1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.song-infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 </style>

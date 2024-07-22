@@ -35,19 +35,22 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('@/assets/main_page.jpeg');
+    background-image: url('@/assets/images/main_page_outpainted.webp');
     background-size: cover;
     background-position: center;
-    filter: blur(3px);
-    transform: scale(1.1);
     z-index: -1;
 }
 
+
 .title {
-    font-size: 20vw;
+    font-size: 25vw;
     font-weight: 800;
-    text-shadow: 4px 4px 4px #000000;
-    color: white;
+    text-shadow:
+        4px 4px 2px rgba(0, 0, 0, 0.5),
+        4px -4px 2px rgba(0, 0, 0, 0.5),
+        -4px 4px 2px rgba(0, 0, 0, 0.5),
+        -4px -4px 2px rgba(0, 0, 0, 0.5);
+    color: rgb(209, 209, 209);
     opacity: 0.7;
 }
 
@@ -72,5 +75,50 @@ export default {
 .button:hover {
     background-color: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
+}
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .title {
+        font-size: 20vw;
+    }
+
+    .button {
+        font-size: 3.5vw;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .title {
+        font-size: 20vw;
+    }
+
+    .button {
+        font-size: 3vw;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .title {
+        font-size: 11rem;
+    }
+
+    .button {
+        font-size: 2.5vw;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .title {
+        font-size: 14rem;
+    }
+
+    .button {
+        font-size: 1.5vw;
+    }
 }
 </style>

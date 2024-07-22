@@ -6,10 +6,8 @@
       <SearchBar @filtered-data="updatedSelection" :data-to-search="data" :check-partition="true" class="search-bar" />
       <FilterBar @changed-selection="updatedSelection" :data="data" class="filter-bar"></FilterBar>
       <div class="results-container">
-        <div class="container-fluid">
-          <ChoroLink v-for="(music, index) in this.filteredData" :id="index" :music="music" :key="music"
-            @click="saveId(index)" />
-        </div>
+        <ChoroLink class='result' v-for="(music, index) in this.filteredData" :id="index" :music="music" :key="music"
+          @click="saveId(index)" />
       </div>
     </div>
   </div>
@@ -86,7 +84,7 @@ export default {
 </script>
 
 
-<style scoped lang="scss">
+<style lang="scss">
 .choro-song-list-container {
   width: 100vw;
   height: 100vh;
@@ -97,10 +95,10 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/main_page.jpeg');
+  background-image: url('@/assets/images/main_page.jpeg');
   background-size: cover;
   background-position: center;
-  filter: blur(5px);
+  // filter: blur(2px);
   z-index: -1;
 }
 
@@ -110,7 +108,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.8);
+  // background-color: rgba(255, 255, 255, 0.5);
 }
 
 .nav-bar {
@@ -132,11 +130,9 @@ export default {
 .results-container {
   flex-grow: 1;
   overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
 }
+
 
 .blink {
   animation: blinker 0.45s ease-in-out;

@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar">
         <router-link class="navbar-brand" to="/">
-            <img class="logo" src="../assets/logo.jpg" alt="Logo">
+            <img class="logo" src="../assets/images/logo.jpg" alt="Logo">
         </router-link>
         <ul class="nav-links">
             <li v-if="showHome" class="nav-item">
@@ -43,7 +43,7 @@ export default {
     align-items: center;
     padding: 0px 20px;
     /* background-color: rgba(255, 255, 255, 0.2); */
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
 }
 
 .navbar-brand {

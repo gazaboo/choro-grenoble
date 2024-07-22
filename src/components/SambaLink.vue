@@ -1,12 +1,12 @@
 <template>
-    <div class="itemSong">
+    <div class="main-container">
         <SongLink :music="music"></SongLink>
         <router-link :to="{
-                name: 'GrilleSambaView',
-                params: {
-                    title: music.title
-                }
-            }">
+            name: 'GrilleSambaView',
+            params: {
+                title: music.title
+            }
+        }">
             <span class="material-symbols-rounded">
                 play_circle
             </span>
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style scoped>
-.itemSong {
+.main-container {
     display: flex;
     align-items: center;
 }
@@ -37,4 +37,3 @@ export default {
     margin-left: 1rem;
 }
 </style>
-
