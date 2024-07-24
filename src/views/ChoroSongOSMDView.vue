@@ -1,68 +1,70 @@
 <template>
-  <div id="navbar-with-controls">
-    <NavBar :showHome="false" :showInfo="false" />
-    <span v-if="compact" class="song-info">
-      {{ this.title }} - {{ this.author }}
-    </span>
-  </div>
-  <div id="control">
-    <div class="burger" @click="toggleControls">
-      <button>
+  <div class="main-wrappper-navbar">
+    <div id="navbar-with-burger">
+      <span v-if="compact" class="song-info">
+        <NavBar :showHome="false" :showInfo="false" :title="this.title" :author="this.author" />
+      </span>
+      <span v-else>
+        <NavBar :showHome="false" :showInfo="false" />
+      </span>
+      <button class="burger" @click="toggleControls">
         <i class="material-icons">menu</i>
       </button>
     </div>
-    <div id="control-buttons" :class="{ 'show': showControls }">
-      <router-link :to="{ name: 'ChoroSongListView' }">
-        <i class="material-icons">arrow_back</i>
-        <span class="role"> Return to List </span>
-      </router-link>
-      <button @click="transposeToCLarinet">
-        <i class="material-icons">air</i>
-        Clarinet Version
-      </button>
-      <button @click="transposeToSaxophone">
-        <i class="material-icons">air</i>
-        Sax Version
-      </button>
-      <button @click="resetTranspose">
-        <i class="material-symbols-rounded">
-          cadence
-        </i>
-        C Version
-      </button>
-      <button @click="zoomIn">
-        <i class="material-icons">zoom_in</i>
-        Zoom In
-      </button>
-      <button @click="zoomOut">
-        <i class=" material-icons">zoom_out</i>
-        Zoom Out
-      </button>
-      <button @click="transposeUp">
-        <span class="material-symbols-rounded">
-          arrow_warm_up
-        </span>
-        Transpose Up
-      </button>
-      <button @click="transposeDown">
-        <span class="material-symbols-rounded">
-          arrow_cool_down
-        </span>
-        Transpose Down
-      </button>
-      <button>
-        <i class="material-icons">download</i>
-        Download
-      </button>
-      <button @click="removeChords">
-        <i class="material-icons">music_note</i>
-        Remove chords
-      </button>
-      <button @click="toggleCompactMode">
-        <i class="material-icons">format_line_spacing</i>
-        Compact Mode
-      </button>
-    </div>
+    <Transition name="fade">
+      <div v-if="showControls" id="control-buttons">
+        <router-link :to="{ name: 'ChoroSongListView' }">
+          <i class="material-icons">arrow_back</i>
+          <span class="role"> Return to List </span>
+        </router-link>
+        <button @click="transposeToCLarinet">
+          <i class="material-icons">air</i>
+          Clarinet Version
+        </button>
+        <button @click="transposeToSaxophone">
+          <i class="material-icons">air</i>
+          Sax Version
+        </button>
+        <button @click="resetTranspose">
+          <i class="material-symbols-rounded">
+            cadence
+          </i>
+          C Version
+        </button>
+        <button @click="zoomIn">
+          <i class="material-icons">zoom_in</i>
+          Zoom In
+        </button>
+        <button @click="zoomOut">
+          <i class=" material-icons">zoom_out</i>
+          Zoom Out
+        </button>
+        <button @click="transposeUp">
+          <span class="material-symbols-rounded">
+            arrow_warm_up
+          </span>
+          Transpose Up
+        </button>
+        <button @click="transposeDown">
+          <span class="material-symbols-rounded">
+            arrow_cool_down
+          </span>
+          Transpose Down
+        </button>
+        <button>
+          <i class="material-icons">download</i>
+          Download
+        </button>
+        <button @click="removeChords">
+          <i class="material-icons">music_note</i>
+          Remove chords
+        </button>
+        <button @click="toggleCompactMode">
+          <i class="material-icons">format_line_spacing</i>
+          Compact Mode
+        </button>
+      </div>
+    </Transition>
   </div>
 
   <div v-if="isLoading || isZooming" class="loading-overlay">
@@ -311,7 +313,8 @@ export default {
 <style scoped lang="scss">
 $primary-color: rgb(0, 189, 0);
 
-#navbar-with-controls {
+
+#navbar-with-burger {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -329,6 +332,8 @@ $primary-color: rgb(0, 189, 0);
 }
 
 .osmd-container {
+  position: relative;
+  // top: ;
   width: 100vw;
   height: 90vh;
   overflow: auto;
@@ -342,7 +347,7 @@ $primary-color: rgb(0, 189, 0);
   top: 0;
   left: 0;
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -352,30 +357,13 @@ $primary-color: rgb(0, 189, 0);
 }
 
 #control {
-  position: fixed;
-  top: 0px;
-  right: 0px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   z-index: 9999;
 }
 
-#control-buttons {
-  display: none;
-  transform: translateX(200px);
-  transition: display 0.3s ease, transform 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(103, 218, 103);
-  z-index: 9999;
-  border-radius: 5%;
-}
 
-#control-buttons.show {
-  display: flex;
-  transform: translateX(-5px);
-}
 
 .material-icons,
 .material-symbols-rounded {
@@ -413,4 +401,24 @@ a:hover .material-icons,
 button:hover .material-icons {
   color: rgb(255, 255, 255);
 }
-</style>
+
+#control-buttons {
+  display: flex;
+  width: 100vw;
+  // transition: display 0.3s ease, transform 0.2s ease;
+  overflow: scroll;
+  background-color: rgb(103, 218, 103);
+  z-index: 9999;
+  border-radius: 5%;
+}
+
+// /* nous vous expliquerons ensuite ce que font ces classes ! */
+// .fade-enter-active #control-buttons,
+// .fade-leave-active #control-buttons {
+//   transition: all 0.3s ease-out;
+// }
+
+// .fade-enter-from #control-buttons,
+// .fade-leave-to #control-buttons {
+//   width: 0;
+// }</style>

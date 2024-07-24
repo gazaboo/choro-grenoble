@@ -14,6 +14,10 @@
                 <router-link class="nav-link" to="/choro">List</router-link>
             </li>
         </ul>
+        <div class="title-author-container">
+            <h3 v-if="title"> {{ this.title }} </h3>
+            <h4 v-if="title"> {{ this.author }} </h4>
+        </div>
     </nav>
 </template>
 
@@ -31,7 +35,15 @@ export default {
         showSongList: {
             type: Boolean,
             default: false
-        }
+        },
+        title: {
+            type: String,
+            default: null
+        },
+        author: {
+            type: String,
+            default: null
+        },
     }
 }
 </script>
@@ -42,8 +54,7 @@ export default {
     justify-content: flex-start;
     align-items: center;
     padding: 0px 20px;
-    /* background-color: rgba(255, 255, 255, 0.2); */
-    /* backdrop-filter: blur(5px); */
+    flex-wrap: nowrap;
 }
 
 .navbar-brand {
@@ -52,9 +63,9 @@ export default {
 }
 
 .logo {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
+    width: 2rem;
+    height: 1.2rem;
+    /* border-radius: 50%; */
     object-fit: cover;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -81,5 +92,27 @@ export default {
 
 .nav-link:hover {
     color: #f0f0f0;
+}
+
+h3,
+h4 {
+    display: inline-block;
+    text-wrap: nowrap;
+    margin: 0;
+}
+
+h3,
+h4 {
+    font-size: 1rem;
+}
+
+h4 {
+    color: rgb(163, 124, 74);
+}
+
+.title-author-container {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 0rem;
 }
 </style>
