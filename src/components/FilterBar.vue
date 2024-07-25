@@ -44,6 +44,8 @@ export default {
             const num = this.data.filter(elt => elt.author == author).length
             this.authors.set(author, num)
         }
+
+        this.authors = new Map([...this.authors.entries()].sort());
     },
 
     watch: {
@@ -51,6 +53,7 @@ export default {
             handler(filters) {
                 if (this.filters.selectedAuthors.length) {
                     this.selection = this.data.filter(elt => filters.selectedAuthors.includes(elt.author));
+
                 } else {
                     this.selection = this.data;
                 }
@@ -63,7 +66,7 @@ export default {
 }
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 .author-pill {
     background-color: #a7f799;
     color: rgb(0, 0, 0);

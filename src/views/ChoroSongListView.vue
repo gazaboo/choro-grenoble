@@ -3,8 +3,16 @@
     <div class="background-image"></div>
     <div class="content-wrapper">
       <NavBar :showHome="true" :showInfo="true" />
-      <SearchBar @filtered-data="updatedSelection" :data-to-search="data" :check-partition="true" class="search-bar" />
-      <FilterBar @changed-selection="updatedSelection" :data="data" class="filter-bar"></FilterBar>
+      <div class="searchbar-filter-wrapper">
+        <div class="searchbar-wrapper">
+          <button class="burger" @click="showFilters = !showFilters">
+            <i class="material-icons">menu</i>
+          </button>
+          <SearchBar @filtered-data="updatedSelection" :data-to-search="data" :check-partition="true"
+            class="search-bar" />
+        </div>
+        <FilterBar v-if='showFilters' @changed-selection="updatedSelection" :data="data" class="filter-bar"></FilterBar>
+      </div>
       <div class="results-container">
         <ChoroLink class='result' v-for="(music, index) in this.filteredData" :id="index" :music="music" :key="music"
           @click="saveId(index)" />
@@ -35,6 +43,7 @@ export default {
     return {
       data: listeChoros.data.filter(itemSong => this.has_partition(itemSong)),
       filteredData: [],
+      showFilters: false
     }
   },
 
@@ -85,6 +94,12 @@ export default {
 
 
 <style lang="scss">
+.material-icons,
+.material-symbols-rounded {
+  color: black;
+  font-size: 1rem;
+}
+
 .choro-song-list-container {
   width: 100vw;
   height: 100vh;
@@ -98,7 +113,6 @@ export default {
   background-image: url('@/assets/images/main_page.jpeg');
   background-size: cover;
   background-position: center;
-  // filter: blur(2px);
   z-index: -1;
 }
 
@@ -107,8 +121,31 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  // background-color: rgba(255, 255, 255, 0.5);
+  padding: 5px;
+}
+
+.searchbar-filter-wrapper {
+  background-color: white;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.searchbar-wrapper {
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  align-content: stretch;
+  padding: 1rem;
+}
+
+.searchbar-wrapper button {
+  background-color: #fff;
+  border: none;
+  padding: 5px;
+}
+
+.material-icons {
+  font-size: 1.5rem;
 }
 
 .nav-bar {
