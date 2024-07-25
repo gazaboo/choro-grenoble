@@ -11,60 +11,77 @@
         <i class="material-icons">menu</i>
       </button>
     </div>
-    <Transition name="fade">
-      <div v-if="showControls" id="control-buttons">
-        <router-link :to="{ name: 'ChoroSongListView' }">
-          <i class="material-icons">arrow_back</i>
-          <span class="role"> Return to List </span>
-        </router-link>
-        <button @click="transposeToCLarinet">
-          <i class="material-icons">air</i>
-          Clarinet Version
-        </button>
-        <button @click="transposeToSaxophone">
-          <i class="material-icons">air</i>
+
+    <div :class="['control-buttons', { expanded: showControls }]">
+      <router-link :to="{ name: 'ChoroSongListView' }">
+        <i class="material-icons">arrow_back</i>
+        <span class="role"> Return to List </span>
+      </router-link>
+      <button @click="transposeToCLarinet">
+        <i class="material-icons">air</i>
+        <span class="role">Clarinet Version</span>
+      </button>
+      <button @click="transposeToSaxophone">
+        <i class="material-icons">air</i>
+        <span class="role">
           Sax Version
-        </button>
-        <button @click="resetTranspose">
-          <i class="material-symbols-rounded">
-            cadence
-          </i>
+        </span>
+      </button>
+      <button @click="resetTranspose">
+        <i class="material-symbols-rounded">
+          cadence
+        </i>
+        <span class="role">
           C Version
-        </button>
-        <button @click="zoomIn">
-          <i class="material-icons">zoom_in</i>
+        </span>
+      </button>
+      <button @click="zoomIn">
+        <i class="material-icons">zoom_in</i>
+        <span class="role">
           Zoom In
-        </button>
-        <button @click="zoomOut">
-          <i class=" material-icons">zoom_out</i>
+        </span>
+      </button>
+      <button @click="zoomOut">
+        <i class=" material-icons">zoom_out</i>
+        <span class="role">
           Zoom Out
-        </button>
-        <button @click="transposeUp">
-          <span class="material-symbols-rounded">
-            arrow_warm_up
-          </span>
+        </span>
+      </button>
+      <button @click="transposeUp">
+        <span class="material-symbols-rounded">
+          arrow_warm_up
+        </span>
+        <span class="role">
           Transpose Up
-        </button>
-        <button @click="transposeDown">
-          <span class="material-symbols-rounded">
-            arrow_cool_down
-          </span>
+        </span>
+      </button>
+      <button @click="transposeDown">
+        <span class="material-symbols-rounded">
+          arrow_cool_down
+        </span>
+        <span class="role">
           Transpose Down
-        </button>
-        <button>
-          <i class="material-icons">download</i>
+        </span>
+      </button>
+      <button>
+        <i class="material-icons">download</i>
+        <span class="role">
           Download
-        </button>
-        <button @click="removeChords">
-          <i class="material-icons">music_note</i>
+        </span>
+      </button>
+      <button @click="removeChords">
+        <i class="material-icons">music_note</i>
+        <span class="role">
           Remove chords
-        </button>
-        <button @click="toggleCompactMode">
-          <i class="material-icons">format_line_spacing</i>
+        </span>
+      </button>
+      <button @click="toggleCompactMode">
+        <i class="material-icons">format_line_spacing</i>
+        <span class="role">
           Compact Mode
-        </button>
-      </div>
-    </Transition>
+        </span>
+      </button>
+    </div>
   </div>
 
   <div v-if="isLoading || isZooming" class="loading-overlay">
@@ -311,8 +328,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$primary-color: rgb(0, 189, 0);
-
+$primary-color: rgb(163, 124, 74);
+$primary-color-lighter: rgb(237, 183, 112);
 
 #navbar-with-burger {
   display: flex;
@@ -322,18 +339,11 @@ $primary-color: rgb(0, 189, 0);
 
 #main-container {
   position: relative;
-  // top: -20px;
 }
 
-.song-info {
-  font-size: 1.2rem;
-  margin-right: 4rem;
-
-}
 
 .osmd-container {
   position: relative;
-  // top: ;
   width: 100vw;
   height: 90vh;
   overflow: auto;
@@ -368,6 +378,7 @@ $primary-color: rgb(0, 189, 0);
 .material-icons,
 .material-symbols-rounded {
   color: $primary-color;
+  font-size: 1rem;
 }
 
 a {
@@ -384,7 +395,7 @@ button {
   border: solid 2px $primary-color;
   background-color: white;
   margin: 0.25rem;
-  padding: 0.1rem 0.25rem;
+  padding: 0rem 0.25rem;
   cursor: pointer;
   border-radius: 7px;
   display: flex;
@@ -394,7 +405,7 @@ button {
 
 a:hover,
 button:hover {
-  background-color: $primary-color;
+  background-color: $primary-color-lighter ;
 }
 
 a:hover .material-icons,
@@ -402,23 +413,25 @@ button:hover .material-icons {
   color: rgb(255, 255, 255);
 }
 
-#control-buttons {
+.control-buttons {
   display: flex;
   width: 100vw;
-  // transition: display 0.3s ease, transform 0.2s ease;
+  height: 0;
+  margin-bottom: 10px;
   overflow: scroll;
-  background-color: rgb(103, 218, 103);
+  background-color: $primary-color;
   z-index: 9999;
-  border-radius: 5%;
+  // border-radius: 5%;
+  transition: all 0.3s ease;
 }
 
-// /* nous vous expliquerons ensuite ce que font ces classes ! */
-// .fade-enter-active #control-buttons,
-// .fade-leave-active #control-buttons {
-//   transition: all 0.3s ease-out;
-// }
 
-// .fade-enter-from #control-buttons,
-// .fade-leave-to #control-buttons {
-//   width: 0;
-// }</style>
+.control-buttons.expanded {
+  height: 2rem;
+}
+
+.role {
+  text-wrap: nowrap;
+  font-size: 0.8rem;
+}
+</style>

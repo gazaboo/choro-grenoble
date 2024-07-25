@@ -1,11 +1,12 @@
 <template>
     <button @click="toggleMuseScores" class="main-container">
-        <span class="song-number"> {{ this.id }} </span>
+        <span class="song-number"> {{ this.id + 1 }} </span>
         <div class="song-infos">
             <div class="title-author">
                 <h3> {{ music.title }}</h3>
                 <h4> {{ music.author }}</h4>
             </div>
+
             <transition name="fade">
                 <div v-if="showLinks" class="container-osmd-mscore">
                     <div class="container-links">
