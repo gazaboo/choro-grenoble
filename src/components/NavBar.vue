@@ -55,6 +55,9 @@ export default {
     align-items: center;
     padding: 0px 20px;
     flex-wrap: nowrap;
+    background-color: #fff;
+    opacity: 0.9;
+    /* border-radius: 15px; */
 }
 
 .navbar-brand {
