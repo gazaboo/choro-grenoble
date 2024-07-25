@@ -85,7 +85,7 @@
   </div>
 
   <div v-if="isLoading || isZooming" class="loading-overlay">
-    <fingerprint-spinner :animation-duration="1500" :size="100" :color="'rgb(0, 189, 0)'" />
+    <fingerprint-spinner :animation-duration="1500" :size="100" :color="'rgb(163, 124, 74)'" />
   </div>
 
   <div v-show="!isZooming" id="main-container">
