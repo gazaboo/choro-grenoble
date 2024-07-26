@@ -147,6 +147,7 @@ export default {
 
     this.osmd.Zoom = 0.75;
     this.osmd.setOptions({
+      backend: "svg",
       autoResize: true,
       drawTitle: false,
       drawingParameters: "compacttight",

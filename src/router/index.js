@@ -9,6 +9,11 @@ const routes = [
     component: () => import('../views/HomeView.vue')
   },
   {
+    path: '/test',
+    name: 'MultiOSMDView',
+    component: () => import('../views/MultiOSMDView.vue')
+  },
+  {
     path: '/choro',
     name: 'ChoroSongListView',
     component: () => import('../views/ChoroSongListView.vue')
