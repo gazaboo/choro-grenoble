@@ -8,6 +8,11 @@
             :style="{ background: isRendering ? getProgressGradient('right') : '' }">
             Zoom In
         </button>
+
+        <button @click="transposeToCLarinet">
+            <i class="material-icons">air</i>
+            <span class="role">Clarinet Version</span>
+        </button>
     </div>
     <div class="osmd-wrapper">
         <div v-for="(container, index) in osmdContainers" :key="index" :ref="container.ref" class="osmd-container"
@@ -15,23 +20,24 @@
     </div>
 </template>
 <script>
-import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
+import { OpenSheetMusicDisplay, TransposeCalculator } from 'opensheetmusicdisplay';
 import JSZip from 'jszip';
 
 export default {
     name: 'MultiOSMDView',
 
     data() {
-        const containerCount = 5;
+        const containerCount = 3;
         return {
             osmdContainers: Array.from({ length: containerCount }, (_, i) => ({
                 ref: `osmdContainer${i + 1}`,
-                zoom: 0.15 + (i * 0.15) // This will create zoom levels of 0.5, 0.75, and 1.0
+                zoom: 0.5 + (i * 0.15) // This will create zoom levels of 0.5, 0.75, and 1.0
             })),
             osmdObjects: [],
             activeIndex: 0,
             renderProgress: 0,
-            isRendering: false
+            isRendering: false,
+            transposeValue: 0
         }
     },
 
@@ -48,6 +54,7 @@ export default {
                 drawTitle: false,
                 drawingParameters: "compacttight",
             });
+            osmd.TransposeCalculator = new TransposeCalculator();
             osmd.render();
             this.osmdObjects.push(osmd);
             this.renderProgress = (this.osmdObjects.length / this.osmdContainers.length) * 100;
@@ -111,21 +118,6 @@ export default {
             }
         },
 
-        async handleResize() {
-            // Render the active OSMD object first
-            if (this.osmdObjects[this.activeIndex]) {
-                await this.osmdObjects[this.activeIndex].updateGraphic();
-                await this.osmdObjects[this.activeIndex].render();
-            }
-
-            // Then render the rest of the OSMD objects
-            for (let index = 0; index < this.osmdObjects.length; index++) {
-                if (index !== this.activeIndex) {
-                    await this.osmdObjects[index].render();
-                }
-            }
-        },
-
         getProgressGradient(side) {
             const color = '#4CAF50'; // Progress color
             const transparent = 'transparent';
@@ -134,7 +126,39 @@ export default {
             } else {
                 return `linear-gradient(to left, ${color} ${this.renderProgress}%, ${transparent} ${this.renderProgress}%)`;
             }
-        }
+        },
+
+        async transposeToCLarinet() {
+            let num = 0;
+
+            if (this.transposeValue != 2) {
+                this.isRendering = true;
+                for (let osmd of this.osmdObjects) {
+                    await this.transpose(osmd, 2);
+                    num++;
+                    this.renderProgress = (num / this.osmdContainers.length) * 100;
+                    console.log('render progress', this.renderProgress);
+                }
+            }
+            this.isRendering = false;
+        },
+
+        resetTranspose() {
+            if (this.transposeValue != 0) {
+                this.transpose(0);
+            }
+        },
+
+        async transpose(osmd, val) {
+            this.transposeValue = val;
+            // this.isLoading = true;
+            osmd.Sheet.Transpose = this.transposeValue; // e.g. -2 for 2 semitones downwards
+            await new Promise(resolve => setTimeout(resolve, 10));
+
+            osmd.updateGraphic();
+            osmd.render();
+            this.isLoading = false;
+        },
     }
 }
 </script>
