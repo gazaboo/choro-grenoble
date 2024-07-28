@@ -18,18 +18,18 @@ export default {
         return {
             input: "",
             filteredList: [],
-            data: []
+            data: [],
+            fuse: null
         }
     },
 
     created() {
-
         this.data = this.dataToSearch.map((item, index) => {
             return {
                 ...item, // spread operator to copy all fields from the original object
                 id: index + 1,
-                title_html: this.clean_string(item.title),
-                author_html: this.clean_string(item.author)
+                title_clean: this.clean_string(item.title),
+                author_clean: this.clean_string(item.author)
             };
         });
 
@@ -39,7 +39,13 @@ export default {
     methods: {
         onChangedInput(event) {
             this.input = this.clean_string(event.target.value);
-            this.filteredList = this.filterList();
+            let clonedOriginalData = JSON.parse(JSON.stringify(this.data));
+
+            this.filteredList = this.filterList(clonedOriginalData);
+            console.log('before', this.filteredList[0])
+
+            this.filteredList = this.filteredList.map(this.highlight_text)
+            console.log('after', this.filteredList[0])
             this.$emit("filteredData", this.filteredList)
         },
 
@@ -53,114 +59,55 @@ export default {
                 .replaceAll(/[ü]/g, "u")
         },
 
-        // getGrenobleSelection(name) {
-        //     let filteredList = [];
-        //     for (let songName of listeGrenoble[name]) {
-        //         let found = this.data.find(itemSong => itemSong.title == songName)
-        //         if (found) {
-        //             filteredList.push(found);
-        //         }
-        //     }
-        //     return filteredList;
-        // },
-
-        // has_partition(itemSong) {
-        //     return Object.entries(itemSong.melody).map(entry => entry[1] != "").includes(true) ||
-        //         Object.entries(itemSong.contracanto).map(entry => entry[1] != "").includes(true)
-        // },
-
-        filterByQuery(selectedList) {
-            const options = {
-                includeScore: true,
-                shouldSort: true,
-                includeMatches: true,
-                keys: ['title_html', 'author_html']
+        highlight_text(item) {
+            if (this.input) {
+                const regex = new RegExp(`(${this.input.split('').join('|')})`, 'gi');
+                item.title = item.title.replace(regex, '<span class="highlight">$1</span>');
+                item.author = item.author.replace(regex, '<span class="highlight">$1</span>');
             }
-            const fuse = new Fuse(selectedList, options)
-            let result = fuse.search(this.input)
-            return result
+            return item;
         },
 
-        highlight(fuseSearchResult, highlightClassName) {
-            const set = (obj, path, value) => {
-                const pathValue = path.split('.');
-                let i;
-
-                for (i = 0; i < pathValue.length - 1; i++) {
-                    obj = obj[pathValue[i]];
-                }
-                obj[pathValue[i]] = value;
-            };
-
-            const generateHighlightedText = (inputText, regions) => {
-                let content = '';
-                let nextUnhighlightedRegionStartingIndex = 0;
-                regions.forEach(region => {
-                    const lastRegionNextIndex = region[1] + 1;
-                    content += [
-                        inputText.substring(nextUnhighlightedRegionStartingIndex, region[0]),
-                        `<span class="${highlightClassName}">`,
-                        inputText.substring(region[0], lastRegionNextIndex),
-                        '</span>',
-                    ].join('');
-
-                    nextUnhighlightedRegionStartingIndex = lastRegionNextIndex;
-                });
-                content += inputText.substring(nextUnhighlightedRegionStartingIndex);
-                return content;
-            };
-
-            for (let elt of fuseSearchResult) {
-                elt.matches.forEach(match => {
-                    if (match.key == "title_html") {
-                        match.value = elt.item.title
-                    } else {
-                        match.value = elt.item.author
-                    }
-                })
-            }
-            let result = fuseSearchResult
-                .filter(item => item.matches && item.matches.length)
-                .map(function (elt) {
-                    const item = elt.item;
-                    const matches = elt.matches;
-                    const highlightedItem = Object.assign({}, item);
-                    matches.forEach(function (match) {
-                        const key = match.key;
-                        const value = match.value;
-                        const indices = match.indices;
-                        set(highlightedItem, key, generateHighlightedText(value, indices));
-                    });
-                    return highlightedItem;
-                });
-            return result
-        },
-
-        filterList() {
+        filterList(data) {
+            this.filteredList = []
 
             if (this.input == "") {
-                let clone = JSON.parse(JSON.stringify(this.data))
-                clone.forEach(elt => {
-                    elt.title_html = elt.title;
-                    elt.author_html = elt.author
-                })
-                return clone
-            }
-            let selectedList = this.data;
-            selectedList.sort((a, b) => (a.title > b.title) ? 1 : -1);
-
-            if (this.input) {
-                selectedList = this.filterByQuery(selectedList);
-                selectedList = this.highlight(selectedList, "highlight");
+                return this.data
             }
 
-            for (let item of selectedList) {
-                item.title_html = item.title_html.includes("highlight") ? item.title_html : item.title;
-                item.author_html = item.author_html.includes("highlight") ? item.author_html : item.author
+            this.filteredList = data.filter(itemSong => {
+                return itemSong.title_clean.startsWith(this.input) || itemSong.author_clean.startsWith(this.input)
+            })
+
+            let remaining = data.filter(itemSong => {
+                return (itemSong.title_clean.includes(this.input) || itemSong.author_clean.includes(this.input)) &&
+                    !this.filteredList.includes(itemSong)
+            })
+
+            this.filteredList = this.filteredList.concat(remaining)
+
+            // Fuzzy search only if needed
+            if (this.filteredList.length == 0) {
+                let clonedOriginalData = JSON.parse(JSON.stringify(this.data));
+                this.filteredList = this.fuzzySearch(clonedOriginalData);
             }
 
-            return selectedList;
+            return this.filteredList;
         },
+
+        fuzzySearch(data) {
+            let filteredData = JSON.parse(JSON.stringify(data));
+
+            const options = {
+                shouldSort: true,
+                includeMatches: true,
+                keys: ['title_clean', 'author_clean']
+            }
+            let fuse = new Fuse(filteredData, options)
+            filteredData = fuse.search(this.input)
+            filteredData = filteredData.map(item => item.item)
+            return filteredData
+        }
     }
 }
 </script>

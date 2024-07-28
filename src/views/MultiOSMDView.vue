@@ -1,19 +1,47 @@
 <template>
-    <div class="button-container">
-        <button @click="zoomOut" :disabled="activeIndex === 0 || isRendering"
-            :style="{ background: isRendering ? getProgressGradient('left') : '' }">
-            Zoom Out
-        </button>
-        <button @click="zoomIn" :disabled="activeIndex === osmdContainers.length - 1 || isRendering"
-            :style="{ background: isRendering ? getProgressGradient('right') : '' }">
-            Zoom In
-        </button>
+    <div class="main-wrappper-navbar">
 
-        <button @click="transposeToCLarinet">
-            <i class="material-icons">air</i>
-            <span class="role">Clarinet Version</span>
-        </button>
+        <div id="navbar-with-burger">
+            <span v-if="compact" class="song-info">
+                <NavBar :showHome="false" :showInfo="false" :title="this.title" :author="this.author" />
+            </span>
+            <span v-else>
+                <NavBar :showHome="false" :showInfo="false" />
+            </span>
+            <button class="burger" @click="toggleControls">
+                <i class="material-icons">menu</i>
+            </button>
+        </div>
+        <div :class="['control-buttons', { expanded: showControls }]">
+            <button @click="zoomOut" :disabled="activeIndex === 0 || isRendering"
+                :style="{ background: isRendering ? getProgressGradient('left') : '' }">
+                Zoom Out
+            </button>
+            <button @click="zoomIn" :disabled="activeIndex === osmdContainers.length - 1 || isRendering"
+                :style="{ background: isRendering ? getProgressGradient('right') : '' }">
+                Zoom In
+            </button>
+
+            <button @click="transposeToCLarinet">
+                <i class="material-icons">air</i>
+                <span class="role">Clarinet Version</span>
+            </button>
+
+            <button @click="transposeToSaxophone">
+                <i class="material-icons">air</i>
+                <span class="role">
+                    Sax Version
+                </span>
+            </button>
+            <button @click="removeChords">
+                <i class="material-icons">music_note</i>
+                <span class="role">
+                    Remove chords
+                </span>
+            </button>
+        </div>
     </div>
+
     <div class="osmd-wrapper">
         <div v-for="(container, index) in osmdContainers" :key="index" :ref="container.ref" class="osmd-container"
             :class="{ 'active-sheet': index === activeIndex }"></div>
@@ -27,7 +55,7 @@ export default {
     name: 'MultiOSMDView',
 
     data() {
-        const containerCount = 3;
+        const containerCount = 5;
         return {
             osmdContainers: Array.from({ length: containerCount }, (_, i) => ({
                 ref: `osmdContainer${i + 1}`,
@@ -37,32 +65,14 @@ export default {
             activeIndex: 0,
             renderProgress: 0,
             isRendering: false,
-            transposeValue: 0
+            transposeValue: 0,
+            showControls: true
         }
     },
 
     async mounted() {
-        let fileName = "C/Altamiro Carrilho - Deixe o breque prá mim - Theme - C.mxl";
-        this.isRendering = true;
-
-        for (let container of this.osmdContainers) {
-            const osmd = await this.fetchOSMDObject(fileName, container.ref);
-            osmd.Zoom = container.zoom;
-            osmd.setOptions({
-                // backend: "svg",
-                autoResize: true,
-                drawTitle: false,
-                drawingParameters: "compacttight",
-            });
-            osmd.TransposeCalculator = new TransposeCalculator();
-            osmd.render();
-            this.osmdObjects.push(osmd);
-            this.renderProgress = (this.osmdObjects.length / this.osmdContainers.length) * 100;
-
-        }
-        this.isRendering = false;
-
-        // window.addEventListener('resize', this.handleResize);
+        this.renderAll();
+        window.addEventListener('resize', this.handleResize);
     },
 
     beforeUnmount() {
@@ -106,6 +116,27 @@ export default {
             }
         },
 
+        async renderAll() {
+            let fileName = "C/Altamiro Carrilho - Deixe o breque prá mim - Theme - C.mxl";
+            this.isRendering = true;
+
+            for (let container of this.osmdContainers) {
+                const osmd = await this.fetchOSMDObject(fileName, container.ref);
+                osmd.Zoom = container.zoom;
+                osmd.setOptions({
+                    backend: "svg",
+                    autoResize: false,
+                    drawTitle: false,
+                    drawingParameters: "compacttight",
+                });
+                osmd.TransposeCalculator = new TransposeCalculator();
+                osmd.render();
+                this.osmdObjects.push(osmd);
+                this.renderProgress = (this.osmdObjects.length / this.osmdContainers.length) * 100;
+
+            }
+            this.isRendering = false;
+        },
         zoomIn() {
             if (this.activeIndex < this.osmdContainers.length - 1) {
                 this.activeIndex++;
@@ -129,16 +160,39 @@ export default {
         },
 
         async transposeToCLarinet() {
-            let num = 0;
-
             if (this.transposeValue != 2) {
                 this.isRendering = true;
-                for (let osmd of this.osmdObjects) {
-                    await this.transpose(osmd, 2);
-                    num++;
-                    this.renderProgress = (num / this.osmdContainers.length) * 100;
-                    console.log('render progress', this.renderProgress);
-                }
+                this.renderProgress = 0;
+                const totalOsmd = this.osmdObjects.length;
+
+                const transposePromises = this.osmdObjects.map((osmd, index) =>
+                    this.transpose(osmd, 2)
+                        .then(() => {
+                            this.renderProgress = ((index + 1) / totalOsmd) * 100;
+                            console.log('render progress', this.renderProgress);
+                        })
+                );
+
+                await Promise.all(transposePromises);
+            }
+            this.isRendering = false;
+        },
+
+        async transposeToSaxophone() {
+            if (this.transposeValue != 6) {
+                this.isRendering = true;
+                this.renderProgress = 0;
+                const totalOsmd = this.osmdObjects.length;
+
+                const transposePromises = this.osmdObjects.map((osmd, index) =>
+                    this.transpose(osmd, 6)
+                        .then(() => {
+                            this.renderProgress = ((index + 1) / totalOsmd) * 100;
+                            console.log('render progress', this.renderProgress);
+                        })
+                );
+
+                await Promise.all(transposePromises);
             }
             this.isRendering = false;
         },
@@ -159,13 +213,59 @@ export default {
             osmd.render();
             this.isLoading = false;
         },
-    }
+
+        async handleResize() {
+            console.log('resize');
+            const activeOsmd = this.osmdObjects[this.activeIndex];
+            if (activeOsmd) {
+                activeOsmd.render();
+                await new Promise(resolve => setTimeout(resolve, 10));
+                console.log('first rendered');
+            }
+
+            for (const [index, osmd] of this.osmdObjects.entries()) {
+                if (index !== this.activeIndex) {
+                    osmd.render();
+                    await new Promise(resolve => setTimeout(resolve, 10));
+                    console.log('render progress', index);
+                }
+            }
+        },
+
+        removeChords() {
+            const text = document.getElementsByClassName('vf-text');
+            let visibility = undefined
+            if (text[0].style.display === '' || text[0].style.display === 'none') {
+                visibility = 'block';
+            }
+            else {
+                visibility = 'none';
+            }
+
+            Array.prototype.map.call(text, function (el) {
+                el.style.display = visibility;
+            })
+        },
+
+        toggleControls() {
+            this.showControls = !this.showControls;
+        },
+    },
 }
 </script>
 
 
 
-<style>
+<style scoped lang="scss">
+$primary-color: rgb(163, 124, 74);
+$primary-color-lighter: rgb(237, 183, 112);
+
+#navbar-with-burger {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
 .osmd-wrapper {
     position: relative;
     width: 100vw;
@@ -212,16 +312,46 @@ export default {
 }
 
 button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid 2px $primary-color;
     min-width: 100px;
-    padding: 10px;
-    border: none;
+    margin: 0.25rem;
+    padding: 0rem 0.25rem;
+    border-radius: 7px;
     background-color: #f0f0f0;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
+button:hover {
+    background-color: $primary-color-lighter ;
+}
+
 button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.control-buttons {
+    display: flex;
+    width: 100vw;
+    height: 0;
+    margin-bottom: 10px;
+    overflow: scroll;
+    background-color: $primary-color;
+    z-index: 9999;
+    transition: all 0.3s ease;
+}
+
+.control-buttons.expanded {
+    height: 2rem;
+}
+
+.material-icons,
+.material-symbols-rounded {
+    color: $primary-color;
+    font-size: 1rem;
 }
 </style>

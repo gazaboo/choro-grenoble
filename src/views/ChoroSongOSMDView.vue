@@ -95,6 +95,7 @@
 
 <script>
 import { OpenSheetMusicDisplay, TransposeCalculator } from 'opensheetmusicdisplay';
+import { ChordSymbolContainer } from 'opensheetmusicdisplay';
 import JSZip from 'jszip';
 import { FingerprintSpinner } from 'epic-spinners'
 import NavBar from '@/components/NavBar.vue';
@@ -145,21 +146,74 @@ export default {
   async mounted() {
     this.osmd = await this.fetchOSMDObject();
 
-    this.osmd.Zoom = 0.75;
+    this.osmd.Zoom = 0.85;
     this.osmd.setOptions({
       backend: "svg",
       autoResize: true,
       drawTitle: false,
       drawingParameters: "compacttight",
+      // drawUpToMeasureNumber: 10
     })
 
     this.osmd.TransposeCalculator = new TransposeCalculator();
     await this.osmd.render();
     this.isLoading = false;
+
+    this.getAllChords();
+    this.getParts()
   },
 
 
   methods: {
+
+    getParts() {
+      let parts = this.osmd.Sheet.SourceMeasures;
+      console.log('PARTS', parts);
+    },
+
+    getAllChords() {
+      let chords = new Map();
+
+      this.osmd.Sheet.SourceMeasures.forEach((measure, index) => {
+        if (measure.verticalSourceStaffEntryContainers) {
+          let measureChords = [];
+          measure.verticalSourceStaffEntryContainers.forEach(container => {
+            if (container.staffEntries) {
+              container.staffEntries.forEach(staffEntry => {
+                if (staffEntry.chordSymbolContainers.length > 0) {
+                  staffEntry.chordSymbolContainers.forEach(chordContainer => {
+                    let text = ChordSymbolContainer.calculateChordText(chordContainer, 0, null);
+                    measureChords.push(text);
+                  });
+                }
+              });
+            }
+          });
+          if (measureChords.length > 0) {
+            chords.set(index, measureChords);
+          }
+        }
+      });
+      chords = this.forwardFillChords(chords);
+      console.log("filledChords", chords);
+    },
+
+    forwardFillChords(chords) {
+      // Forward fill the chords (implicit repetition of chords)
+      let filledChords = new Map();
+      let lastChord = [];
+
+      for (let i = 1; i <= Math.max(...chords.keys()); i++) {
+        if (chords.has(i)) {
+          lastChord = chords.get(i);
+          filledChords.set(i, lastChord);
+        } else {
+          filledChords.set(i, lastChord);
+        }
+      }
+      return filledChords;
+    },
+
     async waitForOSMDInitialization() {
       while (!this.osmd || !this.osmd.Sheet) {
         await new Promise(resolve => setTimeout(resolve, 100));

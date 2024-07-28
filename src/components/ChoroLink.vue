@@ -3,8 +3,8 @@
         <span class="song-number"> {{ this.id + 1 }} </span>
         <div class="song-infos">
             <div class="title-author">
-                <h3> {{ music.title }}</h3>
-                <h4> {{ music.author }}</h4>
+                <h3 v-html="music.title"></h3>
+                <h4 v-html="music.author"></h4>
             </div>
 
             <transition name="fade">
