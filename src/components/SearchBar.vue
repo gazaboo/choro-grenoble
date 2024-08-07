@@ -40,12 +40,8 @@ export default {
         onChangedInput(event) {
             this.input = this.clean_string(event.target.value);
             let clonedOriginalData = JSON.parse(JSON.stringify(this.data));
-
             this.filteredList = this.filterList(clonedOriginalData);
-            console.log('before', this.filteredList[0])
-
             this.filteredList = this.filteredList.map(this.highlight_text)
-            console.log('after', this.filteredList[0])
             this.$emit("filteredData", this.filteredList)
         },
 
