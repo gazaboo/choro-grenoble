@@ -1,7 +1,6 @@
 <template>
     <div class="filter-bar">
         <div class="filter-bar-buttons">
-            <span class="filter-bar-title">Explore</span>
             <a class="custom-collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#authors"
                 aria-expanded="false" aria-controls="authors">
                 Authors
@@ -9,8 +8,7 @@
         </div>
         <div class="authors-container collapse" id="authors">
             <div class="form-check form-check-inline author-link" v-for="author of authors" :key="author">
-                <input type="checkbox" class="btn-check" v-model="filters.selectedAuthors" :id="author[0]"
-                    :value="author[0]">
+                <input type="checkbox" class="btn-check" v-model="selectedAuthors" :id="author[0]" :value="author[0]">
                 <label :for="author[0]" class="author-pill">
                     <span class="author"> {{ author[0] }} </span>
                     <span class="author"> ({{ author[1] }}) </span>
@@ -30,12 +28,7 @@ export default {
         return {
             selection: [],
             authors: new Map(),
-            filters: {
-                selectedAuthors: [],
-                selectedKeys: [],
-                podium: false,
-                chantiers: false
-            }
+            selectedAuthors: [],
         }
     },
 
@@ -44,33 +37,24 @@ export default {
             const num = this.data.filter(elt => elt.author == author).length
             this.authors.set(author, num)
         }
-
         this.authors = new Map([...this.authors.entries()].sort());
     },
 
     watch: {
-        filters: {
-            handler(filters) {
-                if (this.filters.selectedAuthors.length) {
-                    this.selection = this.data.filter(elt => filters.selectedAuthors.includes(elt.author));
-
-                } else {
-                    this.selection = this.data;
-                }
-                this.$emit('changedSelection', this.selection)
-            },
-            deep: true
+        selectedAuthors: {
+            handler(newSelectedAuthors) {
+                this.$emit('selectedAuthors', newSelectedAuthors)
+            }
         }
-
     }
 }
 </script>
 
 <style lang="scss">
 .author-pill {
-    background-color: #a7f799;
-    color: rgb(0, 0, 0);
-    border-radius: 10px;
+    background-color: $secondary-background-color;
+    color: $primary-text-color;
+    border-radius: 5px;
     font-size: 0.75rem;
     display: flex;
     align-items: center;
@@ -107,8 +91,8 @@ input[type=checkbox]:checked+label {
 .custom-collapse-btn {
     display: block;
     padding: 0.5rem;
-    border-radius: 1rem;
-    background-color: #a7f799;
+    border-radius: 5px;
+    background-color: $secondary-background-color;
     text-decoration: none;
     color: black;
 }
@@ -118,6 +102,8 @@ input[type=checkbox]:checked+label {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    height: 15vh;
+    overflow: scroll;
 }
 
 .authors-container>div {

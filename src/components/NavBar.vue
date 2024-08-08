@@ -1,8 +1,8 @@
 <template>
     <nav class="navbar">
-        <router-link class="navbar-brand" to="/">
+        <!-- <router-link class="navbar-brand" to="/">
             <img class="logo" src="../assets/images/logo.jpg" alt="Logo">
-        </router-link>
+        </router-link> -->
         <ul class="nav-links">
             <li v-if="showHome" class="nav-item">
                 <router-link class="nav-link" to="/">Home</router-link>
@@ -48,14 +48,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .navbar {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     padding: 0px 20px;
     flex-wrap: nowrap;
-    background-color: #fff;
+    /* background-color: #9b9b9b; */
     opacity: 0.9;
     /* border-radius: 15px; */
 }
@@ -78,6 +78,7 @@ export default {
     list-style-type: none;
     margin: 0;
     padding: 0;
+
 }
 
 .nav-item {
@@ -86,9 +87,11 @@ export default {
 
 .nav-link {
     color: rgb(32, 32, 32);
+    background-color: #ffffff9b;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
+    border-radius: 10px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     transition: color 0.3s ease;
 }
@@ -110,7 +113,7 @@ h4 {
 }
 
 h4 {
-    color: rgb(163, 124, 74);
+    color: $secondary-text-color;
 }
 
 .title-author-container {

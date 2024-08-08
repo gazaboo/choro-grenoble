@@ -85,7 +85,7 @@
   </div>
 
   <div v-if="isLoading || isZooming" class="loading-overlay">
-    <fingerprint-spinner :animation-duration="1500" :size="100" :color="'rgb(163, 124, 74)'" />
+    <fingerprint-spinner class="loading-spinner" :animation-duration="1500" :size="100" :color="'rgb(163, 124, 74)'" />
   </div>
 
   <div v-show="!isZooming" id="main-container">
@@ -328,9 +328,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$primary-color: rgb(163, 124, 74);
-$primary-color-lighter: rgb(237, 183, 112);
-
 #navbar-with-burger {
   display: flex;
   justify-content: space-between;
@@ -377,14 +374,14 @@ $primary-color-lighter: rgb(237, 183, 112);
 
 .material-icons,
 .material-symbols-rounded {
-  color: $primary-color;
+  color: $secondary-text-color;
   font-size: 1rem;
 }
 
 a {
   display: flex;
   text-decoration: none;
-  color: black;
+  color: $primary-text-color;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -392,8 +389,8 @@ a {
 
 a,
 button {
-  border: solid 2px $primary-color;
-  background-color: white;
+  border: solid 2px $secondary-text-color;
+  background-color: $primary-background-color;
   margin: 0.25rem;
   padding: 0rem 0.25rem;
   cursor: pointer;
@@ -405,12 +402,13 @@ button {
 
 a:hover,
 button:hover {
-  background-color: $primary-color-lighter ;
+  background-color: $secondary-background-color ;
 }
 
 a:hover .material-icons,
-button:hover .material-icons {
-  color: rgb(255, 255, 255);
+button:hover .material-icons,
+button:hover .material-symbols-rounded {
+  color: white;
 }
 
 .control-buttons {
@@ -419,7 +417,7 @@ button:hover .material-icons {
   height: 0;
   margin-bottom: 10px;
   overflow: scroll;
-  background-color: $primary-color;
+  background-color: $secondary-text-color;
   z-index: 9999;
   // border-radius: 5%;
   transition: all 0.3s ease;

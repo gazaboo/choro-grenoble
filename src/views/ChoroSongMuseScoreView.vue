@@ -84,9 +84,6 @@ export default {
 
 
 <style scoped lang="scss">
-$primary-color: rgb(0, 189, 0);
-
-
 body {
     filter: blur(5px)
 }
@@ -125,7 +122,7 @@ body {
     transition: display 0.3s ease, transform 0.2s ease;
     display: flex;
     flex-direction: column;
-    background-color: rgb(103, 218, 103);
+    background-color: $secondary-background-color;
     z-index: 9999;
     border-radius: 5%;
 }
@@ -138,7 +135,7 @@ body {
 
 .material-icons,
 .material-symbols-rounded {
-    color: $primary-color;
+    color: $secondary-text-color;
     font-size: 1.5rem;
 }
 
@@ -147,7 +144,7 @@ option,
 button {
     text-decoration: none;
     color: black;
-    border: solid 2px $primary-color;
+    border: solid 2px $secondary-text-color;
     background-color: white;
     margin: 0.25rem;
     padding: 0.1rem 0.25rem;
@@ -161,7 +158,7 @@ button {
 a:hover,
 option:hover,
 button:hover {
-    background-color: $primary-color;
+    background-color: $secondary-text-color;
 }
 
 a:hover .material-icons option:hover .material-icons,
@@ -171,7 +168,7 @@ button:hover .material-icons {
 
 .material-icons,
 .material-symbols-rounded {
-    color: $primary-color;
+    color: $secondary-text-color;
 }
 
 select {

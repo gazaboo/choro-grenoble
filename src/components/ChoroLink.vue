@@ -75,9 +75,10 @@ export default {
 /* Card */
 .main-container {
     width: 100%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0.6) 50%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0.4) 50%);
     border: none;
-    border-bottom: solid green 1px;
+    border-bottom: solid 1px;
+    border-image: linear-gradient(to right, $secondary-background-color 0%, $secondary-background-color 50%, transparent 75%) 1;
     padding-bottom: 1rem;
     padding-top: 1rem;
     padding: 1rem;
@@ -103,17 +104,17 @@ export default {
 // Media query to detect laptops and make hover effect
 @media (pointer:fine) {
     .main-container:hover {
-        background-color: rgba(255, 255, 255, 0.7);
+        // background-color: rgba(255, 255, 255, 0.7);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         transform: scale(1.02);
     }
 
     .main-container:hover .song-infos h3 {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
 
     .main-container:hover .song-infos h4 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 }
 
@@ -161,10 +162,6 @@ a:hover {
     margin-right: 0.5rem;
 }
 
-// .link {
-//     line-height: 2rem;
-// }
-
 .fade-enter-active {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -182,12 +179,13 @@ a:hover {
 .info {
     font-size: small;
     font-style: italic;
-    color: #545454;
+    color: $primary-text-color;
 
 }
 
 h3 {
     font-size: 1.2rem;
+    font-weight: 900;
     margin: 0.25rem 0;
     white-space: nowrap;
 }
@@ -195,8 +193,11 @@ h3 {
 h4 {
     font-size: 1rem;
     margin: 0.25rem 0;
-    color: rgb(75, 75, 75);
-    // white-space: nowrap;
+    color: $primary-text-color;
+    font-weight: 700;
+    background: linear-gradient(to top, $secondary-background-color 20%, transparent 90%); // white-space: nowrap;
+    border-radius: 5px;
+    padding: 0 5px;
 }
 
 h3,

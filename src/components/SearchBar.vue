@@ -1,24 +1,38 @@
 <template>
-    <form class="container-fluid d-flex flex-fill">
-        <input @input="onChangedInput" class="form-control mt-0" type="search"
-            placeholder="Search by song name or author..." aria-label="Search">
-    </form>
+    <div class="wrapper">
+        <div class="button-and-seachbar-wrapper">
+            <button class="burger" @click="showFilters = !showFilters">
+                <i class="material-icons">menu</i>
+            </button>
+            <input @input="onChangedInput" type="search" placeholder="Search by song name or author..."
+                aria-label="Search">
+        </div>
+        <FilterBar v-if='showFilters' class="filter-bar" @selectedAuthors="handleSelectedAuthors" :data="dataToSearch">
+        </FilterBar>
+    </div>
 </template>
 
 
 <script>
 import Fuse from 'fuse.js'
+import FilterBar from './FilterBar.vue';
+
 export default {
 
     props: ['dataToSearch'],
-
     emits: ['filteredData'],
+    components: {
+        FilterBar
+    },
 
     data() {
         return {
             input: "",
             filteredList: [],
-            data: []
+            data: [],
+            selectedAuthors: [],
+            showFilters: false
+
         }
     },
 
@@ -43,6 +57,20 @@ export default {
             this.$emit("filteredData", this.filteredList)
         },
 
+        handleSelectedAuthors(selectedAuthors) {
+            this.selectedAuthors = selectedAuthors;
+            this.filterResults();
+        },
+
+        filterResults() {
+            let results = this.filterList();
+            if (this.selectedAuthors.length > 0) {
+                results = results.filter(item => this.selectedAuthors.includes(item.author));
+            }
+            this.$emit("filteredData", results);
+        },
+
+
         clean_string(word) {
             return word.toLowerCase()
                 .replaceAll(/[éêè]/g, "e")
@@ -52,22 +80,6 @@ export default {
                 .replaceAll(/[íï]/g, "i")
                 .replaceAll(/[ü]/g, "u")
         },
-
-        // getGrenobleSelection(name) {
-        //     let filteredList = [];
-        //     for (let songName of listeGrenoble[name]) {
-        //         let found = this.data.find(itemSong => itemSong.title == songName)
-        //         if (found) {
-        //             filteredList.push(found);
-        //         }
-        //     }
-        //     return filteredList;
-        // },
-
-        // has_partition(itemSong) {
-        //     return Object.entries(itemSong.melody).map(entry => entry[1] != "").includes(true) ||
-        //         Object.entries(itemSong.contracanto).map(entry => entry[1] != "").includes(true)
-        // },
 
         filterByQuery(selectedList) {
             const options = {
@@ -166,7 +178,29 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss" scoped>
+.button-and-seachbar-wrapper {
+    display: flex;
+}
+
+.material-icons,
+.material-symbols-rounded {
+    font-size: 1.3em;
+}
+
+.burger {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    width: 2rem;
+    margin-right: 0.5rem;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 form {
     padding: 0 !important;
 }
@@ -176,20 +210,9 @@ form {
     flex-wrap: wrap;
 }
 
-.error {
-    min-width: 200px;
-    margin: 0 auto 10px auto;
-    padding: 10px 20px;
-    color: white;
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
-        rgba(18, 187, 35, 0.06) 0px 1px 2px 0px;
-    background-color: tomato;
-}
-
 .highlight {
     font-weight: 700;
-    color: rgba(46, 91, 1, 0.685);
+    color: $secondary-text-color;
 }
 
 input {
@@ -202,6 +225,8 @@ input {
     border-radius: 5px;
     box-shadow: rgba(22, 193, 36, 0.25) 0px 2px 5px -1px,
         rgba(32, 167, 23, 0.3) 0px 1px 3px -1px;
+    flex-grow: 1;
+    padding-left: 1rem;
 }
 
 
@@ -211,46 +236,3 @@ input {
     padding: 0;
 }
 </style>
-
-
-
-
-
-
-
-
-
-<!-- 
-filterByQueryOld2(selectedList) {
-    let exploded_input = this.input.split("").filter(letter => letter != " ");
-    let map = new Map();
-
-    for (let itemSong of selectedList) {
-        let fullName = this.clean_string(itemSong.title + " " + itemSong.author);
-        if (fullName.includes(this.input)) {
-            map.set(fullName, 2);
-        } else {
-            let num_of_match = 0;
-            for (let letter of exploded_input) {
-                let hasMatch = fullName.includes(letter);
-                num_of_match = hasMatch ? num_of_match + 1 : num_of_match;
-            }
-
-            let ratio = num_of_match / exploded_input.length;
-            map.set(fullName, ratio);
-        }
-    }
-
-    map = new Map([...map].sort((a, b) => a[1] < b[1]));
-
-    console.log(map)
-    return selectedList;
-},
-
-filterByQueryOld(selectedList) {
-    selectedList = selectedList.filter(itemSong =>
-        this.clean_string(itemSong.title).includes(this.input)
-        || this.clean_string(itemSong.author).includes(this.input)
-    );
-    return selectedList;
-}, -->

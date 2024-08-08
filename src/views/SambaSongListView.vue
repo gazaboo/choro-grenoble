@@ -51,7 +51,7 @@ export default {
 
 </script>
 
-<style>
+<style lang="scss">
 .filters,
 .results {
   height: 80vh;
@@ -59,7 +59,7 @@ export default {
 }
 
 .itemSong {
-  border-bottom: solid green 1px;
+  border-bottom: solid $secondary-background-color 1px;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
 

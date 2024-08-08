@@ -3,16 +3,7 @@
     <div class="background-image"></div>
     <div class="content-wrapper">
       <NavBar :showHome="true" :showInfo="true" />
-      <div class="searchbar-filter-wrapper">
-        <div class="searchbar-wrapper">
-          <button class="burger" @click="showFilters = !showFilters">
-            <i class="material-icons">menu</i>
-          </button>
-          <SearchBar @filtered-data="updatedSelection" :data-to-search="data" :check-partition="true"
-            class="search-bar" />
-        </div>
-        <FilterBar v-if='showFilters' @changed-selection="updatedSelection" :data="data" class="filter-bar"></FilterBar>
-      </div>
+      <SearchBar @filtered-data="updatedSelection" :data-to-search="data" :check-partition="true" class="search-bar" />
       <div class="results-container">
         <ChoroLink class='result' v-for="(music, index) in this.filteredData" :id="index" :music="music" :key="music"
           @click="saveId(index)" />
@@ -28,7 +19,6 @@ import SearchBar from '@/components/SearchBar.vue';
 import NavBar from '@/components/NavBar.vue';
 import listeChoros from "@/assets/liste_totale_choros.json";
 import ChoroLink from '@/components/ChoroLink.vue';
-import FilterBar from '@/components/FilterBar.vue';
 
 export default {
   name: 'HomeView',
@@ -36,7 +26,6 @@ export default {
     SearchBar,
     NavBar,
     ChoroLink,
-    FilterBar
   },
 
   data() {
@@ -94,12 +83,6 @@ export default {
 
 
 <style lang="scss">
-.material-icons,
-.material-symbols-rounded {
-  color: black;
-  font-size: 1rem;
-}
-
 .choro-song-list-container {
   width: 100vw;
   height: 100vh;
@@ -110,7 +93,11 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/images/main_page.jpeg');
+  background-image: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.8) 0%,
+      rgba(0, 0, 0, 0.5) 30%,
+      rgba(0, 0, 0, 0) 100%),
+    url('@/assets/images/roda_pixi_lacerda.webp');
   background-size: cover;
   background-position: center;
   z-index: -1;
@@ -124,44 +111,8 @@ export default {
   padding: 5px;
 }
 
-.searchbar-filter-wrapper {
-  background-color: white;
-  margin-bottom: 0.5rem;
-  opacity: 0.9;
-}
-
-.searchbar-wrapper {
-  display: flex;
-  background-color: white;
-  justify-content: center;
-  align-content: stretch;
-  padding: 1rem;
-}
-
-.searchbar-wrapper button {
-  background-color: #fff;
-  border: none;
-  padding: 5px;
-}
-
-.material-icons {
-  font-size: 1.5rem;
-}
-
-.nav-bar {
-  margin-bottom: 10px;
-}
-
-.search-filter-container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.search-bar,
-.filter-bar {
-  flex: 1;
-  margin: 0 5px;
+.search-bar {
+  margin: 10px;
 }
 
 .results-container {
@@ -169,7 +120,6 @@ export default {
   overflow-y: auto;
   border-radius: 25px;
 }
-
 
 .blink {
   animation: blinker 0.45s ease-in-out;

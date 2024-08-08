@@ -1,11 +1,3 @@
-<script>
-export default {
-    name: 'SongLink',
-    props: ['music'],
-}
-
-</script>
-
 <template>
     <div class="song-infos">
         <h3 v-if="music.title_html" v-html="music.title_html"></h3>
@@ -14,6 +6,14 @@ export default {
         <h4 v-else> {{ music.author }}</h4>
     </div>
 </template>
+
+<script>
+export default {
+    name: 'SongLink',
+    props: ['music'],
+}
+
+</script>
 
 <style scoped lang="scss">
 h3 {
