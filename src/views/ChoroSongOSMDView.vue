@@ -139,7 +139,7 @@ export default {
     this.author = this.song.author;
     this.url = this.song[params.theme][params.instrument];
     this.youtube = this.song.youtube.filter(url => url != "");
-    this.path = `${params.instrument}/${this.song.author} - ${this.song.title} - Theme - ${params.instrument}.mxl`;
+    this.path = `mxl/${params.instrument}/${this.song.author} - ${this.song.title} - Theme - ${params.instrument}.mxl`;
   },
 
   async mounted() {
