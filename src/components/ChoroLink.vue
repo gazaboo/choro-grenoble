@@ -42,6 +42,12 @@
                         </div>
 
                     </div>
+
+                    <div v-for="link in pdfLinks" :key="link.instrument" class="container-links">
+                        <a :href="link.url" target="_blank" rel="noopener">
+                            Download PDF ({{ link.instrument }})
+                        </a>
+                    </div>
                 </div>
             </transition>
         </div>
@@ -60,13 +66,26 @@ export default {
         }
     },
 
+    computed: {
+        pdfLinks() {
+            const base_url = "https://raw.githubusercontent.com/gazaboo/choro-db/main/pdf/";
+            const instruments = ["C", "Clarinet Bb", "Saxophone Eb"];
+            return instruments.map(inst => {
+                const fileName = `${this.music.author} - ${this.music.title} - Theme - ${inst}.pdf`;
+                return {
+                    instrument: inst,
+                    url: `${base_url}${inst}/${encodeURIComponent(fileName)}`
+                };
+            });
+        }
+    },
+
     methods: {
         toggleMuseScores() {
             this.showLinks = !this.showLinks;
         }
     }
 }
-
 </script>
 
 
