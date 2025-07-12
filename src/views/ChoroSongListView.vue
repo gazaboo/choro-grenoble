@@ -32,7 +32,7 @@ export default {
     return {
       data: listeChoros.data.filter(itemSong => this.has_partition(itemSong)),
       filteredData: [],
-      showFilters: false
+      showFilters: false,
     }
   },
 
@@ -61,7 +61,8 @@ export default {
       if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: "center" });
       }
-    }
+    },
+
   },
 
   mounted() {

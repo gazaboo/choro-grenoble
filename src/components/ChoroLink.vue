@@ -48,6 +48,11 @@
                             Download PDF ({{ link.instrument }})
                         </a>
                     </div>
+                    <div v-if="youtubeLoading">Loading videos...</div>
+                    <div v-else>
+                        <iframe v-for="videoId in youtubeVideoIds" :key="videoId" width="320" height="180"
+                            :src="`https://www.youtube.com/embed/${videoId}`" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
             </transition>
         </div>
@@ -63,6 +68,8 @@ export default {
     data() {
         return {
             showLinks: false,
+            youtubeVideoIds: [],
+            youtubeLoading: false,
         }
     },
 
@@ -80,9 +87,34 @@ export default {
         }
     },
 
+    watch: {
+        showLinks(newVal) {
+            if (newVal && this.youtubeVideoIds.length === 0) {
+                this.fetchYouTubeVideos();
+            }
+        }
+    },
+
     methods: {
         toggleMuseScores() {
             this.showLinks = !this.showLinks;
+        },
+
+        async fetchYouTubeVideos() {
+            this.youtubeLoading = true;
+            const query = `${this.music.author} ${this.music.title} choro`;
+            const apiKey = process.env.VUE_APP_YOUTUBE_API_KEY;
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=2&q=${encodeURIComponent(query)}&key=${apiKey}`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                this.youtubeVideoIds = data.items.map(item => item.id.videoId);
+                console.log('Fetching YouTube videos for:', this.youtubeVideoIds);
+            } catch (e) {
+                console.error('Failed to fetch YouTube videos', e);
+            } finally {
+                this.youtubeLoading = false;
+            }
         }
     }
 }
