@@ -14,4 +14,9 @@ module.exports = defineConfig({
 })
 
 
-
+module.exports = {
+  devServer: {
+    // Autorise tous les hosts uniquement en DEV sur Netlify
+    allowedHosts: process.env.NETLIFY && process.env.NODE_ENV === 'development' ? 'all' : undefined
+  }
+}
