@@ -7,7 +7,7 @@
                 <h4> {{ music.author }}</h4>
             </div>
 
-            <transition name="fade">
+            <!-- <transition name="fade">
                 <div v-if="showLinks" class="container-osmd-mscore">
                     <div class="container-links">
                         <div class="link">
@@ -54,7 +54,7 @@
                             :src="`https://www.youtube.com/embed/${videoId}`" frameborder="0" allowfullscreen></iframe>
                     </div>
                 </div>
-            </transition>
+            </transition> -->
         </div>
     </button>
 </template>

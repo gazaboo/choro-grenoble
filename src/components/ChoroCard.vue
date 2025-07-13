@@ -140,7 +140,8 @@ export default {
     flex-direction: column;
     align-items: stretch;
     gap: 1.5rem;
-    border-radius: 8px;
+    // border-radius: 8px;
+    border: none;
     width: 100%;
     color: #f0f0f0;
 }
