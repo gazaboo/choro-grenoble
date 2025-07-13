@@ -1,28 +1,3 @@
-Of course. It looks like the issue isn't a missing or extra bracket, which can be tricky to spot, but rather how the CSS
-is structured to handle the new pdf-links container you've added. When you wrapped the PDF buttons in a div, they
-defaulted to stacking vertically.
-
-I've fixed this by adding styles for the .pdf-links container to arrange the buttons horizontally in a row. I also took
-the opportunity to reorganize the SCSS using nesting, which makes the relationships between elements and their styles
-clearer and tidies up the structure, addressing the "bracket" concern.
-
-Corrected Component
-
-Key Changes:
-
-No Bracket Errors Found: The original code was syntactically correct with no mismatched brackets. The issue was with the
-CSS layout.
-
-Added .pdf-links Style: A new CSS rule was added to make the PDF buttons display side-by-side using display: flex.
-
-SCSS Nesting: The styles have been nested to match the HTML structure (e.g., .action-button styles are now inside
-.links-wrapper). This is a best practice that makes the code cleaner and easier to read.
-
-Button Width Adjustment: The PDF links now correctly share the available space within their new container.
-
-Here is the complete, corrected component:
-
-Generated html
 <template>
     <div class="modal-content-container">
         <div class="title-author">
@@ -81,15 +56,19 @@ Generated html
 
 <script>
 export default {
-    name: 'ChoroLink',
+    name: 'ChoroCard',
     props: ['music', 'id'],
     data() {
         return {
-            showLinks: false,
             youtubeVideoIds: [],
             youtubeLoading: false,
         }
     },
+
+    created() {
+        this.fetchYouTubeVideos();
+    },
+
     computed: {
         pdfLinks() {
             const base_url = "https://raw.githubusercontent.com/gazaboo/choro-db/main/pdf/";
@@ -101,16 +80,9 @@ export default {
                     url: `${base_url}${inst}/${encodeURIComponent(fileName)}`
                 };
             });
-        }
+        },
     },
-    watch: {
-        showLinks(newVal) {
-            // Fetch videos when the modal becomes visible
-            if (newVal && this.youtubeVideoIds.length === 0) {
-                this.fetchYouTubeVideos();
-            }
-        }
-    },
+
     methods: {
         async fetchYouTubeVideos() {
             this.youtubeLoading = true;
@@ -140,9 +112,10 @@ export default {
     flex-direction: column;
     align-items: stretch;
     gap: 1.5rem;
-    // border-radius: 8px;
     border: none;
     width: 100%;
+    height: 80vh;
+    overflow-y: scroll;
     color: #f0f0f0;
 }
 

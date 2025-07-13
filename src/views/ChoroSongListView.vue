@@ -2,24 +2,42 @@
   <div class="choro-song-list-container">
     <div class="background-image"></div>
     <div class="content-wrapper">
-      <!-- <NavBar :showHome="true" :showInfo="true" /> -->
       <SearchBar @filtered-data="updatedSelection" :data-to-search="data" :check-partition="true" class="search-bar" />
       <CategoryFilter :active-category="activeCategory" @category-changed="handleCategoryChange" />
+
+      <!-- Songs List (Correct) -->
       <div v-if="activeCategory === 'Songs'" class="results-container">
         <ChoroLink class="result" v-for="(music, index) in filteredData" :id="index" :music="music" :key="music"
           @click="openSongModal(music)" />
       </div>
-      <div v-if="activeCategory === 'Artists'" class="results-container">
-        <div v-for="(author, index) in this.uniqueAuthors" :id="index" :key="author">
-          <AuthorCard :author="author" :id="index" class='result' />
-        </div>
 
+      <!-- Artists List (Correct) -->
+      <div v-if="activeCategory === 'Artists'" class="results-container">
+        <div v-for="(author, index) in uniqueAuthors" :id="index" :key="author">
+          <AuthorCard @click="openAuthorModal(author)" :author="author" :id="index" class='result' />
+        </div>
       </div>
     </div>
+
+    <!-- Song Detail Modal (Correct) -->
     <div v-if="showSongModal" class="modal-overlay" @click.self="closeSongModal">
       <div class="modal-content">
-        <button class="close-btn" @click="closeSongModal" aria-label="Close">&times;</button>
-        <ChoroCard :music="selectedSong" class='result' />
+        <button class="close-btn" @click="closeSongModal" aria-label="Close">×</button>
+        <ChoroCard :music="selectedSong" />
+      </div>
+    </div>
+
+    <div v-if="showAuthorModal" class="modal-overlay" @click.self="closeAuthorModal">
+      <div class="modal-content">
+        <button class="close-btn" @click="closeAuthorModal" aria-label="Close">×</button>
+
+        <div v-if="selectedAuthor">
+          <h2> {{ selectedAuthor }}</h2>
+          <div class="modal-results-container">
+            <ChoroLink v-for="(music, index) in songsBySelectedAuthor" :key="music.title" :music="music" :id="index"
+              @click="openSongFromAuthorModal(music)" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -42,7 +60,7 @@ export default {
     ChoroLink,
     CategoryFilter,
     AuthorCard,
-    ChoroCard
+    ChoroCard,
   },
 
   data() {
@@ -52,13 +70,24 @@ export default {
       showFilters: false,
       activeCategory: 'Songs',
       showSongModal: false,      // <-- add this
-      selectedSong: null         // <-- add this
+      showAuthorModal: false,      // <-- add this
+      selectedSong: null,         // <-- add this
+      selectedAuthor: null,
     }
   },
 
   created() {
     this.filteredData = this.data.sort((a, b) => (a.title > b.title) ? 1 : -1);
     this.uniqueAuthors = [...new Set(this.data.map(elt => elt.author))]
+  },
+
+  computed: {
+    songsBySelectedAuthor() {
+      if (!this.selectedAuthor) return [];
+      return this.data
+        .filter(song => song.author === this.selectedAuthor)
+        .sort((a, b) => (a.title > b.title) ? 1 : -1);
+    }
   },
 
   methods: {
@@ -101,6 +130,21 @@ export default {
       this.selectedSong = null;
     },
 
+    openAuthorModal(author) {
+      this.selectedAuthor = author;
+      this.showAuthorModal = true;
+      console.log('Selected author:', author);
+    },
+
+    closeAuthorModal() {
+      this.showAuthorModal = false;
+      this.selectedAuthor = null;
+    },
+
+    openSongFromAuthorModal(song) {
+      this.closeAuthorModal();
+      this.openSongModal(song);
+    },
 
   },
 

@@ -2,14 +2,10 @@
     <div>
         <button @click="showModal = true" class="main-container">
             <span class="song-number">{{ id + 1 }}</span>
-            <div class="song-infos">
-                <div class="title-author">
-                    <h3>{{ author }}</h3>
-                </div>
-            </div>
+            <h3>{{ author }}</h3>
         </button>
 
-        <div v-if="showModal" class="modal-overlay" @click.self="showModal = false">
+        <!-- <div v-if="showModal" class="modal-overlay" @click.self="showModal = false">
             <div class="modal-content">
                 <button class="close-btn" @click="showModal = false" aria-label="Close">
                     &times;
@@ -17,31 +13,44 @@
                 <h2>{{ author }}</h2>
                 <div class="songList">
                     <ChoroLink class="result" v-for="(music, index) in this.songs" :id="index" :music="music"
-                        :key="music" />
+                        :key="music" @click="openSelectedSong(music)" />
                 </div>
             </div>
-        </div>
+            <div v-if="selectedSong">
+                <h1>Test</h1>
+            </div>
+
+        </div> -->
     </div>
 </template>
 
 <script>
 import listeChoros from "@/assets/liste_totale_choros.json";
-import ChoroLink from '@/components/ChoroLink.vue';
+// import ChoroLink from '@/components/ChoroLink.vue';
 
 export default {
     name: 'AuthorCard',
     props: ['author', 'id'],
     components: {
-        ChoroLink
+        // ChoroLink
     },
     data() {
         return {
             showModal: false,
-            songs: []
+            songs: [],
+            selectedSong: null,
         }
     },
     mounted() {
         this.songs = listeChoros.data.filter(song => song.author === this.author);
+    },
+
+    methods: {
+        openSelectedSong(song) {
+            this.selectedSong = song;
+            this.showSongModal = true;
+            console.log('Selected song:', song);
+        },
     }
 }
 </script>

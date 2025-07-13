@@ -1,62 +1,21 @@
 <template>
-    <button @click="toggleMuseScores" class="main-container">
+    <button class="main-container">
         <span class="song-number"> {{ this.id + 1 }} </span>
         <div class="song-infos">
             <div class="title-author">
                 <h3> {{ music.title }}</h3>
                 <h4> {{ music.author }}</h4>
             </div>
-
-            <!-- <transition name="fade">
-                <div v-if="showLinks" class="container-osmd-mscore">
-                    <div class="container-links">
-                        <div class="link">
-                            <router-link :to="{
-                                name: 'ChoroSongMuseScoreView',
-                                params: {
-                                    theme: 'melody',
-                                    instrument: 'C',
-                                    title: music.title,
-                                    author: music.author
-                                }
-                            }">
-                                Muse Score
-                            </router-link>
-                            <span class="info"> Play sound, Loop and Slowdown</span>
-                        </div>
-
-                    </div>
-                    <div class="container-links">
-                        <div class="link">
-                            <router-link :to="{
-                                name: 'ChoroSongOSMDView',
-                                params: {
-                                    theme: 'melody',
-                                    instrument: 'C',
-                                    title: music.title,
-                                }
-                            }">
-                                Music Sheet
-                            </router-link>
-                            <span class="info">Better for screens. </span>
-                        </div>
-
-                    </div>
-
-                    <div v-for="link in pdfLinks" :key="link.instrument" class="container-links">
-                        <a :href="link.url" target="_blank" rel="noopener">
-                            Download PDF ({{ link.instrument }})
-                        </a>
-                    </div>
-                    <div v-if="youtubeLoading">Loading videos...</div>
-                    <div v-else>
-                        <iframe v-for="videoId in youtubeVideoIds" :key="videoId" width="320" height="180"
-                            :src="`https://www.youtube.com/embed/${videoId}`" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </transition> -->
         </div>
     </button>
+
+    <!-- <div v-if="showSongModal" class="modal-overlay" @click.self="closeSongModal">
+        <div class="modal-content">
+            <button class="close-btn" @click="closeSongModal" aria-label="Close">&times;</button>
+            <ChoroCard :music="music" class='result' />
+        </div>
+    </div> -->
+
 </template>
 
 <script>
@@ -67,57 +26,57 @@ export default {
 
     data() {
         return {
-            showLinks: false,
-            youtubeVideoIds: [],
-            youtubeLoading: false,
+            // showSongModal: false,
+            // youtubeVideoIds: [],
+            // youtubeLoading: false,
         }
     },
 
-    computed: {
-        pdfLinks() {
-            const base_url = "https://raw.githubusercontent.com/gazaboo/choro-db/main/pdf/";
-            const instruments = ["C", "Clarinet Bb", "Saxophone Eb"];
-            return instruments.map(inst => {
-                const fileName = `${this.music.author} - ${this.music.title} - Theme - ${inst}.pdf`;
-                return {
-                    instrument: inst,
-                    url: `${base_url}${inst}/${encodeURIComponent(fileName)}`
-                };
-            });
-        }
-    },
+    // computed: {
+    //     pdfLinks() {
+    //         const base_url = "https://raw.githubusercontent.com/gazaboo/choro-db/main/pdf/";
+    //         const instruments = ["C", "Clarinet Bb", "Saxophone Eb"];
+    //         return instruments.map(inst => {
+    //             const fileName = `${this.music.author} - ${this.music.title} - Theme - ${inst}.pdf`;
+    //             return {
+    //                 instrument: inst,
+    //                 url: `${base_url}${inst}/${encodeURIComponent(fileName)}`
+    //             };
+    //         });
+    //     }
+    // },
 
-    watch: {
-        showLinks(newVal) {
-            if (newVal && this.youtubeVideoIds.length === 0) {
-                this.fetchYouTubeVideos();
-            }
-        }
-    },
+    // watch: {
+    //     showLinks(newVal) {
+    //         if (newVal && this.youtubeVideoIds.length === 0) {
+    //             this.fetchYouTubeVideos();
+    //         }
+    //     }
+    // },
 
-    methods: {
-        toggleMuseScores() {
-            this.showLinks = !this.showLinks;
-        },
+    // methods: {
+    //     toggleMuseScores() {
+    //         this.showSongModal = !this.showSongModal;
+    //     },
 
-        async fetchYouTubeVideos() {
-            this.youtubeLoading = true;
-            const query = `${this.music.author} ${this.music.title} choro`;
-            const apiKey = process.env.VUE_APP_YOUTUBE_API_KEY;
-            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=2&q=${encodeURIComponent(query)}&key=${apiKey}`;
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                this.youtubeVideoIds = data.items.map(item => item.id.videoId);
-                console.log('Fetching YouTube videos for:', this.youtubeVideoIds);
-            } catch (e) {
-                console.error('Failed to fetch YouTube videos', e);
-            } finally {
-                this.youtubeLoading = false;
-            }
-        }
-    }
+    // async fetchYouTubeVideos() {
+    //     this.youtubeLoading = true;
+    //     const query = `${this.music.author} ${this.music.title} choro`;
+    //     const apiKey = process.env.VUE_APP_YOUTUBE_API_KEY;
+    //     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=2&q=${encodeURIComponent(query)}&key=${apiKey}`;
+    //     try {
+    //         const response = await fetch(url);
+    //         const data = await response.json();
+    //         this.youtubeVideoIds = data.items.map(item => item.id.videoId);
+    //         console.log('Fetching YouTube videos for:', this.youtubeVideoIds);
+    //     } catch (e) {
+    //         console.error('Failed to fetch YouTube videos', e);
+    //     } finally {
+    //         this.youtubeLoading = false;
+    //     }
+    // }
 }
+
 </script>
 
 

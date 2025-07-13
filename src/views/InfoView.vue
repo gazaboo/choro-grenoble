@@ -25,6 +25,10 @@
             </ul>
         </section>
 
+        <Parallaxy :speed="20" class="relative z-20 flex justify-start items-center">
+            <img src="https://picsum.photos/400" class="w-3/4 lg:w-full">
+        </Parallaxy>
+
         <section class=" info-section">
             <h2>Using the MuseScore Page</h2>
             <p>The MuseScore page allows you to view and interact with the sheet music : </p>
