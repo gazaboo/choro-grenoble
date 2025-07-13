@@ -10,13 +10,8 @@ module.exports = defineConfig({
         path.resolve(__dirname, './src/styles/global.scss'),
       ]
     }
-  }
-})
-
-
-module.exports = {
+  },
   devServer: {
-    // Autorise tous les hosts uniquement en DEV sur Netlify
     allowedHosts: process.env.NETLIFY && process.env.NODE_ENV === 'development' ? 'all' : undefined
   }
-}
+})
