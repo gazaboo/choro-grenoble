@@ -90,19 +90,12 @@ $secondary-dark-bg: #2B2B2B;
     background-color: $secondary-dark-bg;
     border: none;
     border-bottom: solid 1px;
-    // border-color: #7cb82756;
-    // border-image: linear-gradient(to right, $secondary-background-color 0%, $secondary-background-color 50%, transparent 75%) 1;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
     padding: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: baseline;
-
-    @media (min-width: 576px) {
-        gap: 2rem;
-    }
+    gap: 2rem;
 }
 
 .container-osmd-mscore {

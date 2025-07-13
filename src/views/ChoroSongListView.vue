@@ -3,7 +3,8 @@
     <div class="background-image"></div>
     <div class="content-wrapper">
       <SearchBar @filtered-data="updatedSelection" :data-to-search="data" :check-partition="true" class="search-bar" />
-      <CategoryFilter :active-category="activeCategory" @category-changed="handleCategoryChange" />
+      <CategoryFilter :active-category="activeCategory" @category-changed="handleCategoryChange"
+        class="category-filters" />
 
       <!-- Songs List (Correct) -->
       <div v-if="activeCategory === 'Songs'" class="results-container">
@@ -35,7 +36,7 @@
           <h2> {{ selectedAuthor }}</h2>
           <div class="modal-results-container">
             <ChoroLink v-for="(music, index) in songsBySelectedAuthor" :key="music.title" :music="music" :id="index"
-              @click="openSongFromAuthorModal(music)" />
+              @click="openSongFromAuthorModal(music)" class="modal-result" />
           </div>
         </div>
       </div>
@@ -196,7 +197,7 @@ export default {
 .results-container {
   flex-grow: 1;
   overflow-y: auto;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .blink {
@@ -240,5 +241,19 @@ export default {
   color: #f0f0f0;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+.category-filters {
+  padding-bottom: 0.25rem;
+}
+
+.modal-results-container {
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.modal-result {
+  margin-bottom: 5px;
+  box-shadow: #00000069 1px 1px;
 }
 </style>

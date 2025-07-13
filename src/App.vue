@@ -28,4 +28,17 @@ body {
   color: #f0f0f0;
   background-color: $primary-dark-bg;
 }
+
+
+html {
+  scrollbar-color: rgb(204, 159, 70) #2c2c2c;
+}
+
+html::-webkit-scrollbar {
+  width: 1px;
+}
+
+html::-webkit-scrollbar-track {
+  opacity: 0;
+}
 </style>
