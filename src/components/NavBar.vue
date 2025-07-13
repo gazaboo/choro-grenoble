@@ -3,10 +3,26 @@
         <router-link class="navbar-brand" to="/">
             CHORO
         </router-link>
+        <div v-if="title">
+            <h2> {{ title }} </h2>
+            <h3> {{ author }} </h3>
+        </div>
         <div class="nav-links">
-            <router-link class="nav-link" to="/">Home</router-link>
-            <router-link class="nav-link" to="/info">Info</router-link>
-            <router-link class="nav-link" to="/choro">List</router-link>
+            <router-link class="nav-link" to="/">
+                <span class="material-symbols-outlined">
+                    home
+                </span>
+            </router-link>
+            <router-link class="nav-link" to="/choro">
+                <span class="material-symbols-outlined">
+                    format_list_bulleted
+                </span>
+            </router-link>
+            <router-link class="nav-link" to="/info">
+                <span class="material-symbols-outlined">
+                    question_mark
+                </span>
+            </router-link>
         </div>
     </nav>
 </template>
@@ -49,16 +65,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// Define your SCSS variables here or import them from a global file
-$primary-bg-color: #7d7e7e; // Deep Charcoal/Navy
-$accent-color: #e6b800; // Rich Gold
-$text-light: #f0f0f0; // Off-white for text on dark bg
-$secondary-text-color: #b0c4de; // Light steel blue for secondary text
+h2,
+h3 {
+    display: inline;
+    padding-right: 1rem;
+}
+
+h2 {
+    color: greenyellow;
+}
+
+h3 {
+    color: rgb(212, 138, 0)
+}
 
 .navbar {
     display: flex;
     justify-content: space-between; // Distributes items with space between
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: nowrap; // Prevent wrapping on large screens
 
     width: 100vw;
@@ -94,5 +118,11 @@ $secondary-text-color: #b0c4de; // Light steel blue for secondary text
     justify-content: center;
     height: 100%; // Optional: fill parent height
     text-align: center;
+}
+
+.nav-link.router-link-exact-active {
+    background-color: #1ed760;
+    color: #000;
+    font-weight: 600;
 }
 </style>

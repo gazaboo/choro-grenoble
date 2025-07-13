@@ -1,5 +1,5 @@
 <template>
-    <NavBar :showHome="true" :showSongList="true" />
+    <NavBar />
     <div class="language-selector">
         <img src="@/assets/flags/brazil.svg" @click="currentLanguage = 'pt'" alt="Português" title="Português">
         <img src="@/assets/flags/us.svg" @click="currentLanguage = 'en'" alt="English" title="English">
@@ -24,10 +24,6 @@
                 </li>
             </ul>
         </section>
-
-        <Parallaxy :speed="20" class="relative z-20 flex justify-start items-center">
-            <img src="https://picsum.photos/400" class="w-3/4 lg:w-full">
-        </Parallaxy>
 
         <section class=" info-section">
             <h2>Using the MuseScore Page</h2>
@@ -170,15 +166,10 @@ export default {
     font-family: 'Arial', sans-serif;
 }
 
-.title {
-    text-align: center;
-    color: #2c3e50;
-    margin-bottom: 2rem;
-}
-
 .info-section {
     margin-bottom: 5vh;
-    background-color: #f8f9fa;
+    background-color: #444444;
+    color: #f0f0f0;
     border-radius: 8px;
     padding: 2rem;
     margin-bottom: 2rem;
@@ -193,12 +184,6 @@ export default {
     h2 {
         color: $secondary-text-color;
         margin-bottom: 1rem;
-    }
-
-    p,
-    ul {
-        color: #34495e;
-        line-height: 1.6;
     }
 
     ul {

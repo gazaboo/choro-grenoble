@@ -5,7 +5,7 @@
     <FilterBar @changed-selection="updatedSelection" :data="data"></FilterBar>
     <div class="row results">
       <div class="container-fluid">
-        <SambaLink :music="music" v-for=" music in this.filteredData" :key="music" />
+        <SambaLink :music="music" v-for="music in this.filteredData" :key="music" />
       </div>
     </div>
   </div>
@@ -52,16 +52,8 @@ export default {
 </script>
 
 <style lang="scss">
-.filters,
 .results {
   height: 80vh;
   overflow: scroll;
-}
-
-.itemSong {
-  border-bottom: solid $secondary-background-color 1px;
-  margin-bottom: 1rem;
-  padding-bottom: 1rem;
-
 }
 </style>

@@ -1,4 +1,5 @@
 <template>
+    <NavBar />
     <div class="home-container">
         <div class="background-image"></div>
         <h1 class="title">CHORO</h1>
@@ -10,8 +11,13 @@
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue';
+
 export default {
     name: 'HomeView',
+    components: {
+        NavBar
+    },
 }
 </script>
 

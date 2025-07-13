@@ -80,14 +80,6 @@ input[type=checkbox]:checked+label {
     padding: 0.5rem 0;
 }
 
-.filter-bar-title {
-    display: inline-flex;
-    align-items: center;
-    padding-right: 1rem;
-    font-size: 1rem;
-    margin: 0;
-}
-
 .custom-collapse-btn {
     display: block;
     padding: 0.5rem;

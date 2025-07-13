@@ -1,95 +1,101 @@
 <template>
-  <div class="main-wrappper-navbar">
-    <div id="navbar-with-burger">
-      <span v-if="compact" class="song-info">
-        <NavBar :showHome="false" :showInfo="false" :title="this.title" :author="this.author" />
-      </span>
-      <span v-else>
-        <NavBar :showHome="false" :showInfo="false" />
-      </span>
-      <button class="burger" @click="toggleControls">
-        <i class="material-icons">menu</i>
-      </button>
+  <div class="main-wrapper-page">
+    <div class="main-wrappper-navbar">
+      <div id="navbar-with-burger">
+        <span v-if="compact" class="song-info">
+          <NavBar class="navbar" :title="this.title" :author="this.author" />
+        </span>
+        <span v-else>
+          <NavBar :showHome="false" :showInfo="false" />
+        </span>
+
+        <button class="burger" @click="toggleControls">
+          <span class="material-symbols-outlined">
+            handyman
+          </span>
+        </button>
+      </div>
+
+      <div :class="['control-buttons', { expanded: showControls }]">
+        <router-link :to="{ name: 'ChoroSongListView' }">
+          <i class="material-icons">arrow_back</i>
+          <span class="role"> Return to List </span>
+        </router-link>
+        <button @click="transposeToCLarinet">
+          <i class="material-icons">air</i>
+          <span class="role">Clarinet Version</span>
+        </button>
+        <button @click="transposeToSaxophone">
+          <i class="material-icons">air</i>
+          <span class="role">
+            Sax Version
+          </span>
+        </button>
+        <button @click="resetTranspose">
+          <i class="material-symbols-rounded">
+            cadence
+          </i>
+          <span class="role">
+            C Version
+          </span>
+        </button>
+        <button @click="zoomIn">
+          <i class="material-icons">zoom_in</i>
+          <span class="role">
+            Zoom In
+          </span>
+        </button>
+        <button @click="zoomOut">
+          <i class=" material-icons">zoom_out</i>
+          <span class="role">
+            Zoom Out
+          </span>
+        </button>
+        <button @click="transposeUp">
+          <span class="material-symbols-rounded">
+            arrow_warm_up
+          </span>
+          <span class="role">
+            Transpose Up
+          </span>
+        </button>
+        <button @click="transposeDown">
+          <span class="material-symbols-rounded">
+            arrow_cool_down
+          </span>
+          <span class="role">
+            Transpose Down
+          </span>
+        </button>
+        <button>
+          <i class="material-icons">download</i>
+          <span class="role">
+            Download
+          </span>
+        </button>
+        <button @click="removeChords">
+          <i class="material-icons">music_note</i>
+          <span class="role">
+            Remove chords
+          </span>
+        </button>
+        <button @click="toggleCompactMode">
+          <i class="material-icons">format_line_spacing</i>
+          <span class="role">
+            Compact Mode
+          </span>
+        </button>
+      </div>
     </div>
 
-    <div :class="['control-buttons', { expanded: showControls }]">
-      <router-link :to="{ name: 'ChoroSongListView' }">
-        <i class="material-icons">arrow_back</i>
-        <span class="role"> Return to List </span>
-      </router-link>
-      <button @click="transposeToCLarinet">
-        <i class="material-icons">air</i>
-        <span class="role">Clarinet Version</span>
-      </button>
-      <button @click="transposeToSaxophone">
-        <i class="material-icons">air</i>
-        <span class="role">
-          Sax Version
-        </span>
-      </button>
-      <button @click="resetTranspose">
-        <i class="material-symbols-rounded">
-          cadence
-        </i>
-        <span class="role">
-          C Version
-        </span>
-      </button>
-      <button @click="zoomIn">
-        <i class="material-icons">zoom_in</i>
-        <span class="role">
-          Zoom In
-        </span>
-      </button>
-      <button @click="zoomOut">
-        <i class=" material-icons">zoom_out</i>
-        <span class="role">
-          Zoom Out
-        </span>
-      </button>
-      <button @click="transposeUp">
-        <span class="material-symbols-rounded">
-          arrow_warm_up
-        </span>
-        <span class="role">
-          Transpose Up
-        </span>
-      </button>
-      <button @click="transposeDown">
-        <span class="material-symbols-rounded">
-          arrow_cool_down
-        </span>
-        <span class="role">
-          Transpose Down
-        </span>
-      </button>
-      <button>
-        <i class="material-icons">download</i>
-        <span class="role">
-          Download
-        </span>
-      </button>
-      <button @click="removeChords">
-        <i class="material-icons">music_note</i>
-        <span class="role">
-          Remove chords
-        </span>
-      </button>
-      <button @click="toggleCompactMode">
-        <i class="material-icons">format_line_spacing</i>
-        <span class="role">
-          Compact Mode
-        </span>
-      </button>
+    <div v-if="isLoading || isZooming" class="loading-overlay">
+      <fingerprint-spinner class="loading-spinner" :animation-duration="1500" :size="100"
+        :color="'rgb(163, 124, 74)'" />
     </div>
-  </div>
 
-  <div v-if="isLoading || isZooming" class="loading-overlay">
-    <fingerprint-spinner class="loading-spinner" :animation-duration="1500" :size="100" :color="'rgb(163, 124, 74)'" />
-  </div>
-
-  <div v-show="!isZooming" id="main-container">
-    <div v-show="!isZooming" ref="osmdContainer" class="osmd-container" :class="{ 'hidden': isZooming }"></div>
+    <div v-show="!isZooming" id="main-container">
+      <div v-show="!isZooming" ref="osmdContainer" class="osmd-container" :class="{ 'hidden': isZooming }"></div>
+    </div>
   </div>
 </template>
 
@@ -145,7 +151,7 @@ export default {
   async mounted() {
     this.osmd = await this.fetchOSMDObject();
 
-    this.osmd.Zoom = 0.75;
+    this.osmd.Zoom = 1;
     this.osmd.setOptions({
       autoResize: true,
       drawTitle: false,
@@ -336,8 +342,13 @@ export default {
 
 #main-container {
   position: relative;
+  background-color: #fff;
+  padding-top: 10px;
 }
 
+.navbar {
+  width: 80vw;
+}
 
 .osmd-container {
   position: relative;
@@ -347,7 +358,6 @@ export default {
   z-index: 0;
   opacity: 1;
 }
-
 
 .loading-overlay {
   position: fixed;
@@ -363,6 +373,21 @@ export default {
   opacity: 1;
 }
 
+.burger {
+  color: #000000;
+  background-color: #ddad76;
+  border-radius: 20px;
+  border-color: #333;
+  margin: 0 5px;
+  margin-right: 20px;
+  padding: .5rem 1rem;
+  display: flex; // Ensures text is centered inside the link
+  align-items: center;
+  justify-content: center;
+  height: 100%; // Optional: fill parent height
+  text-align: center;
+}
+
 #control {
   display: flex;
   flex-direction: column;
@@ -372,11 +397,11 @@ export default {
 
 
 
-.material-icons,
-.material-symbols-rounded {
-  color: $secondary-text-color;
-  font-size: 1rem;
-}
+// .material-icons,
+// .material-symbols-rounded {
+//   color: $secondary-text-color;
+//   font-size: 1rem;
+// }
 
 a {
   display: flex;
@@ -387,9 +412,7 @@ a {
   align-items: center;
 }
 
-a,
-button {
-  border: solid 2px $secondary-text-color;
+a {
   background-color: $primary-background-color;
   margin: 0.25rem;
   padding: 0rem 0.25rem;

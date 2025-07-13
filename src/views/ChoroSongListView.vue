@@ -203,7 +203,6 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 5px;
 }
 
 .search-and-filter-container {

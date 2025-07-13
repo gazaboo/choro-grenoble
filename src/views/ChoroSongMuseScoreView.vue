@@ -84,39 +84,6 @@ export default {
     justify-content: center;
 }
 
-#control {
-    position: fixed;
-    top: 5px;
-    right: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    z-index: 9999;
-}
-
-#control-buttons {
-    display: none;
-    transform: translateX(200px);
-    transition: display 0.3s ease, transform 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    background-color: $secondary-background-color;
-    z-index: 9999;
-    border-radius: 5%;
-}
-
-#control-buttons.show {
-    display: flex;
-    transform: translateX(-5px);
-}
-
-
-.material-icons,
-.material-symbols-rounded {
-    color: $secondary-text-color;
-    font-size: 1.5rem;
-}
-
 a,
 option,
 button {
@@ -137,16 +104,6 @@ a:hover,
 option:hover,
 button:hover {
     background-color: $secondary-text-color;
-}
-
-a:hover .material-icons option:hover .material-icons,
-button:hover .material-icons {
-    color: rgb(255, 255, 255);
-}
-
-.material-icons,
-.material-symbols-rounded {
-    color: $secondary-text-color;
 }
 
 select {
