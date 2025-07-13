@@ -38,7 +38,7 @@ $primary-dark-bg: #1A1A1A;
 .filter-container {
     display: flex;
     white-space: nowrap;
-    margin: 0 0 5px 5px;
+    padding: 0 0 5px 5px;
     gap: 8px;
     -ms-overflow-style: none;
     scrollbar-width: none;

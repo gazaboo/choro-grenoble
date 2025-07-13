@@ -1,18 +1,29 @@
 <template>
   <div class="choro-song-list-container">
-    <div class="background-image"></div>
     <div class="content-wrapper">
-      <SearchBar @filtered-data="updatedSelection" :data-to-search="data" :check-partition="true" class="search-bar" />
-      <CategoryFilter :active-category="activeCategory" @category-changed="handleCategoryChange"
-        class="category-filters" />
+      <NavBar></NavBar>
+      <div class="search-and-filter-container" :class="{ 'search-active': isSearchActive }">
 
-      <!-- Songs List (Correct) -->
+        <!-- These filters will be hidden on mobile when search is active -->
+        <CategoryFilter :active-category="activeCategory" @category-changed="handleCategoryChange"
+          class="category-filters" />
+
+
+        <!-- NEW: The search icon button that is ONLY visible on mobile -->
+        <button class="search-toggle-btn" @click="toggleSearch">
+          <span class="material-icons">{{ isSearchActive ? 'close' : 'search' }}</span>
+        </button>
+
+        <!-- The actual search bar component -->
+        <SearchBar @search-activated="activateSongSearch" @filtered-data="updatedSelection" :data-to-search="data"
+          :check-partition="true" class="search-bar" />
+      </div>
+
       <div v-if="activeCategory === 'Songs'" class="results-container">
         <ChoroLink class="result" v-for="(music, index) in filteredData" :id="index" :music="music" :key="music"
           @click="openSongModal(music)" />
       </div>
 
-      <!-- Artists List (Correct) -->
       <div v-if="activeCategory === 'Artists'" class="results-container">
         <div v-for="(author, index) in uniqueAuthors" :id="index" :key="author">
           <AuthorCard @click="openAuthorModal(author)" :author="author" :id="index" class='result' />
@@ -20,7 +31,6 @@
       </div>
     </div>
 
-    <!-- Song Detail Modal (Correct) -->
     <div v-if="showSongModal" class="modal-overlay" @click.self="closeSongModal">
       <div class="modal-content">
         <button class="close-btn" @click="closeSongModal" aria-label="Close">×</button>
@@ -53,6 +63,7 @@ import ChoroLink from '@/components/ChoroLink.vue';
 import CategoryFilter from '@/components/CategoryFilter.vue';
 import AuthorCard from '@/components/AuthorCard.vue'
 import ChoroCard from '@/components/ChoroCard.vue';
+import NavBar from '@/components/NavBar.vue';
 
 export default {
   name: 'HomeView',
@@ -62,6 +73,7 @@ export default {
     CategoryFilter,
     AuthorCard,
     ChoroCard,
+    NavBar
   },
 
   data() {
@@ -74,6 +86,7 @@ export default {
       showAuthorModal: false,      // <-- add this
       selectedSong: null,         // <-- add this
       selectedAuthor: null,
+      isSearchActive: false, // <-- NEW: State to control the search bar's visibility on mobile
     }
   },
 
@@ -92,6 +105,16 @@ export default {
   },
 
   methods: {
+
+    activateSongSearch() {
+      this.activeCategory = 'Songs';
+    },
+
+    toggleSearch() {
+      this.isSearchActive = !this.isSearchActive;
+      this.activeCategory = 'Songs';
+    },
+
     updatedSelection(filteredData) {
       this.filteredData = filteredData;
       this.backToTop();
@@ -172,14 +195,7 @@ export default {
   height: 100vh;
   overflow: hidden;
   color: #f0f0f0;
-}
-
-.background-image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  filter: blur(5px);
+  padding: 0;
 }
 
 .content-wrapper {
@@ -190,12 +206,32 @@ export default {
   padding: 5px;
 }
 
-.search-bar {
-  margin: 10px;
+.search-and-filter-container {
+  display: flex;
+  width: 90vw;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
 }
 
+
+
+.search-and-filter-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+
+@media (min-width: 769px) {
+  .search-bar {
+    flex-grow: 1;
+  }
+}
+
+
 .results-container {
-  flex-grow: 1;
   overflow-y: auto;
   border-radius: 10px;
 }
@@ -255,5 +291,77 @@ export default {
 .modal-result {
   margin-bottom: 5px;
   box-shadow: #00000069 1px 1px;
+}
+
+
+
+
+@media (max-width: 768px) {
+  .search-and-filter-container {
+    position: relative; // Needed to position children correctly
+    align-items: center;
+  }
+
+  // The new search icon button
+  .search-toggle-btn {
+    display: flex; // This makes it visible on mobile
+    background: #333;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    // position: absolute; // Position it within the container
+    // left: 1rem;
+    z-index: 2; // Make sure it's on top
+  }
+
+  // By default on mobile, the category filters are visible
+  .category-filters {
+    flex-grow: 1;
+    transition: width 0.3s ease, opacity 0.3s ease;
+  }
+
+  // And the search bar itself is hidden
+  .search-bar {
+    // position: absolute;
+    // left: 1rem;
+    // right: 1rem;
+    width: 0; // Starts with zero width
+    opacity: 0;
+    pointer-events: none; // Not clickable when hidden
+    transition: width 0.3s ease, opacity 0.3s ease;
+    z-index: 1;
+    margin-left: 0; // Override desktop margin
+  }
+
+  /* --- STYLES FOR WHEN SEARCH IS ACTIVE --- */
+
+  // When the container has the 'search-active' class...
+  .search-and-filter-container.search-active {
+
+    // Hide the category filters
+    .category-filters {
+      width: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    // Expand the search bar to take up the full width
+    .search-bar {
+      width: calc(100% - 2rem); // Fill the container (minus padding)
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+}
+
+@media (min-width: 769px) {
+
+  // On desktop, make sure the toggle button is hidden
+  .search-toggle-btn {
+    display: none;
+  }
 }
 </style>

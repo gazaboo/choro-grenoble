@@ -1,33 +1,23 @@
 <template>
-    <div id="control">
-        <button class="burger" @click="toggleControls">
-            <i class="material-icons">menu</i>
-        </button>
-        <div id="control-buttons" :class="{ 'show': showControls }">
-            <select v-model="currentKey" multiple>
-                <option v-for="key in ['C', 'Eb', 'Bb']" :key="key">
-                    {{ key }}
-                </option>
-            </select>
-
-            <router-link :to="{ name: 'ChoroSongListView' }">
-                <i class="material-icons">arrow_back</i>
-                <span class="role"> Return to List </span>
-            </router-link>
-        </div>
+    <NavBar :title="title" :author="author" />
+    <div class="iframe-container">
+        <iframe :key="currentUrl" ref="musescore" class="musescore" :src="currentUrl" frameborder="0" allowfullscreen
+            allow="autoplay; fullscreen"></iframe>
     </div>
-    <iframe :key="currentUrl" ref="musescore" class="musescore" :src="currentUrl" frameborder="0" allowfullscreen
-        allow="autoplay; fullscreen"></iframe>
 </template>
 
 <script>
 
 import listeChoros from "../assets/liste_totale_choros.json";
+import NavBar from "@/components/NavBar.vue";
 import { useRoute } from 'vue-router';
 
 export default {
 
     name: 'ChoroSongMuseScoreView',
+    components: {
+        NavBar,
+    },
 
     data() {
         return {
@@ -58,7 +48,6 @@ export default {
     watch: {
         currentKey(newKey) {
             console.log('Current key changed to:', newKey);
-            // You can perform any other actions here when the key changes
         }
     },
 
@@ -84,26 +73,15 @@ export default {
 
 
 <style scoped lang="scss">
-body {
-    filter: blur(5px)
-}
-
 .musescore {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 90vw;
-    height: 100vh;
+    width: 95vw;
+    height: 85vh;
+    box-shadow: 2px 5px 8px rgba(255, 255, 255, 0.215); // Subtle shadow for depth
 }
 
-@media screen and (max-width: 600px) {
-    .musescore {
-        position: absolute;
-        left: -8px;
-        top: -8px;
-        width: 102vw;
-        height: 100vh;
-    }
+.iframe-container {
+    display: flex;
+    justify-content: center;
 }
 
 #control {

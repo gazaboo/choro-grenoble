@@ -1,35 +1,20 @@
 <template>
     <div class="wrapper">
-
         <div class="button-and-seachbar-wrapper">
-            <router-link class="navbar-brand" to="/">
-                CHORO
-            </router-link>
-            <input @input="onChangedInput" type="search" placeholder="Search by song name or author..."
+            <input @focus="handleFocus" @input="onChangedInput" type="search" placeholder="Search..."
                 aria-label="Search">
-            <!-- <button class="burger" @click="showFilters = !showFilters">
-                <i class="material-icons">menu</i>
-            </button> -->
-            <div class="nav-links" :class="{ 'nav-links-mobile': mobileMenuOpen }">
-                <router-link class="nav-link" to="/">Home</router-link>
-                <router-link class="nav-link" to="/info">Info</router-link>
-                <router-link class="nav-link" to="/choro">List</router-link>
-            </div>
         </div>
-        <!-- <FilterBar v-if='showFilters' class="filter-bar" @selectedAuthors="handleSelectedAuthors" :data="dataToSearch">
-        </FilterBar> -->
     </div>
 </template>
 
 
 <script>
 import Fuse from 'fuse.js'
-// import FilterBar from './FilterBar.vue';
 
 export default {
 
     props: ['dataToSearch'],
-    emits: ['filteredData'],
+    emits: ['filteredData', 'search-activated'],
     components: {
         // FilterBar
     },
@@ -60,6 +45,10 @@ export default {
     },
 
     methods: {
+        handleFocus() {
+            this.$emit('search-activated');
+        },
+
         onChangedInput(event) {
             this.input = this.clean_string(event.target.value);
             this.filteredList = this.filterList();
@@ -190,56 +179,10 @@ export default {
 <style lang="scss" scoped>
 $secondary-dark-bg: #2B2B2B;
 
-.navbar-brand {
-    color: #f0f0f0;
-    font-size: 2rem;
-    background-color: #0000;
-}
-
-
-.nav-item {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    justify-content: stretch;
-}
-
-.nav-link {
-    color: #f0f0f0;
-    background-color: #333;
-    border-radius: 20px;
-    margin: 0 5px;
-
-    display: flex; // Ensures text is centered inside the link
-    align-items: center;
-    justify-content: center;
-    height: 100%; // Optional: fill parent height
-    text-align: center;
-}
-
 .button-and-seachbar-wrapper {
     display: flex;
     height: 3rem;
     align-items: center;
-}
-
-.material-icons,
-.material-symbols-rounded {
-    font-size: 1.3em;
-}
-
-.burger {
-    background-color: #333;
-    border: none;
-    border-radius: 3px;
-    width: 2rem;
-    margin-right: 0.5rem;
-    color: #f0f0f0;
 }
 
 .wrapper {
@@ -247,38 +190,15 @@ $secondary-dark-bg: #2B2B2B;
     flex-direction: column;
 }
 
-form {
-    padding: 0 !important;
-}
-
-.items {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.highlight {
-    font-weight: 700;
-    color: $secondary-text-color;
-}
-
 input {
     background-color: $secondary-dark-bg;
+    min-width: 0;
     font-size: 16px;
     color: #f0f0f0;
-    // border: none;
     border-radius: 20px;
     border-color: #444444;
-    // box-shadow: rgba(22, 193, 36, 0.25) 0px 2px 5px -1px,
-    //     rgba(32, 167, 23, 0.3) 0px 1px 3px -1px;
     flex-grow: 1;
-    padding-left: 1rem;
     height: 90%;
-}
-
-
-.form-check-input {
-    width: 1rem;
-    height: 1rem;
-    padding: 0;
+    padding-left: 1rem;
 }
 </style>
