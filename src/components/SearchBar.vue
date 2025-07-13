@@ -1,28 +1,37 @@
 <template>
     <div class="wrapper">
+
         <div class="button-and-seachbar-wrapper">
-            <button class="burger" @click="showFilters = !showFilters">
-                <i class="material-icons">menu</i>
-            </button>
+            <router-link class="navbar-brand" to="/">
+                CHORO
+            </router-link>
             <input @input="onChangedInput" type="search" placeholder="Search by song name or author..."
                 aria-label="Search">
+            <!-- <button class="burger" @click="showFilters = !showFilters">
+                <i class="material-icons">menu</i>
+            </button> -->
+            <div class="nav-links" :class="{ 'nav-links-mobile': mobileMenuOpen }">
+                <router-link class="nav-link" to="/">Home</router-link>
+                <router-link class="nav-link" to="/info">Info</router-link>
+                <router-link class="nav-link" to="/choro">List</router-link>
+            </div>
         </div>
-        <FilterBar v-if='showFilters' class="filter-bar" @selectedAuthors="handleSelectedAuthors" :data="dataToSearch">
-        </FilterBar>
+        <!-- <FilterBar v-if='showFilters' class="filter-bar" @selectedAuthors="handleSelectedAuthors" :data="dataToSearch">
+        </FilterBar> -->
     </div>
 </template>
 
 
 <script>
 import Fuse from 'fuse.js'
-import FilterBar from './FilterBar.vue';
+// import FilterBar from './FilterBar.vue';
 
 export default {
 
     props: ['dataToSearch'],
     emits: ['filteredData'],
     components: {
-        FilterBar
+        // FilterBar
     },
 
     data() {
@@ -179,8 +188,44 @@ export default {
 
 
 <style lang="scss" scoped>
+$secondary-dark-bg: #2B2B2B;
+
+.navbar-brand {
+    color: #f0f0f0;
+    font-size: 2rem;
+    background-color: #0000;
+}
+
+
+.nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+}
+
+.nav-link {
+    color: #f0f0f0;
+    background-color: #333;
+    border-radius: 20px;
+    margin: 0 5px;
+
+    display: flex; // Ensures text is centered inside the link
+    align-items: center;
+    justify-content: center;
+    height: 100%; // Optional: fill parent height
+    text-align: center;
+}
+
 .button-and-seachbar-wrapper {
     display: flex;
+    height: 3rem;
+    align-items: center;
 }
 
 .material-icons,
@@ -189,11 +234,12 @@ export default {
 }
 
 .burger {
-    background-color: #ffffff;
+    background-color: #333;
     border: none;
     border-radius: 3px;
     width: 2rem;
     margin-right: 0.5rem;
+    color: #f0f0f0;
 }
 
 .wrapper {
@@ -216,17 +262,17 @@ form {
 }
 
 input {
-    display: block;
-    margin: 0;
-    padding: 10px 45px;
-    background-size: 15px 15px;
+    background-color: $secondary-dark-bg;
     font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: rgba(22, 193, 36, 0.25) 0px 2px 5px -1px,
-        rgba(32, 167, 23, 0.3) 0px 1px 3px -1px;
+    color: #f0f0f0;
+    // border: none;
+    border-radius: 20px;
+    border-color: #444444;
+    // box-shadow: rgba(22, 193, 36, 0.25) 0px 2px 5px -1px,
+    //     rgba(32, 167, 23, 0.3) 0px 1px 3px -1px;
     flex-grow: 1;
     padding-left: 1rem;
+    height: 90%;
 }
 
 

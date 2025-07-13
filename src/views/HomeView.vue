@@ -35,10 +35,11 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('@/assets/images/main_page_outpainted.webp');
+    background-image: url('@/assets/images/roda_pixi_lacerda.webp');
     background-size: cover;
     background-position: center;
     z-index: -1;
+    filter: blur(2px);
 }
 
 
@@ -119,6 +120,13 @@ export default {
 
     .button {
         font-size: 1.5vw;
+    }
+}
+
+@media (max-width: 576px) {
+    .background-image {
+        background-position: 65% center;
+        /* shifts image to the right */
     }
 }
 </style>

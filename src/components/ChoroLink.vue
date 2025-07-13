@@ -122,14 +122,17 @@ export default {
 
 
 
-<style scoped lang="scss">
+<style lang="scss">
+$secondary-dark-bg: #2B2B2B;
+
 /* Card */
 .main-container {
     width: 100%;
-    background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 20%, rgba(255, 255, 255, 0.4) 50%);
+    background-color: $secondary-dark-bg;
     border: none;
     border-bottom: solid 1px;
-    border-image: linear-gradient(to right, $secondary-background-color 0%, $secondary-background-color 50%, transparent 75%) 1;
+    // border-color: #7cb82756;
+    // border-image: linear-gradient(to right, $secondary-background-color 0%, $secondary-background-color 50%, transparent 75%) 1;
     padding-bottom: 1rem;
     padding-top: 1rem;
     padding: 1rem;
@@ -137,7 +140,6 @@ export default {
     flex-direction: row;
     justify-content: flex-start;
     align-items: baseline;
-    gap: 1rem;
 
     @media (min-width: 576px) {
         gap: 2rem;
@@ -151,31 +153,31 @@ export default {
     gap: 0.5rem;
 }
 
+.title-author {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    column-gap: 1rem;
+    flex-wrap: wrap;
+    color: #9f9f9f;
+}
+
+h3 {
+    color: #f0f0f0;
+}
 
 // Media query to detect laptops and make hover effect
 @media (pointer:fine) {
     .main-container:hover {
-        // background-color: rgba(255, 255, 255, 0.7);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        transform: scale(1.02);
+        background-color: #444444d3;
     }
 
-    .main-container:hover .song-infos h3 {
-        font-size: 1.6rem;
-    }
-
-    .main-container:hover .song-infos h4 {
-        font-size: 1.3rem;
+    .main-container:hover h4 {
+        color: #f0f0f0; // or any color you want
     }
 }
 
-.title-author {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    column-gap: 1rem;
-    flex-wrap: wrap;
-}
 
 
 .container-links {
@@ -203,7 +205,7 @@ a {
 }
 
 a:hover {
-    background-color: rgb(56, 175, 58);
+    background-color: rgba(56, 175, 58, 0.933);
 }
 
 .role {
@@ -230,13 +232,14 @@ a:hover {
 .info {
     font-size: small;
     font-style: italic;
-    color: $primary-text-color;
+    color: #f0f0f0 !important;
+    // color: $primary-text-color;
 
 }
 
 h3 {
-    font-size: 1.2rem;
-    font-weight: 900;
+    font-size: 1.3rem;
+    font-weight: 500;
     margin: 0.25rem 0;
     white-space: nowrap;
 }
@@ -244,20 +247,12 @@ h3 {
 h4 {
     font-size: 1rem;
     margin: 0.25rem 0;
-    color: $primary-text-color;
-    font-weight: 700;
-    background: linear-gradient(to top, $secondary-background-color 20%, transparent 90%); // white-space: nowrap;
+    // color: $primary-text-color;
+    font-weight: 400;
+    // background: linear-gradient(to top, $secondary-background-color 20%, transparent 90%); // white-space: nowrap;
     border-radius: 5px;
     padding: 0 5px;
-}
-
-h3,
-h4 {
-    text-shadow:
-        1px 1px 2px rgba(255, 225, 0, 0.126),
-        // 1px -1px 2px rgba(255, 255, 255, 0.9),
-        // -1px 1px 2px rgba(255, 255, 255, 0.9),
-        // -1px -1px 2px rgba(255, 255, 255, 0.9);
+    color: #A0A0A0;
 }
 
 .song-infos {

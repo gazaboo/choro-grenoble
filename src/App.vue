@@ -12,6 +12,8 @@ export default {
 
 
 <style lang="scss">
+$primary-dark-bg: #121212;
+
 * {
   padding: 0;
   margin: 0;
@@ -23,6 +25,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #f0f0f0;
+  background-color: $primary-dark-bg;
 }
-
 </style>
