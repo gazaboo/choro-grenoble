@@ -67,24 +67,13 @@
             Transpose Down
           </span>
         </button>
-        <button>
-          <i class="material-icons">download</i>
-          <span class="role">
-            Download
-          </span>
-        </button>
         <button @click="removeChords">
           <i class="material-icons">music_note</i>
           <span class="role">
             Remove chords
           </span>
         </button>
-        <button @click="toggleCompactMode">
-          <i class="material-icons">format_line_spacing</i>
-          <span class="role">
-            Compact Mode
-          </span>
-        </button>
+
       </div>
     </div>
 
@@ -151,16 +140,20 @@ export default {
   async mounted() {
     this.osmd = await this.fetchOSMDObject();
 
-    this.osmd.Zoom = 1;
-    this.osmd.setOptions({
-      autoResize: true,
-      drawTitle: false,
-      drawingParameters: "compacttight",
-    })
-
-    this.osmd.TransposeCalculator = new TransposeCalculator();
-    await this.osmd.render();
-    this.isLoading = false;
+    try {
+      this.osmd.Zoom = 1;
+      this.osmd.setOptions({
+        autoResize: true,
+        drawTitle: false,
+        drawingParameters: "compacttight",
+      })
+      this.osmd.TransposeCalculator = new TransposeCalculator();
+      await this.osmd.render();
+      this.isLoading = false;
+    } catch (error) {
+      console.error('Error during OSMD rendering:', error);
+      this.isLoading = false;
+    }
   },
 
 
@@ -316,7 +309,7 @@ export default {
         this.osmd.setOptions({
           drawingParameters: "compacttight",
         });
-        this.osmd.Zoom = 0.75;
+        this.osmd.Zoom = 1;
         this.osmd.updateGraphic();
         this.osmd.render()
       } else {
@@ -334,6 +327,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+/* --- Main Page Layout --- */
 #navbar-with-burger {
   display: flex;
   justify-content: space-between;
@@ -359,6 +353,7 @@ export default {
   opacity: 1;
 }
 
+/* --- Loading Overlay Spinner --- */
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -373,86 +368,128 @@ export default {
   opacity: 1;
 }
 
+/* --- Burger/Tools Button --- */
 .burger {
   color: #000000;
   background-color: #ddad76;
   border-radius: 20px;
   border-color: #333;
+  border: none;
   margin: 0 5px;
   margin-right: 20px;
   padding: .5rem 1rem;
-  display: flex; // Ensures text is centered inside the link
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%; // Optional: fill parent height
+  height: 100%;
   text-align: center;
-}
-
-#control {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  z-index: 9999;
-}
-
-
-
-// .material-icons,
-// .material-symbols-rounded {
-//   color: $secondary-text-color;
-//   font-size: 1rem;
-// }
-
-a {
-  display: flex;
-  text-decoration: none;
-  color: $primary-text-color;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-a {
-  background-color: $primary-background-color;
-  margin: 0.25rem;
-  padding: 0rem 0.25rem;
   cursor: pointer;
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
-a:hover,
-button:hover {
-  background-color: $secondary-background-color ;
-}
 
-a:hover .material-icons,
-button:hover .material-icons,
-button:hover .material-symbols-rounded {
-  color: white;
-}
+/*
+================================================================
+  CONTROL DRAWER (THE SLIDING PANEL)
+================================================================
+*/
 
 .control-buttons {
-  display: flex;
-  width: 100vw;
-  height: 0;
-  margin-bottom: 10px;
-  overflow: scroll;
-  background-color: $secondary-text-color;
+  /* --- Positioning & Sizing --- */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30vh;
   z-index: 9999;
-  // border-radius: 5%;
-  transition: all 0.3s ease;
+
+  /* --- Appearance --- */
+  background-color: #2c2c2c;
+  /* A dark, modern background */
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.35);
+  border-top: 1px solid #444;
+
+  /* --- Button Layout (CSS Grid) --- */
+  display: grid;
+  /* This creates a responsive grid that fits as many columns as possible.
+     Each column will be at least 110px wide but can grow to fill space. */
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 12px;
+  padding: 15px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  /* Allows scrolling if buttons overflow on small screens */
+
+  /* --- Animation: Hidden by Default --- */
+  /* Move it 100% of its own height down (off-screen) */
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
 }
 
-
+/* --- State for When the Drawer is OPEN --- */
 .control-buttons.expanded {
-  height: 2rem;
+  /* Move it back to its original position (0) on screen */
+  transform: translateY(0);
+  opacity: 1;
 }
 
+
+/*
+================================================================
+  INDIVIDUAL BUTTONS INSIDE THE CONTROL DRAWER
+================================================================
+*/
+
+/* Target both <button> and <router-link> elements inside the drawer */
+.control-buttons>button,
+.control-buttons>a {
+  display: flex;
+  flex-direction: column;
+  /* Stack icon on top of text label */
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  /* Space between icon and text */
+
+  /* Appearance */
+  background-color: #404040;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover effect for the buttons */
+.control-buttons>button:hover,
+.control-buttons>a:hover {
+  background-color: #555;
+}
+
+/* Text label for the buttons */
 .role {
   text-wrap: nowrap;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  /* Slightly smaller font for a cleaner look */
+}
+
+/* Icons inside the buttons */
+.control-buttons .material-icons,
+.control-buttons .material-symbols-outlined,
+.control-buttons .material-symbols-rounded {
+  color: #f0f0f0;
+  font-size: 1.75rem;
+  /* Make icons prominent */
+  transition: color 0.2s ease;
+}
+
+/* Icon hover effect */
+.control-buttons>button:hover .material-icons,
+.control-buttons>button:hover .material-symbols-rounded,
+.control-buttons>a:hover .material-icons {
+  color: #ddad76;
+  /* Match your burger button's color on hover for consistency */
 }
 </style>

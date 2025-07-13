@@ -3,7 +3,7 @@
         <router-link class="navbar-brand" to="/">
             CHORO
         </router-link>
-        <div v-if="title">
+        <div class="title" v-if="title">
             <h2> {{ title }} </h2>
             <h3> {{ author }} </h3>
         </div>
@@ -67,16 +67,20 @@ export default {
 <style lang="scss" scoped>
 h2,
 h3 {
-    display: inline;
+    display: inline-block;
     padding-right: 1rem;
 }
 
 h2 {
     color: greenyellow;
+    font-size: 1.2rem;
+    margin-bottom: 0;
 }
 
 h3 {
-    color: rgb(212, 138, 0)
+    color: rgb(212, 138, 0);
+    font-size: 1rem;
+    margin-bottom: 0;
 }
 
 .navbar {
@@ -92,6 +96,11 @@ h3 {
     position: sticky; // Makes navbar stick to top on scroll
     top: 0;
     z-index: 1000; // Ensures it's above other content
+}
+
+.title {
+    position: absolute;
+    bottom: -7px;
 }
 
 .navbar-brand {
