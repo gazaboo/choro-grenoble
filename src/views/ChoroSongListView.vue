@@ -1,20 +1,16 @@
 <template>
+
   <div class="choro-song-list-container">
     <div class="content-wrapper">
-      <NavBar></NavBar>
-      <div class="search-and-filter-container" :class="{ 'search-active': isSearchActive }">
 
-        <!-- These filters will be hidden on mobile when search is active -->
+      <NavBar></NavBar>
+
+      <div class="search-and-filter-container" :class="{ 'search-active': isSearchActive }">
         <CategoryFilter :active-category="activeCategory" @category-changed="handleCategoryChange"
           class="category-filters" />
-
-
-        <!-- NEW: The search icon button that is ONLY visible on mobile -->
         <button class="search-toggle-btn" @click="toggleSearch">
           <span class="material-icons">{{ isSearchActive ? 'close' : 'search' }}</span>
         </button>
-
-        <!-- The actual search bar component -->
         <SearchBar @search-activated="activateSongSearch" @filtered-data="updatedSelection" :data-to-search="data"
           :check-partition="true" class="search-bar" />
       </div>
@@ -29,6 +25,7 @@
           <AuthorCard @click="openAuthorModal(author)" :author="author" :id="index" class='result' />
         </div>
       </div>
+
     </div>
 
     <div v-if="showSongModal" class="modal-overlay" @click.self="closeSongModal">
@@ -36,12 +33,12 @@
         <button class="close-btn" @click="closeSongModal" aria-label="Close">×</button>
         <ChoroCard :music="selectedSong" />
       </div>
+
     </div>
 
     <div v-if="showAuthorModal" class="modal-overlay" @click.self="closeAuthorModal">
       <div class="modal-content">
         <button class="close-btn" @click="closeAuthorModal" aria-label="Close">×</button>
-
         <div v-if="selectedAuthor">
           <h2> {{ selectedAuthor }}</h2>
           <div class="modal-results-container">
@@ -51,12 +48,17 @@
         </div>
       </div>
     </div>
+
   </div>
+
 </template>
+
 
 <script>
 
+
 // @ is an alias to /src
+
 import SearchBar from '@/components/SearchBar.vue';
 import listeChoros from "@/assets/liste_totale_choros.json";
 import ChoroLink from '@/components/ChoroLink.vue';
@@ -66,7 +68,9 @@ import ChoroCard from '@/components/ChoroCard.vue';
 import NavBar from '@/components/NavBar.vue';
 
 export default {
+
   name: 'HomeView',
+
   components: {
     SearchBar,
     ChoroLink,
@@ -76,24 +80,27 @@ export default {
     NavBar
   },
 
+
   data() {
     return {
       data: listeChoros.data.filter(itemSong => this.has_partition(itemSong)),
       filteredData: [],
       showFilters: false,
       activeCategory: 'Songs',
-      showSongModal: false,      // <-- add this
-      showAuthorModal: false,      // <-- add this
-      selectedSong: null,         // <-- add this
+      showSongModal: false,
+      showAuthorModal: false,
+      selectedSong: null,
       selectedAuthor: null,
-      isSearchActive: false, // <-- NEW: State to control the search bar's visibility on mobile
+      isSearchActive: false,
     }
   },
+
 
   created() {
     this.filteredData = this.data.sort((a, b) => (a.title > b.title) ? 1 : -1);
     this.uniqueAuthors = [...new Set(this.data.map(elt => elt.author))]
   },
+
 
   computed: {
     songsBySelectedAuthor() {
@@ -104,8 +111,8 @@ export default {
     }
   },
 
-  methods: {
 
+  methods: {
     activateSongSearch() {
       this.activeCategory = 'Songs';
     },
@@ -169,8 +176,8 @@ export default {
       this.closeAuthorModal();
       this.openSongModal(song);
     },
-
   },
+
 
   mounted() {
     if (localStorage.ref) {
@@ -186,7 +193,9 @@ export default {
     }
   }
 }
+
 </script>
+
 
 
 <style lang="scss">
@@ -213,7 +222,6 @@ export default {
 }
 
 
-
 .search-and-filter-container {
   display: flex;
   align-items: center;
@@ -222,27 +230,15 @@ export default {
   padding: 0 1rem;
 }
 
-
 @media (min-width: 769px) {
   .search-bar {
     flex-grow: 1;
   }
 }
 
-
 .results-container {
   overflow-y: auto;
   border-radius: 10px;
-}
-
-.blink {
-  animation: blinker 0.45s ease-in-out;
-}
-
-@keyframes blinker {
-  50% {
-    opacity: 0;
-  }
 }
 
 .modal-overlay {
@@ -267,6 +263,7 @@ export default {
   position: relative;
 }
 
+
 .close-btn {
   position: absolute;
   top: 10px;
@@ -278,63 +275,56 @@ export default {
   cursor: pointer;
 }
 
+
 .category-filters {
   padding-bottom: 0.25rem;
 }
+
 
 .modal-results-container {
   height: 80vh;
   overflow-y: scroll;
 }
 
+
 .modal-result {
   margin-bottom: 5px;
   box-shadow: #00000069 1px 1px;
 }
 
-
-
-
+// Mobile
 @media (max-width: 768px) {
   .search-and-filter-container {
-    position: relative; // Needed to position children correctly
+    position: relative;
     align-items: center;
   }
 
-  // The new search icon button
+
   .search-toggle-btn {
-    display: flex; // This makes it visible on mobile
+    display: flex;
     background: #333;
     border: none;
     color: white;
     padding: 0.5rem;
     border-radius: 20px;
     cursor: pointer;
-    // position: absolute; // Position it within the container
-    // left: 1rem;
-    z-index: 2; // Make sure it's on top
+    z-index: 2;
   }
 
-  // By default on mobile, the category filters are visible
   .category-filters {
     flex-grow: 1;
     transition: width 0.3s ease, opacity 0.3s ease;
   }
 
-  // And the search bar itself is hidden
   .search-bar {
-    // position: absolute;
-    // left: 1rem;
-    // right: 1rem;
-    width: 0; // Starts with zero width
+    width: 0;
     opacity: 0;
-    pointer-events: none; // Not clickable when hidden
+    pointer-events: none;
     transition: width 0.3s ease, opacity 0.3s ease;
     z-index: 1;
-    margin-left: 0; // Override desktop margin
+    margin-left: 0;
   }
 
-  /* --- STYLES FOR WHEN SEARCH IS ACTIVE --- */
 
   // When the container has the 'search-active' class...
   .search-and-filter-container.search-active {
@@ -354,11 +344,11 @@ export default {
     }
   }
 
+
 }
 
+// desktop, make sure the toggle button is hidden
 @media (min-width: 769px) {
-
-  // On desktop, make sure the toggle button is hidden
   .search-toggle-btn {
     display: none;
   }
