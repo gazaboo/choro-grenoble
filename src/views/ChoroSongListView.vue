@@ -19,35 +19,36 @@
         <ChoroLink class="result" v-for="(music, index) in filteredData" :id="index" :music="music" :key="music"
           @click="openSongModal(music)" />
       </div>
-
-      <div v-if="activeCategory === 'Artists'" class="results-container">
+      <div v-else-if="activeCategory === 'Artists'" class="results-container">
         <div v-for="(author, index) in uniqueAuthors" :id="index" :key="author">
           <AuthorCard @click="openAuthorModal(author)" :author="author" :id="index" class='result' />
         </div>
       </div>
-
     </div>
 
-    <div v-if="showSongModal" class="modal-overlay" @click.self="closeSongModal">
-      <div class="modal-content">
-        <button class="close-btn" @click="closeSongModal" aria-label="Close">×</button>
-        <ChoroCard :music="selectedSong" />
+    <Transition name="transition-fade-modals">
+      <div v-if="showSongModal" class="modal-overlay" @click.self="closeSongModal">
+        <div class="modal-content">
+          <button class="close-btn" @click="closeSongModal" aria-label="Close">×</button>
+          <ChoroCard :music="selectedSong" />
+        </div>
       </div>
+    </Transition>
 
-    </div>
-
-    <div v-if="showAuthorModal" class="modal-overlay" @click.self="closeAuthorModal">
-      <div class="modal-content">
-        <button class="close-btn" @click="closeAuthorModal" aria-label="Close">×</button>
-        <div v-if="selectedAuthor">
-          <h2> {{ selectedAuthor }}</h2>
-          <div class="modal-results-container">
-            <ChoroLink v-for="(music, index) in songsBySelectedAuthor" :key="music.title" :music="music" :id="index"
-              @click="openSongFromAuthorModal(music)" class="modal-result" />
+    <Transition name="transition-fade-modals">
+      <div v-if="showAuthorModal" class="modal-overlay" @click.self="closeAuthorModal">
+        <div class="modal-content">
+          <button class="close-btn" @click="closeAuthorModal" aria-label="Close">×</button>
+          <div v-if="selectedAuthor">
+            <h2> {{ selectedAuthor }}</h2>
+            <div class="modal-results-container">
+              <ChoroLink v-for="(music, index) in songsBySelectedAuthor" :key="music.title" :music="music" :id="index"
+                @click="openSongFromAuthorModal(music)" class="modal-result" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Transition>
 
   </div>
 
@@ -352,5 +353,29 @@ export default {
   .search-toggle-btn {
     display: none;
   }
+}
+
+
+
+
+.transition-fade-modals-enter-active,
+.transition-fade-modals-leave-active {
+  transition: all 0.25s ease-out;
+}
+
+.transition-fade-modals-enter-from {
+  opacity: 0;
+}
+
+.transition-fade-modals-enter-to {
+  opacity: 1;
+}
+
+.transition-fade-modals-leave-from {
+  opacity: 1;
+}
+
+.transition-fade-modals-leave-to {
+  opacity: 0;
 }
 </style>
