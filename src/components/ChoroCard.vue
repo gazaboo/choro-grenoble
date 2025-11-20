@@ -31,9 +31,10 @@
                 <span class="info">Better for screens.</span>
             </router-link>
 
-            <h4>Download PDF</h4>
+            <h4>PDF Music Sheets</h4>
             <div class="pdf-links">
-                <a v-for="link in pdfLinks" :key="link.instrument" :href="link.url" target="_blank" rel="noopener"
+                <!-- Updated: Uses prevent default to open modal -->
+                <a v-for="link in pdfLinks" :key="link.instrument" :href="link.url" @click.prevent="openPdf(link.url)"
                     class="action-button pdf-link">
                     {{ link.instrument }}
                 </a>
@@ -49,8 +50,18 @@
             </div>
             <div v-else class="youtube-container no-videos">No YouTube videos found.</div>
         </div>
+
+        <!-- PDF Modal Overlay -->
+        <div v-if="showPdfModal" class="pdf-modal-overlay" @click.self="closePdf">
+            <div class="pdf-modal-content">
+                <button class="close-pdf-btn" @click="closePdf">&times;</button>
+                <iframe :src="selectedPdfUrl" type="application/pdf" width="100%" height="100%" frameborder="0">
+                </iframe>
+            </div>
+        </div>
     </div>
 </template>
+
 
 <script>
 export default {
@@ -61,6 +72,9 @@ export default {
             youtubeVideoIds: [],
             youtubeLoading: false,
             YOUTUBE_CACHE_EXPIRATION_MS: 24 * 60 * 60 * 1000,
+            // New state for PDF Modal
+            showPdfModal: false,
+            selectedPdfUrl: ''
         }
     },
 
@@ -70,7 +84,9 @@ export default {
 
     computed: {
         pdfLinks() {
-            const base_url = "https://raw.githubusercontent.com/gazaboo/choro-db/main/pdf/";
+            // CHANGED: Use jsDelivr to ensure correct Content-Type (application/pdf) for embedding
+            // Original: https://raw.githubusercontent.com/gazaboo/choro-db/main/pdf/
+            const base_url = "https://cdn.jsdelivr.net/gh/gazaboo/choro-db@main/pdf/";
             const instruments = ["C", "Clarinet Bb", "Saxophone Eb"];
             return instruments.map(inst => {
                 const fileName = `${this.music.author} - ${this.music.title} - Theme - ${inst}.pdf`;
@@ -83,6 +99,14 @@ export default {
     },
 
     methods: {
+        openPdf(url) {
+            this.selectedPdfUrl = url;
+            this.showPdfModal = true;
+        },
+        closePdf() {
+            this.showPdfModal = false;
+            this.selectedPdfUrl = '';
+        },
         async fetchYouTubeVideos() {
             this.youtubeLoading = true;
             const query = `${this.music.author} ${this.music.title} choro`;
@@ -107,7 +131,6 @@ export default {
                 console.error('Error reading from YouTube cache:', e);
             }
 
-            // 2. Fetch from YouTube API if not in cache or expired
             const apiKey = process.env.VUE_APP_YOUTUBE_API_KEY;
             const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=2&q=${encodeURIComponent(query)}&key=${apiKey}`;
 
@@ -119,7 +142,6 @@ export default {
                 const data = await response.json();
                 this.youtubeVideoIds = data.items.map(item => item.id.videoId);
 
-                // 3. Store new data in cache
                 const cacheData = {
                     data: this.youtubeVideoIds,
                     timestamp: new Date().getTime(),
@@ -136,10 +158,11 @@ export default {
 }
 </script>
 
+
 <style lang="scss" scoped>
 /* Main container for the modal content */
 .modal-content-container {
-    background-color: #2B2B2B; // Your $secondary-dark-bg
+    background-color: #2B2B2B;
     padding: 2rem 1.5rem;
     display: flex;
     flex-direction: column;
@@ -147,27 +170,27 @@ export default {
     gap: 1.5rem;
     border: none;
     width: 100%;
-    max-height: 80vh; // Ensure it doesn't overflow viewport
-    overflow-y: auto; // Use 'auto' to show scrollbar only when needed
-    color: #f0f0f0; // Your $text-light
-    border-radius: 12px; // Match modal border-radius
+    max-height: 80vh;
+    overflow-y: auto;
+    color: #f0f0f0;
+    border-radius: 12px;
 
-    // Custom scrollbar for dark mode (optional, but good for polish)
+    /* Custom scrollbar */
     &::-webkit-scrollbar {
         width: 8px;
     }
 
     &::-webkit-scrollbar-track {
-        background: #3a3a3a; // Darker track
+        background: #3a3a3a;
         border-radius: 4px;
     }
 
     &::-webkit-scrollbar-thumb {
-        background: #555; // Darker thumb
+        background: #555;
         border-radius: 4px;
 
         &:hover {
-            background: #777; // Lighter on hover
+            background: #777;
         }
     }
 }
@@ -187,7 +210,7 @@ export default {
         font-size: 1.15rem;
         font-weight: 400;
         margin: 0;
-        color: #A0A0A0; // Your $text-muted
+        color: #A0A0A0;
     }
 }
 
@@ -198,64 +221,60 @@ export default {
     gap: 0.75rem;
     width: 100%;
 
-    /* Section title for PDF downloads / Youtube */
     h4 {
         margin-top: 0.5rem;
         margin-bottom: 0;
-        font-weight: 600; // Slightly bolder for section titles
-        font-size: 1.1rem; // Slightly larger
-        color: #f0f0f0; // Ensure these stand out
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: #f0f0f0;
     }
 }
 
 /* Unified style for all action buttons */
 .action-button {
     display: flex;
-    justify-content: space-between; // Space between main text and info text on desktop
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; // Allow wrapping on larger screens by default
+    flex-wrap: wrap;
     gap: 10px;
-    background-color: #44601D; // This is your current green accent. Consider replacing with $accent-color.
+    background-color: #44601D;
     color: #f0f0f0;
     padding: 1rem;
-    border-radius: 8px; // Slightly more rounded
+    border-radius: 8px;
     text-decoration: none;
     text-align: left;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease; // Add box-shadow transition
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
     width: 100%;
     box-sizing: border-box;
     border: none;
-    font-size: 1.05rem; // Slightly larger for better readability
+    font-size: 1.05rem;
     font-weight: 500;
     cursor: pointer;
 
     &:hover {
-        background-color: #597d25; // Darken/lighten your accent color on hover.
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); // Subtle shadow on hover
+        background-color: #597d25;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
     span:first-child {
-        // Main button text (e.g., "Muse Score", "Music Sheet")
-        font-weight: 600; // Make main text bolder
-        flex-shrink: 0; // Prevent main text from shrinking too much
-        margin-right: auto; // Pushes the .info span to the right on larger screens
-        // Desktop-specific text overflow (will be overridden on mobile)
+        font-weight: 600;
+        flex-shrink: 0;
+        margin-right: auto;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 70%; // Prevent it from pushing info text too much
+        max-width: 70%;
     }
 
     .info {
-        font-size: 0.85rem; // Slightly larger info text
+        font-size: 0.85rem;
         font-style: italic;
         font-weight: 400;
         color: #dcdcdc;
-        opacity: 0.8; // Slightly less opaque to differentiate
-        text-align: right; // Right-align on desktop
-        flex-grow: 1; // Allows info to take remaining space on desktop
-        min-width: 0; // Allows text-overflow to work correctly in flex items on desktop
-        // Desktop-specific text overflow (will be overridden on mobile)
+        opacity: 0.8;
+        text-align: right;
+        flex-grow: 1;
+        min-width: 0;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -269,16 +288,14 @@ export default {
     flex-wrap: wrap;
     gap: 0.75rem;
 
-    /* Styling for the individual PDF links */
     .pdf-link {
         justify-content: center;
         text-align: center;
         white-space: nowrap;
         flex-grow: 1;
-        min-width: 80px; // Ensure minimum width for buttons
-        padding: 0.75rem 1rem; // Adjust padding for smaller buttons
-        font-size: 0.9rem; // Smaller font for instrument names
-        // Inherits action-button styles for background/hover
+        min-width: 80px;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -295,7 +312,7 @@ export default {
         height: auto;
         aspect-ratio: 16 / 9;
         border-radius: 5px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); // Subtle shadow for videos
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 }
 
@@ -306,10 +323,78 @@ export default {
     padding: 1rem 0;
 }
 
+/* FULL SCREEN PDF MODAL STYLES */
+.pdf-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 1);
+    /* Solid background for immersion */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    /* High z-index to cover everything */
+    padding: 0;
+    /* Remove padding for full edge-to-edge */
+}
+
+.pdf-modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    /* Remove width limit */
+    background-color: #2B2B2B;
+    border-radius: 0;
+    /* Remove radius */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    iframe {
+        flex-grow: 1;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        border: none;
+    }
+}
+
+.close-pdf-btn {
+    position: fixed;
+    /* Fixed to screen, stays visible */
+    top: 30px;
+    right: 25px;
+    background: #d9534f;
+    /* Red for visibility */
+    border: 2px solid white;
+    color: white;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2010;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, background-color 0.2s;
+
+    &:hover {
+        background: #c9302c;
+        transform: scale(1.1);
+    }
+}
+
 // Media Query for Mobile Specific Styles
 @media (max-width: 768px) {
     .modal-content-container {
-        padding: 1.5rem 1rem; // Slightly less padding on mobile
+        padding: 1.5rem 1rem;
     }
 
     .title-author {
@@ -323,40 +408,39 @@ export default {
     }
 
     .action-button {
-        flex-direction: column; // Stack items vertically on mobile
-        align-items: flex-start; // Align content to the left
-        justify-content: flex-start; // Align content to the top
-        gap: 0.25rem; // Smaller gap for vertical stacking
-        padding: 0.8rem; // Slightly less padding for smaller buttons
-        flex-wrap: nowrap; // No need for wrapping if it's a column, but good to ensure
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 0.25rem;
+        padding: 0.8rem;
+        flex-wrap: nowrap;
     }
 
     .action-button span:first-child {
-        // Main button text
-        margin-right: 0; // Remove auto margin from desktop
-        text-align: left; // Ensure main text is left-aligned
-        white-space: normal; // Allow text to wrap naturally within its width
-        overflow: visible; // Allow overflow to be visible
-        text-overflow: clip; // No ellipsis needed when wrapping naturally
-        max-width: 100%; // Allow to take full width of button
+        margin-right: 0;
+        text-align: left;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        max-width: 100%;
     }
 
     .action-button .info {
-        text-align: left; // Align info text to the left below main text
-        margin-left: 0; // Remove auto margin from desktop
-        white-space: normal; // Allow text to wrap naturally
-        overflow: visible; // Allow overflow to be visible
-        text-overflow: clip; // No ellipsis needed when wrapping naturally
-        flex-grow: 0; // No need to grow when stacking
+        text-align: left;
+        margin-left: 0;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        flex-grow: 0;
     }
 
     .pdf-links {
-        gap: 0.5rem; // Reduce gap for PDF buttons
+        gap: 0.5rem;
     }
 
     .pdf-link {
-        padding: 0.6rem 0.8rem; // Adjust padding for smaller PDF buttons
-        font-size: 0.85rem; // Slightly smaller font
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
     }
 }
 </style>
