@@ -30,19 +30,43 @@ export default {
         }
     },
 
-    created() {
-
-        this.data = this.dataToSearch.map((item, index) => {
-            return {
-                ...item, // spread operator to copy all fields from the original object
-                id: index + 1,
-                title_html: this.clean_string(item.title),
-                author_html: this.clean_string(item.author)
-            };
-        });
-
-        this.filteredList = this.filterList();
+    watch: {
+        dataToSearch: {
+            immediate: true, // Run immediately on mount if data exists
+            handler(newData) {
+                if (!newData || newData.length === 0) {
+                    this.data = [];
+                } else {
+                    // Re-process the new data when it arrives
+                    this.data = newData.map((item, index) => {
+                        return {
+                            ...item,
+                            id: index + 1,
+                            title_html: this.clean_string(item.title),
+                            author_html: this.clean_string(item.author)
+                        };
+                    });
+                }
+                // Re-run filter with the new data
+                this.filteredList = this.filterList();
+                this.$emit("filteredData", this.filteredList);
+            }
+        }
     },
+
+    // created() {
+
+    //     this.data = this.dataToSearch.map((item, index) => {
+    //         return {
+    //             ...item, // spread operator to copy all fields from the original object
+    //             id: index + 1,
+    //             title_html: this.clean_string(item.title),
+    //             author_html: this.clean_string(item.author)
+    //         };
+    //     });
+
+    //     this.filteredList = this.filterList();
+    // },
 
     methods: {
         handleFocus() {

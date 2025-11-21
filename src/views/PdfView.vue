@@ -14,15 +14,15 @@
 <script>
 export default {
     name: 'PdfView',
-    props: ['title', 'author', 'instrument'],
-    computed: {
-        pdfUrl() {
-            const base_url = "https://raw.githubusercontent.com/gazaboo/choro-db/main/pdf/";
-            const fileName = `${this.author} - ${this.title} - Theme - ${this.instrument}.pdf`;
-            // Use query parameter to avoid issues with special characters in path
-            return `${base_url}${this.instrument}/${encodeURIComponent(fileName)}`;
-        }
-    }
+    props: ['title', 'author', 'instrument', 'url'],
+    // computed: {
+    //     pdfUrl() {
+    //         const base_url = "https://raw.githubusercontent.com/gazaboo/choro-db/main/pdf/";
+    //         const fileName = `${this.author} - ${this.title} - Theme - ${this.instrument}.pdf`;
+    //         // Use query parameter to avoid issues with special characters in path
+    //         return `${base_url}${this.instrument}/${encodeURIComponent(fileName)}`;
+    //     }
+    // }
 }
 </script>
 

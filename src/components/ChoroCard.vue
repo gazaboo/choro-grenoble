@@ -6,37 +6,41 @@
         </div>
 
         <div class="links-wrapper">
-            <router-link :to="{
-                name: 'ChoroSongMuseScoreView',
-                params: {
-                    theme: 'melody',
-                    instrument: 'C',
-                    title: music.title,
-                    author: music.author
-                }
-            }" class="action-button">
-                <span>Muse Score</span>
-                <span class="info">Play sound, Loop and Slowdown</span>
-            </router-link>
+            <template v-if="hasMuseScore">
+                <router-link :to="{
+                    name: 'ChoroSongMuseScoreView',
+                    params: {
+                        theme: 'melody',
+                        instrument: 'C',
+                        title: music.title,
+                        author: music.author
+                    }
+                }" class="action-button">
+                    <span>Muse Score</span>
+                    <span class="info">Play sound, Loop and Slowdown</span>
+                </router-link>
 
-            <router-link :to="{
-                name: 'ChoroSongOSMDView',
-                params: {
-                    theme: 'melody',
-                    instrument: 'C',
-                    title: music.title,
-                }
-            }" class="action-button">
-                <span>Music Sheet</span>
-                <span class="info">Better for screens.</span>
-            </router-link>
+                <router-link :to="{
+                    name: 'ChoroSongOSMDView',
+                    params: {
+                        theme: 'melody',
+                        instrument: 'C',
+                        title: music.title,
+                    }
+                }" class="action-button">
+                    <span>Music Sheet</span>
+                    <span class="info">Better for screens.</span>
+                </router-link>
+            </template>
+
 
             <h4>PDF Music Sheets</h4>
             <div class="pdf-links">
-                <!-- Updated: Uses prevent default to open modal -->
-                <a v-for="link in pdfLinks" :key="link.instrument" :href="link.url" @click.prevent="openPdf(link.url)"
+                <a v-for="(link, index) in pdfLinks" :key="index" :href="link.url" @click.prevent="openPdf(link.url)"
                     class="action-button pdf-link">
-                    {{ link.instrument }}
+                    <!-- Show Instrument AND Type if it's not just 'Theme' -->
+                    {{ link.instrument }} <span v-if="link.type !== 'Theme'" style="font-size: 0.8em">({{ link.type
+                    }})</span>
                 </a>
             </div>
 
@@ -64,6 +68,8 @@
 
 
 <script>
+import listeChoros from "@/assets/liste_totale_choros.json";
+
 export default {
     name: 'ChoroCard',
     props: ['music', 'id'],
@@ -82,17 +88,56 @@ export default {
         this.fetchYouTubeVideos();
     },
 
+    // computed: {
+    //     pdfLinks() {
+    //         // CHANGED: Use jsDelivr to ensure correct Content-Type (application/pdf) for embedding
+    //         // Original: https://raw.githubusercontent.com/gazaboo/choro-db/main/pdf/
+    //         const base_url = "https://cdn.jsdelivr.net/gh/gazaboo/choro-db@main/pdf/";
+    //         const instruments = ["C", "Clarinet Bb", "Saxophone Eb"];
+    //         return instruments.map(inst => {
+    //             const fileName = `${this.music.author} - ${this.music.title} - Theme - ${inst}.pdf`;
+    //             return {
+    //                 instrument: inst,
+    //                 url: `${base_url}${inst}/${encodeURIComponent(fileName)}`
+    //             };
+    //         });
+    //     },
+    // },
+
     computed: {
+        museScoreData() {
+            // We match by Title AND Author to be safe
+            return listeChoros.data.find(
+                item => item.title === this.music.title && item.author === this.music.author
+            );
+        },
+
+        hasMuseScore() {
+            // Checks if we found a match AND if it actually has melody links
+            // You can adjust this condition if you want strict checking for "C" key etc.
+            return !!this.museScoreData;
+        },
+
         pdfLinks() {
-            // CHANGED: Use jsDelivr to ensure correct Content-Type (application/pdf) for embedding
-            // Original: https://raw.githubusercontent.com/gazaboo/choro-db/main/pdf/
+            // Use the actual PDFs found in the repo for this song
+            if (this.music.pdfs && this.music.pdfs.length > 0) {
+                return this.music.pdfs.map(pdf => ({
+                    instrument: pdf.key, // "C", "Bb", "Eb"
+                    type: pdf.type,      // "Theme" or "Contraponto"
+                    // Use the raw URL from GitHub (or replace host with cdn.jsdelivr.net for better caching)
+                    url: pdf.url.replace('raw.githubusercontent.com', 'cdn.jsdelivr.net/gh').replace('/main/', '@main/')
+                })).sort((a, b) => a.instrument.localeCompare(b.instrument));
+            }
+
+            // Fallback ONLY if no PDFs were found (shouldn't happen if data is clean)
             const base_url = "https://cdn.jsdelivr.net/gh/gazaboo/choro-db@main/pdf/";
             const instruments = ["C", "Clarinet Bb", "Saxophone Eb"];
             return instruments.map(inst => {
                 const fileName = `${this.music.author} - ${this.music.title} - Theme - ${inst}.pdf`;
                 return {
                     instrument: inst,
-                    url: `${base_url}${inst}/${encodeURIComponent(fileName)}`
+                    type: 'Theme',
+                    url: `${base_url}${encodeURIComponent(fileName)}`
                 };
             });
         },
@@ -343,7 +388,7 @@ export default {
 
 .pdf-modal-content {
     position: relative;
-    width: 100%;
+    width: 90%;
     height: 100%;
     max-width: none;
     /* Remove width limit */
@@ -353,6 +398,7 @@ export default {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    border: solid 10px #12611a;
 
     iframe {
         flex-grow: 1;

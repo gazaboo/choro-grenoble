@@ -61,7 +61,7 @@
 // @ is an alias to /src
 
 import SearchBar from '@/components/SearchBar.vue';
-import listeChoros from "@/assets/liste_totale_choros.json";
+// import listeChoros from "@/assets/liste_totale_choros.json";
 import ChoroLink from '@/components/ChoroLink.vue';
 import CategoryFilter from '@/components/CategoryFilter.vue';
 import AuthorCard from '@/components/AuthorCard.vue'
@@ -84,7 +84,7 @@ export default {
 
   data() {
     return {
-      data: listeChoros.data.filter(itemSong => this.has_partition(itemSong)),
+      data: [],
       filteredData: [],
       showFilters: false,
       activeCategory: 'Songs',
@@ -97,9 +97,14 @@ export default {
   },
 
 
+  // async created() {
+  //   this.data = await this.fetchPDFListFromGitHub();
+  //   this.filteredData = this.data.sort((a, b) => (a.title > b.title) ? 1 : -1);
+  //   this.uniqueAuthors = [...new Set(this.data.map(elt => elt.author))]
+  // },
+
   created() {
-    this.filteredData = this.data.sort((a, b) => (a.title > b.title) ? 1 : -1);
-    this.uniqueAuthors = [...new Set(this.data.map(elt => elt.author))]
+    this.initializeData();
   },
 
 
@@ -114,6 +119,101 @@ export default {
 
 
   methods: {
+
+    // 1. FETCH: Get raw list of PDF files from GitHub
+    async fetchPDFListFromGitHub() {
+      const owner = 'gazaboo';
+      const repo = 'choro-db';
+      const branch = 'main';
+      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
+
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data.tree.filter(file => file.path.endsWith('.pdf'));
+      } catch (error) {
+        console.error("Failed to fetch from GitHub:", error);
+        return [];
+      }
+    },
+
+    // 2. Parse and Group Files
+    processGithubFiles(files) {
+      const songsMap = {};
+      const owner = 'gazaboo';
+      const repo = 'choro-db';
+      const branch = 'main';
+      const baseUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/`;
+
+      files.forEach(file => {
+        // Filename example: "Zé Menezes - Encabulado - Theme - Clarinet Bb.pdf"
+        // Note: file.path includes the folder, e.g., "pdf/Zé Menezes..."
+        const fullFilename = file.path.split('/').pop().replace('.pdf', '');
+        const parts = fullFilename.split(' - ');
+
+        // Safety check: Ensure we have enough parts
+        if (parts.length < 2) return;
+
+        const author = parts[0].trim();
+        const title = parts[1].trim();
+
+        // Default Key logic
+        // We look for key indicators in the filename (last part usually)
+        let key = 'C';
+        if (fullFilename.includes('Clarinet Bb')) key = 'Bb';
+        else if (fullFilename.includes('Saxophone Eb')) key = 'Eb';
+        else if (fullFilename.includes(' - C')) key = 'C';
+        // Handle variants if needed (e.g. " - C - variant 1") -> Key is still C
+
+        // Determine Type
+        const isContracanto = fullFilename.toLowerCase().includes('contraponto');
+
+        const uniqueKey = `${author}||${title}`;
+
+        // Initialize song entry if new
+        if (!songsMap[uniqueKey]) {
+          songsMap[uniqueKey] = {
+            title: title,
+            author: author,
+            melody: {},
+            contracanto: {},
+            pdfs: []
+          };
+        }
+
+        // Construct raw URL (handle spaces in filename)
+        const pdfUrl = `${baseUrl}${encodeURIComponent(file.path)}`;
+
+        // Add to melody or contracanto map for specific instrument keys
+        // Note: If multiple variants exist for same key, this simple map will take the last one.
+        // If you need all variants accessible, rely on the 'pdfs' array below.
+        if (isContracanto) {
+          songsMap[uniqueKey].contracanto[key] = pdfUrl;
+        } else {
+          songsMap[uniqueKey].melody[key] = pdfUrl;
+        }
+
+        // Add to full list of PDFs for this song (good for "All Versions" list in modal)
+        songsMap[uniqueKey].pdfs.push({
+          url: pdfUrl,
+          filename: fullFilename,
+          key: key,
+          type: isContracanto ? 'Contracanto' : 'Theme'
+        });
+      });
+
+      return Object.values(songsMap);
+    },
+
+    async initializeData() {
+      const pdfFiles = await this.fetchPDFListFromGitHub();
+      this.data = this.processGithubFiles(pdfFiles);
+
+      this.filteredData = this.data.sort((a, b) => (a.title > b.title) ? 1 : -1);
+      this.uniqueAuthors = [...new Set(this.data.map(elt => elt.author))].sort();
+    },
+
+
     activateSongSearch() {
       this.activeCategory = 'Songs';
     },
