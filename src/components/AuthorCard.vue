@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import listeChoros from "@/assets/liste_totale_choros.json";
+// import listeChoros from "@/assets/liste_totale_choros.json";
 // import ChoroLink from '@/components/ChoroLink.vue';
 
 export default {
@@ -37,19 +37,24 @@ export default {
     data() {
         return {
             showModal: false,
-            songs: [],
+            // songs: [],
             selectedSong: null,
         }
     },
     mounted() {
-        this.songs = listeChoros.data.filter(song => song.author === this.author);
+        this.songs = this.allSongs.filter(song => song.author === this.author);
+    },
+
+    computed: {
+        allSongs() {
+            return this.$store.state.data;
+        },
     },
 
     methods: {
         openSelectedSong(song) {
             this.selectedSong = song;
-            this.showSongModal = true;
-            console.log('Selected song:', song);
+            this.showModal = true;
         },
     }
 }
