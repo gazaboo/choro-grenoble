@@ -1,17 +1,18 @@
 <template>
     <div class="filter-bar">
         <div class="filter-bar-buttons">
-            <a class="custom-collapse-btn" type="button" data-bs-toggle="collapse" data-bs-target="#authors"
-                aria-expanded="false" aria-controls="authors">
+            <button class="custom-collapse-btn" type="button" :aria-expanded="String(showAuthors)"
+                aria-controls="authors" @click="showAuthors = !showAuthors">
                 Authors
-            </a>
+            </button>
         </div>
-        <div class="authors-container collapse" id="authors">
-            <div class="form-check form-check-inline author-link" v-for="author of authors" :key="author">
-                <input type="checkbox" class="btn-check" v-model="selectedAuthors" :id="author[0]" :value="author[0]">
-                <label :for="author[0]" class="author-pill">
-                    <span class="author"> {{ author[0] }} </span>
-                    <span class="author"> ({{ author[1] }}) </span>
+        <div v-show="showAuthors" class="authors-container" id="authors">
+            <div class="author-link" v-for="([name, count], index) of authors" :key="name">
+                <input type="checkbox" class="author-checkbox" v-model="selectedAuthors"
+                    :id="`author-${index}`" :value="name">
+                <label :for="`author-${index}`" class="author-pill">
+                    <span class="author"> {{ name }} </span>
+                    <span class="author"> ({{ count }}) </span>
                 </label>
             </div>
         </div>
@@ -29,6 +30,7 @@ export default {
             selection: [],
             authors: new Map(),
             selectedAuthors: [],
+            showAuthors: false,
         }
     },
 
@@ -70,8 +72,27 @@ export default {
     padding: 0 2px;
 }
 
-input[type=checkbox]:checked+label {
+/* Was Bootstrap's .btn-check: keep the checkbox operable but invisible,
+   the .author-pill label is the visible control. */
+.author-checkbox {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.author-checkbox:checked+label {
     background-color: #27a00ebd;
+}
+
+.author-checkbox:focus-visible+label {
+    outline: 2px solid #1ed760;
+    outline-offset: 2px;
 }
 
 .filter-bar-buttons {
@@ -87,6 +108,9 @@ input[type=checkbox]:checked+label {
     background-color: $secondary-background-color;
     text-decoration: none;
     color: black;
+    border: none;
+    cursor: pointer;
+    font: inherit;
 }
 
 .authors-container {
