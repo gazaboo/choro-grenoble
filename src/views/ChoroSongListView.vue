@@ -15,12 +15,14 @@
           :check-partition="true" class="search-bar" />
       </div>
 
-      <div v-if="activeCategory === 'Songs'" class="results-container">
-        <ChoroLink class="result" v-for="(music, index) in filteredData" :id="index" :music="music" :key="music"
-          @click="openSongModal(music)" />
+      <p v-if="loadError" class="load-error">{{ loadError }}</p>
+
+      <div v-else-if="activeCategory === 'Songs'" ref="results" class="results-container">
+        <ChoroLink class="result" v-for="(music, index) in filteredData" :id="index" :music="music"
+          :key="songKey(music)" @click="openSongModal(music)" />
       </div>
-      <div v-else-if="activeCategory === 'Artists'" class="results-container">
-        <div v-for="(author, index) in uniqueAuthors" :id="index" :key="author">
+      <div v-else-if="activeCategory === 'Artists'" ref="results" class="results-container">
+        <div v-for="(author, index) in uniqueAuthors" :key="author">
           <AuthorCard @click="openAuthorModal(author)" :author="author" :id="index" class='result' />
         </div>
       </div>
@@ -57,20 +59,19 @@
 
 <script>
 
-
 // @ is an alias to /src
 
 import SearchBar from '@/components/SearchBar.vue';
-// import listeChoros from "@/assets/liste_totale_choros.json";
 import ChoroLink from '@/components/ChoroLink.vue';
 import CategoryFilter from '@/components/CategoryFilter.vue';
 import AuthorCard from '@/components/AuthorCard.vue'
 import ChoroCard from '@/components/ChoroCard.vue';
 import NavBar from '@/components/NavBar.vue';
+import { loadChoroLibrary } from '@/services/choroLibrary';
 
 export default {
 
-  name: 'HomeView',
+  name: 'ChoroSongListView',
 
   components: {
     SearchBar,
@@ -86,6 +87,8 @@ export default {
     return {
       data: [],
       filteredData: [],
+      uniqueAuthors: [],
+      loadError: '',
       showFilters: false,
       activeCategory: 'Songs',
       showSongModal: false,
@@ -96,12 +99,6 @@ export default {
     }
   },
 
-
-  // async created() {
-  //   this.data = await this.fetchPDFListFromGitHub();
-  //   this.filteredData = this.data.sort((a, b) => (a.title > b.title) ? 1 : -1);
-  //   this.uniqueAuthors = [...new Set(this.data.map(elt => elt.author))]
-  // },
 
   created() {
     this.initializeData();
@@ -120,99 +117,22 @@ export default {
 
   methods: {
 
-    // 1. FETCH: Get raw list of PDF files from GitHub
-    async fetchPDFListFromGitHub() {
-      const owner = 'gazaboo';
-      const repo = 'choro-db';
-      const branch = 'main';
-      const apiUrl = `https://api.github.com/repos/${owner}/${repo}/git/trees/${branch}?recursive=1`;
-
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        return data.tree.filter(file => file.path.endsWith('.pdf'));
-      } catch (error) {
-        console.error("Failed to fetch from GitHub:", error);
-        return [];
-      }
-    },
-
-    // 2. Parse and Group Files
-    processGithubFiles(files) {
-      const songsMap = {};
-      const owner = 'gazaboo';
-      const repo = 'choro-db';
-      const branch = 'main';
-      const baseUrl = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/`;
-
-      files.forEach(file => {
-        // Filename example: "Zé Menezes - Encabulado - Theme - Clarinet Bb.pdf"
-        // Note: file.path includes the folder, e.g., "pdf/Zé Menezes..."
-        const fullFilename = file.path.split('/').pop().replace('.pdf', '');
-        const parts = fullFilename.split(' - ');
-
-        // Safety check: Ensure we have enough parts
-        if (parts.length < 2) return;
-
-        const author = parts[0].trim();
-        const title = parts[1].trim();
-
-        // Default Key logic
-        // We look for key indicators in the filename (last part usually)
-        let key = 'C';
-        if (fullFilename.includes('Clarinet Bb')) key = 'Bb';
-        else if (fullFilename.includes('Saxophone Eb')) key = 'Eb';
-        else if (fullFilename.includes(' - C')) key = 'C';
-        // Handle variants if needed (e.g. " - C - variant 1") -> Key is still C
-
-        // Determine Type
-        const isContracanto = fullFilename.toLowerCase().includes('contraponto');
-
-        const uniqueKey = `${author}||${title}`;
-
-        // Initialize song entry if new
-        if (!songsMap[uniqueKey]) {
-          songsMap[uniqueKey] = {
-            title: title,
-            author: author,
-            melody: {},
-            contracanto: {},
-            pdfs: []
-          };
-        }
-
-        // Construct raw URL (handle spaces in filename)
-        const pdfUrl = `${baseUrl}${encodeURIComponent(file.path)}`;
-
-        // Add to melody or contracanto map for specific instrument keys
-        // Note: If multiple variants exist for same key, this simple map will take the last one.
-        // If you need all variants accessible, rely on the 'pdfs' array below.
-        if (isContracanto) {
-          songsMap[uniqueKey].contracanto[key] = pdfUrl;
-        } else {
-          songsMap[uniqueKey].melody[key] = pdfUrl;
-        }
-
-        // Add to full list of PDFs for this song (good for "All Versions" list in modal)
-        songsMap[uniqueKey].pdfs.push({
-          url: pdfUrl,
-          filename: fullFilename,
-          key: key,
-          type: isContracanto ? 'Contracanto' : 'Theme'
-        });
-      });
-
-      return Object.values(songsMap);
-    },
-
     async initializeData() {
-      const pdfFiles = await this.fetchPDFListFromGitHub();
-      this.data = this.processGithubFiles(pdfFiles);
+      try {
+        this.data = await loadChoroLibrary();
+      } catch (error) {
+        console.error('Failed to load the song library:', error);
+        this.loadError = 'Could not load the song list. Please check your connection and reload.';
+        return;
+      }
 
-      this.filteredData = this.data.sort((a, b) => (a.title > b.title) ? 1 : -1);
+      this.filteredData = this.data.slice().sort((a, b) => (a.title > b.title) ? 1 : -1);
       this.uniqueAuthors = [...new Set(this.data.map(elt => elt.author))].sort();
     },
 
+    songKey(music) {
+      return `${music.author}||${music.title}`;
+    },
 
     activateSongSearch() {
       this.activeCategory = 'Songs';
@@ -228,28 +148,16 @@ export default {
       this.backToTop();
     },
 
-    has_partition(itemSong) {
-      return Object.entries(itemSong.melody).map(entry => entry[1] != "").includes(true) ||
-        Object.entries(itemSong.contracanto).map(entry => entry[1] != "").includes(true)
-    },
-
-    saveId(id) {
-      localStorage.ref = id;
-    },
-
     backToTop() {
-      const element = document.getElementById('0');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: "center" });
-      }
+      // Jump the results list back to the top after the DOM has settled.
+      // This runs on every search update, so it must not animate.
+      this.$nextTick(() => {
+        if (this.$refs.results) this.$refs.results.scrollTop = 0;
+      });
     },
 
     handleCategoryChange(category) {
       this.activeCategory = category;
-    },
-
-    getSongsFromAuthor(author) {
-      return this.data.filter(elt => elt.author == author)
     },
 
     openSongModal(song) {
@@ -265,7 +173,6 @@ export default {
     openAuthorModal(author) {
       this.selectedAuthor = author;
       this.showAuthorModal = true;
-      console.log('Selected author:', author);
     },
 
     closeAuthorModal() {
@@ -278,21 +185,6 @@ export default {
       this.openSongModal(song);
     },
   },
-
-
-  mounted() {
-    if (localStorage.ref) {
-      this.ref = localStorage.ref;
-      const element = document.getElementById(this.ref);
-      if (element) {
-        element.scrollIntoView({ behavior: 'auto', block: "center" });
-        element.classList.add('blink')
-        setTimeout(() => {
-          this.disabled = false
-        }, 500)
-      }
-    }
-  }
 }
 
 </script>
@@ -340,6 +232,12 @@ export default {
 .results-container {
   overflow-y: auto;
   border-radius: 10px;
+}
+
+.load-error {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #ff8a80;
 }
 
 .modal-overlay {
