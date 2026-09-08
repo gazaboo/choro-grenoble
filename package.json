@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:index": "node scripts/build-choro-index.mjs",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

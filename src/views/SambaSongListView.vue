@@ -3,10 +3,8 @@
     <NavBar />
     <SearchBar @filtered-data="updatedSelection" :data-to-search=data :check-partition=true />
     <FilterBar @changed-selection="updatedSelection" :data="data"></FilterBar>
-    <div class="row results">
-      <div class="container-fluid">
-        <SambaLink :music="music" v-for="music in this.filteredData" :key="music" />
-      </div>
+    <div class="results">
+      <SambaLink :music="music" v-for="music in filteredData" :key="`${music.author}||${music.title}`" />
     </div>
   </div>
 </template>
@@ -35,10 +33,6 @@ export default {
     }
   },
 
-  created() {
-    this.filteredData = this.data.sort((a, b) => (a > b) ? 1 : -1);
-  },
-
   methods: {
 
     updatedSelection(filteredData) {
@@ -52,8 +46,11 @@ export default {
 </script>
 
 <style lang="scss">
+/* Replaces Bootstrap's .row/.container-fluid, which is no longer loaded. */
 .results {
+  width: 100%;
   height: 80vh;
-  overflow: scroll;
+  overflow-y: auto;
+  padding: 0 0.75rem;
 }
 </style>

@@ -41,16 +41,14 @@ export default {
 $primary-size: 0.5em;
 $secondary-size : 0.5em;
 
-@import url('https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Comic+Neue:wght@300&family=Coming+Soon&family=Delius&family=Handlee&family=Klee+One&family=Neucha&family=Shadows+Into+Light&family=Shadows+Into+Light+Two&family=Yomogi&display=swap');
+// Nine of the ten families this used to import were only ever candidates in
+// the commented-out list below; only Comic Neue is applied.
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&display=swap');
 
 .chord {
 
-    // font-family: 'Annie Use Your Telescope', cursive;
+    // Alternatives tried: Annie Use Your Telescope, Delius, Klee One, Neucha, Yomogi
     font-family: 'Comic Neue', cursive;
-    // font-family: 'Delius', cursive;
-    // font-family: 'Klee One', cursive;
-    // font-family: 'Neucha', cursive;
-    // font-family: 'Yomogi', cursive;
 
     display: flex;
     flex-direction: row;
