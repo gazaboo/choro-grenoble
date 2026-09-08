@@ -17,12 +17,12 @@
 
       <p v-if="loadError" class="load-error">{{ loadError }}</p>
 
-      <div v-else-if="activeCategory === 'Songs'" ref="results" class="results-container">
-        <ChoroLink class="result" v-for="(music, index) in filteredData" :id="index" :music="music"
+      <div v-else-if="activeCategory === 'Songs'" ref="results" class="results-container" @scroll.passive="onResultsScroll">
+        <ChoroLink class="result" v-for="(music, index) in visibleSongs" :id="index" :music="music"
           :key="songKey(music)" @click="openSongModal(music)" />
       </div>
-      <div v-else-if="activeCategory === 'Artists'" ref="results" class="results-container">
-        <div v-for="(author, index) in uniqueAuthors" :key="author">
+      <div v-else-if="activeCategory === 'Artists'" ref="results" class="results-container" @scroll.passive="onResultsScroll">
+        <div v-for="(author, index) in visibleAuthors" :key="author">
           <AuthorCard @click="openAuthorModal(author)" :author="author" :id="index" class='result' />
         </div>
       </div>
@@ -69,6 +69,20 @@ import ChoroCard from '@/components/ChoroCard.vue';
 import NavBar from '@/components/NavBar.vue';
 import { loadChoroLibrary } from '@/services/choroLibrary';
 
+// Mounting all 1141 rows at once costs ~366 ms on a mid-range phone, and that
+// bill is paid again every time the filter changes. Rows are cheap to scroll
+// once they exist (measured: no dropped frames), so rather than windowing them
+// — which the variable row height makes unreliable — we render enough to fill
+// the viewport straight away and append the rest while the browser is idle.
+const INITIAL_ROWS = 40
+const GROW_CHUNK = 150
+// Grow immediately, ignoring the idle queue, when the user scrolls this close
+// to the end of what has been rendered so far.
+const SCROLL_GROW_MARGIN_PX = 1200
+
+const requestIdle = window.requestIdleCallback || (cb => setTimeout(() => cb(), 16))
+const cancelIdle = window.cancelIdleCallback || clearTimeout
+
 export default {
 
   name: 'ChoroSongListView',
@@ -96,6 +110,8 @@ export default {
       selectedSong: null,
       selectedAuthor: null,
       isSearchActive: false,
+      renderLimit: INITIAL_ROWS,
+      growHandle: null,
     }
   },
 
@@ -105,13 +121,38 @@ export default {
   },
 
 
+  unmounted() {
+    cancelIdle(this.growHandle);
+  },
+
+
   computed: {
     songsBySelectedAuthor() {
       if (!this.selectedAuthor) return [];
       return this.data
         .filter(song => song.author === this.selectedAuthor)
         .sort((a, b) => (a.title > b.title) ? 1 : -1);
-    }
+    },
+
+    activeList() {
+      return this.activeCategory === 'Artists' ? this.uniqueAuthors : this.filteredData;
+    },
+
+    visibleSongs() {
+      return this.filteredData.slice(0, this.renderLimit);
+    },
+
+    visibleAuthors() {
+      return this.uniqueAuthors.slice(0, this.renderLimit);
+    },
+  },
+
+
+  watch: {
+    // Any change of list starts the progressive fill over.
+    activeList() {
+      this.restartGrowing();
+    },
   },
 
 
@@ -132,6 +173,31 @@ export default {
 
     songKey(music) {
       return `${music.author}||${music.title}`;
+    },
+
+    restartGrowing() {
+      cancelIdle(this.growHandle);
+      this.renderLimit = INITIAL_ROWS;
+      this.growUntilComplete();
+    },
+
+    growUntilComplete() {
+      cancelIdle(this.growHandle);
+      if (this.renderLimit >= this.activeList.length) return;
+      this.growHandle = requestIdle(() => {
+        this.renderLimit = Math.min(this.renderLimit + GROW_CHUNK, this.activeList.length);
+        this.growUntilComplete();
+      });
+    },
+
+    // Idle time may never come while the user is actively scrolling, so keep
+    // the rendered window ahead of them.
+    onResultsScroll(event) {
+      const el = event.target;
+      if (this.renderLimit >= this.activeList.length) return;
+      if (el.scrollHeight - el.scrollTop - el.clientHeight > SCROLL_GROW_MARGIN_PX) return;
+      this.renderLimit = Math.min(this.renderLimit + GROW_CHUNK, this.activeList.length);
+      this.growUntilComplete();
     },
 
     activateSongSearch() {
