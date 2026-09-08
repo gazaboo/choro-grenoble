@@ -41,16 +41,6 @@ export default {
             selectedSong: null,
         }
     },
-    mounted() {
-        this.songs = this.allSongs.filter(song => song.author === this.author);
-    },
-
-    computed: {
-        allSongs() {
-            return this.$store.state.data;
-        },
-    },
-
     methods: {
         openSelectedSong(song) {
             this.selectedSong = song;

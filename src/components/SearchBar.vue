@@ -9,24 +9,44 @@
 
 
 <script>
+import { markRaw } from 'vue'
 import Fuse from 'fuse.js'
+
+const SEARCH_DEBOUNCE_MS = 180
+
+const FUSE_OPTIONS = {
+    includeScore: true,
+    shouldSort: true,
+    includeMatches: true,
+    keys: ['title_html', 'author_html']
+}
 
 export default {
 
-    props: ['dataToSearch'],
-    emits: ['filteredData', 'search-activated'],
-    components: {
-        // FilterBar
+    props: {
+        dataToSearch: {
+            type: Array,
+            default: () => []
+        },
+        checkPartition: {
+            type: Boolean,
+            default: false
+        }
     },
+
+    emits: ['filteredData', 'search-activated'],
 
     data() {
         return {
             input: "",
-            filteredList: [],
+            // Search corpus: title_html/author_html hold accent-folded text so
+            // Fuse matches "acucar" against "açúcar".
             data: [],
-            selectedAuthors: [],
-            showFilters: false
-
+            // What we emit for an empty query: same objects every time, so the
+            // consumer's :key stays stable and Vue patches instead of remounting.
+            plainList: [],
+            fuse: null,
+            debounceTimer: null
         }
     },
 
@@ -36,37 +56,38 @@ export default {
             handler(newData) {
                 if (!newData || newData.length === 0) {
                     this.data = [];
+                    this.plainList = [];
+                    this.fuse = null;
                 } else {
-                    // Re-process the new data when it arrives
-                    this.data = newData.map((item, index) => {
-                        return {
-                            ...item,
-                            id: index + 1,
-                            title_html: this.clean_string(item.title),
-                            author_html: this.clean_string(item.author)
-                        };
-                    });
+                    const sorted = newData.slice().sort((a, b) => (a.title > b.title) ? 1 : -1);
+
+                    this.data = sorted.map((item, index) => ({
+                        ...item,
+                        id: index + 1,
+                        title_html: this.clean_string(item.title),
+                        author_html: this.clean_string(item.author)
+                    }));
+
+                    this.plainList = sorted.map((item, index) => ({
+                        ...item,
+                        id: index + 1,
+                        title_html: item.title,
+                        author_html: item.author
+                    }));
+
+                    // Built once per dataset instead of once per keystroke.
+                    // markRaw keeps Vue from deep-proxying Fuse's internal index.
+                    this.fuse = markRaw(new Fuse(this.data, FUSE_OPTIONS));
                 }
-                // Re-run filter with the new data
-                this.filteredList = this.filterList();
-                this.$emit("filteredData", this.filteredList);
+
+                this.emitResults();
             }
         }
     },
 
-    // created() {
-
-    //     this.data = this.dataToSearch.map((item, index) => {
-    //         return {
-    //             ...item, // spread operator to copy all fields from the original object
-    //             id: index + 1,
-    //             title_html: this.clean_string(item.title),
-    //             author_html: this.clean_string(item.author)
-    //         };
-    //     });
-
-    //     this.filteredList = this.filterList();
-    // },
+    unmounted() {
+        clearTimeout(this.debounceTimer);
+    },
 
     methods: {
         handleFocus() {
@@ -74,24 +95,17 @@ export default {
         },
 
         onChangedInput(event) {
-            this.input = this.clean_string(event.target.value);
-            this.filteredList = this.filterList();
-            this.$emit("filteredData", this.filteredList)
+            const value = this.clean_string(event.target.value);
+            clearTimeout(this.debounceTimer);
+            this.debounceTimer = setTimeout(() => {
+                this.input = value;
+                this.emitResults();
+            }, SEARCH_DEBOUNCE_MS);
         },
 
-        handleSelectedAuthors(selectedAuthors) {
-            this.selectedAuthors = selectedAuthors;
-            this.filterResults();
+        emitResults() {
+            this.$emit("filteredData", this.filterList());
         },
-
-        filterResults() {
-            let results = this.filterList();
-            if (this.selectedAuthors.length > 0) {
-                results = results.filter(item => this.selectedAuthors.includes(item.author));
-            }
-            this.$emit("filteredData", results);
-        },
-
 
         clean_string(word) {
             return word.toLowerCase()
@@ -101,18 +115,6 @@ export default {
                 .replaceAll(/[ç]/g, "c")
                 .replaceAll(/[íï]/g, "i")
                 .replaceAll(/[ü]/g, "u")
-        },
-
-        filterByQuery(selectedList) {
-            const options = {
-                includeScore: true,
-                shouldSort: true,
-                includeMatches: true,
-                keys: ['title_html', 'author_html']
-            }
-            const fuse = new Fuse(selectedList, options)
-            let result = fuse.search(this.input)
-            return result
         },
 
         highlight(fuseSearchResult, highlightClassName) {
@@ -171,22 +173,11 @@ export default {
         },
 
         filterList() {
-
-            if (this.input == "") {
-                let clone = JSON.parse(JSON.stringify(this.data))
-                clone.forEach(elt => {
-                    elt.title_html = elt.title;
-                    elt.author_html = elt.author
-                })
-                return clone
+            if (this.input === "" || !this.fuse) {
+                return this.plainList;
             }
-            let selectedList = this.data;
-            selectedList.sort((a, b) => (a.title > b.title) ? 1 : -1);
 
-            if (this.input) {
-                selectedList = this.filterByQuery(selectedList);
-                selectedList = this.highlight(selectedList, "highlight");
-            }
+            const selectedList = this.highlight(this.fuse.search(this.input), "highlight");
 
             for (let item of selectedList) {
                 item.title_html = item.title_html.includes("highlight") ? item.title_html : item.title;

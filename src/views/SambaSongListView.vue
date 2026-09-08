@@ -5,7 +5,7 @@
     <FilterBar @changed-selection="updatedSelection" :data="data"></FilterBar>
     <div class="row results">
       <div class="container-fluid">
-        <SambaLink :music="music" v-for="music in this.filteredData" :key="music" />
+        <SambaLink :music="music" v-for="music in filteredData" :key="`${music.author}||${music.title}`" />
       </div>
     </div>
   </div>
@@ -33,10 +33,6 @@ export default {
       data: Object.values(listeSambas),
       filteredData: []
     }
-  },
-
-  created() {
-    this.filteredData = this.data.sort((a, b) => (a > b) ? 1 : -1);
   },
 
   methods: {
