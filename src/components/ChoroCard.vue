@@ -12,9 +12,9 @@
                     params: {
                         theme: 'melody',
                         instrument: 'C',
-                        title: music.title,
-                        author: music.author
-                    }
+                        title: museScoreData.title,
+                    },
+                    query: { author: museScoreData.author }
                 }" class="action-button">
                     <span>Muse Score</span>
                     <span class="info">Play sound, Loop and Slowdown</span>
@@ -25,8 +25,9 @@
                     params: {
                         theme: 'melody',
                         instrument: 'C',
-                        title: music.title,
-                    }
+                        title: museScoreData.title,
+                    },
+                    query: { author: museScoreData.author }
                 }" class="action-button">
                     <span>Music Sheet</span>
                     <span class="info">Better for screens.</span>
@@ -36,11 +37,11 @@
 
             <h4>PDF Music Sheets</h4>
             <div class="pdf-links">
-                <a v-for="(link, index) in pdfLinks" :key="index" :href="link.url" @click.prevent="openPdf(link.url)"
+                <a v-for="link in pdfLinks" :key="link.url" :href="link.url" @click.prevent="openPdf(link.url)"
                     class="action-button pdf-link">
                     <!-- Show Instrument AND Type if it's not just 'Theme' -->
                     {{ link.instrument }} <span v-if="link.type !== 'Theme'" style="font-size: 0.8em">({{ link.type
-                    }})</span>
+                    }})</span><span v-if="link.variant" style="font-size: 0.8em"> · v{{ link.variant }}</span>
                 </a>
             </div>
 
@@ -68,7 +69,7 @@
 
 
 <script>
-import listeChoros from "@/assets/liste_totale_choros.json";
+import { findScore } from '@/services/scoreLookup';
 
 export default {
     name: 'ChoroCard',
@@ -106,10 +107,9 @@ export default {
 
     computed: {
         museScoreData() {
-            // We match by Title AND Author to be safe
-            return listeChoros.data.find(
-                item => item.title === this.music.title && item.author === this.music.author
-            );
+            // Matched on title AND author, ignoring case and accents: the two
+            // datasets disagree on spelling for 88 songs whose score does exist.
+            return findScore({ title: this.music.title, author: this.music.author });
         },
 
         hasMuseScore() {
@@ -121,12 +121,30 @@ export default {
         pdfLinks() {
             // Use the actual PDFs found in the repo for this song
             if (this.music.pdfs && this.music.pdfs.length > 0) {
-                return this.music.pdfs.map(pdf => ({
+                const links = this.music.pdfs.map(pdf => ({
                     instrument: pdf.key, // "C", "Bb", "Eb"
-                    type: pdf.type,      // "Theme" or "Contraponto"
+                    type: pdf.type,      // "Theme" or "Contracanto"
                     // Use the raw URL from GitHub (or replace host with cdn.jsdelivr.net for better caching)
                     url: pdf.url.replace('raw.githubusercontent.com', 'cdn.jsdelivr.net/gh').replace('/main/', '@main/')
                 })).sort((a, b) => a.instrument.localeCompare(b.instrument));
+
+                // The index drops byte-identical duplicates, but a handful of songs
+                // really do have two different engravings of the same part. Number
+                // those so the buttons are not two identical labels.
+                const totals = {};
+                for (const link of links) {
+                    const label = `${link.instrument}|${link.type}`;
+                    totals[label] = (totals[label] || 0) + 1;
+                }
+                const seen = {};
+                for (const link of links) {
+                    const label = `${link.instrument}|${link.type}`;
+                    if (totals[label] > 1) {
+                        seen[label] = (seen[label] || 0) + 1;
+                        link.variant = seen[label];
+                    }
+                }
+                return links;
             }
 
             // Fallback ONLY if no PDFs were found (shouldn't happen if data is clean)

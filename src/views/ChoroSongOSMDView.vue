@@ -77,12 +77,14 @@
       </div>
     </div>
 
-    <div v-if="isLoading || isZooming" class="loading-overlay">
+    <p v-if="loadError" class="load-error">{{ loadError }}</p>
+
+    <div v-else-if="isLoading || isZooming" class="loading-overlay">
       <fingerprint-spinner class="loading-spinner" :animation-duration="1500" :size="100"
         :color="'rgb(163, 124, 74)'" />
     </div>
 
-    <div v-show="!isZooming" id="main-container">
+    <div v-if="!loadError" v-show="!isZooming" id="main-container">
       <div v-show="!isZooming" ref="osmdContainer" class="osmd-container" :class="{ 'hidden': isZooming }"></div>
     </div>
   </div>
@@ -94,7 +96,7 @@ import JSZip from 'jszip';
 import { FingerprintSpinner } from 'epic-spinners'
 import NavBar from '@/components/NavBar.vue';
 import { useRoute } from 'vue-router';
-import listeChoros from "../assets/liste_totale_choros.json";
+import { findScore } from '@/services/scoreLookup';
 
 
 
@@ -112,6 +114,7 @@ export default {
       osmd: null,
       fileName: '',
       isLoading: true,
+      loadError: '',
       isZooming: false,
       showControls: false,
       mxmlCache: {},
@@ -130,7 +133,14 @@ export default {
     const params = route.params;
     this.title = params.title;
     this.key = params.instrument;
-    this.song = this.getSong();
+    this.song = this.getSong(route.query.author);
+
+    if (!this.song) {
+      this.isLoading = false;
+      this.loadError = `No score found for "${this.title}".`;
+      return;
+    }
+
     this.author = this.song.author;
     this.url = this.song[params.theme][params.instrument];
     this.youtube = this.song.youtube.filter(url => url != "");
@@ -138,6 +148,8 @@ export default {
   },
 
   async mounted() {
+    if (!this.song) return;
+
     this.osmd = await this.fetchOSMDObject();
 
     try {
@@ -206,11 +218,10 @@ export default {
       }
     },
 
-    getSong() {
-      let song = listeChoros.data.find((itemSong) =>
-        itemSong.title.toLowerCase() === this.title.toLowerCase()
-      );
-      return song
+    // Eight titles are shared by two composers, so matching on the title alone
+    // can open somebody else's piece. The author rides along in the query string.
+    getSong(author) {
+      return findScore({ title: this.title, author });
     },
 
     async fetchOSMDObject() {
@@ -351,6 +362,12 @@ export default {
   overflow: auto;
   z-index: 0;
   opacity: 1;
+}
+
+.load-error {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #ff8a80;
 }
 
 /* --- Loading Overlay Spinner --- */

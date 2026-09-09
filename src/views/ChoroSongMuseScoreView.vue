@@ -1,6 +1,7 @@
 <template>
     <NavBar :title="title" :author="author" />
-    <div class="iframe-container">
+    <p v-if="loadError" class="load-error">{{ loadError }}</p>
+    <div v-else class="iframe-container">
         <iframe :key="currentUrl" ref="musescore" class="musescore" :src="currentUrl" frameborder="0" allowfullscreen
             allow="autoplay; fullscreen"></iframe>
     </div>
@@ -8,9 +9,9 @@
 
 <script>
 
-import listeChoros from "../assets/liste_totale_choros.json";
 import NavBar from "@/components/NavBar.vue";
 import { useRoute } from 'vue-router';
+import { findScore } from '@/services/scoreLookup';
 
 export default {
 
@@ -21,12 +22,12 @@ export default {
 
     data() {
         return {
-            url: "",
+            song: null,
             title: "",
-            otherKeys: [],
-            showControls: false,
+            author: "",
             currentKey: 'C',
             part: "melody",
+            loadError: '',
         }
     },
 
@@ -34,39 +35,27 @@ export default {
         const route = useRoute();
         const params = route.params;
         this.title = params.title;
-        this.song = this.getSong();
         this.part = params.theme;
-        this.currentUrl = this.song[params.theme][params.instrument];
         this.currentKey = params.instrument;
-        this.youtube = this.song.youtube.filter(url => url != "");
+
+        // Eight titles are shared by two composers, so matching on the title
+        // alone can open somebody else's piece. The author rides along in the
+        // query string, and the match ignores case and accents.
+        this.song = findScore({ title: this.title, author: route.query.author });
+
+        if (!this.song) {
+            this.loadError = `No score found for "${this.title}".`;
+            return;
+        }
+        this.author = this.song.author;
     },
+
     computed: {
         currentUrl() {
+            if (!this.song) return '';
             return this.song[this.part][this.currentKey];
         },
     },
-    watch: {
-        currentKey(newKey) {
-            console.log('Current key changed to:', newKey);
-        }
-    },
-
-    methods: {
-        getSong() {
-            let song = listeChoros.data.find((itemSong) =>
-                itemSong.title.toLowerCase() === this.title.toLowerCase()
-            );
-            return song
-        },
-        toggleControls() {
-            this.showControls = !this.showControls;
-        },
-
-        updateMuseScore(key) {
-            this.currentKey = key;
-            this.currentUrl = this.song[this.part][this.currentInstrument];
-        },
-    }
 }
 </script>
 
@@ -82,6 +71,12 @@ export default {
 .iframe-container {
     display: flex;
     justify-content: center;
+}
+
+.load-error {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: #ff8a80;
 }
 
 a,
