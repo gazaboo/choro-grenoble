@@ -296,12 +296,6 @@ export default {
         color: #A0A0A0;
     }
 
-    .pdf-note {
-        margin: -0.4rem 0 0;
-        font-size: 0.8rem;
-        color: #A0A0A0;
-    }
-
     .warning-note {
         margin: 0.35rem 0 0;
         font-size: 0.8rem;
@@ -323,6 +317,12 @@ export default {
         font-weight: 600;
         font-size: 1.1rem;
         color: #f0f0f0;
+    }
+
+    .pdf-note {
+        margin: -0.4rem 0 0;
+        font-size: 0.8rem;
+        color: #A0A0A0;
     }
 }
 
