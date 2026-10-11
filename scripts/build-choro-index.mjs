@@ -11,11 +11,16 @@
  *   npm run build:index
  *
  * Set GITHUB_TOKEN to raise the API rate limit if you hit it.
+ *
+ * Set CHORO_DB_DIR to a local clone of choro-db to read its checked-out commit
+ * instead, e.g. to regenerate the index for a choro-db branch before it merges:
+ *   CHORO_DB_DIR=../app-db npm run build:index
  */
 
 import { writeFile, mkdir } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { execFileSync } from 'node:child_process'
 
 const OWNER = 'gazaboo'
 const REPO = 'choro-db'
@@ -23,7 +28,23 @@ const BRANCH = 'main'
 
 const OUT = resolve(dirname(fileURLToPath(import.meta.url)), '../public/choro-index.json')
 
+/** Same shape as the GitHub tree entries buildIndex reads: { path, sha }. */
+function readLocalTree(dir) {
+  const out = execFileSync('git', ['-C', dir, '-c', 'core.quotePath=false', 'ls-tree', '-r', '-z', 'HEAD'], {
+    encoding: 'utf8',
+    maxBuffer: 64 * 1024 * 1024,
+  })
+  return out
+    .split('\0')
+    .filter(Boolean)
+    .map((line) => {
+      const [meta, path] = line.split('\t')
+      return { path, sha: meta.split(' ')[2] }
+    })
+}
+
 async function fetchTree() {
+  if (process.env.CHORO_DB_DIR) return readLocalTree(process.env.CHORO_DB_DIR)
   const url = `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`
   const headers = { Accept: 'application/vnd.github+json' }
   if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
