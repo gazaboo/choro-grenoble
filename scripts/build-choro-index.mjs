@@ -170,6 +170,13 @@ function qualify(code, path) {
   return code
 }
 
+// "Jacob Do Bandolim" and "Jacob do Bandolim", "Mané" and "Mane": one song.
+const fold = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+
+function mostCommon(counts) {
+  return [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0]
+}
+
 function buildIndex(tree, warnings = {}) {
   const songs = new Map()
 
@@ -183,13 +190,17 @@ function buildIndex(tree, warnings = {}) {
 
     const rawAuthor = parts[0].trim()
     const rawTitle = parts[1].trim()
-    const [author, title] = SONG_MERGES.get(`${rawAuthor}||${rawTitle}`) ?? [rawAuthor, rawTitle]
-    const key = `${author}||${title}`
+    const [merged, title] = SONG_MERGES.get(`${rawAuthor}||${rawTitle}`) ?? [rawAuthor, rawTitle]
+    const author = AUTHOR_RENAMES.get(merged) ?? merged
+    const key = `${fold(author)}||${fold(title)}`
 
     if (!songs.has(key)) {
-      songs.set(key, [AUTHOR_RENAMES.get(author) ?? author, title, [], new Set()])
+      songs.set(key, [new Map(), new Map(), [], new Set()])
     }
     const song = songs.get(key)
+    // The spelling shown is the one most files use.
+    song[0].set(author, (song[0].get(author) ?? 0) + 1)
+    song[1].set(title, (song[1].get(title) ?? 0) + 1)
 
     // 1839 of the 1856 "- variant 1" files are byte-identical to the file they
     // sit next to, which is why a song's modal shows six PDF buttons where three
@@ -202,7 +213,9 @@ function buildIndex(tree, warnings = {}) {
 
   // Sort for a stable diff between regenerations, and drop the sha bookkeeping.
   // A fourth element lists the song's warning codes, only when it has some.
-  const rows = [...songs.values()].map(([author, title, paths]) => {
+  const rows = [...songs.values()].map(([authors, titles, paths]) => {
+    const author = mostCommon(authors)
+    const title = mostCommon(titles)
     const codes = [...new Set(paths.flatMap((p) => (warnings[p] ?? []).map((code) => qualify(code, p))))].sort()
     const row = [author, title, paths.sort()]
     return codes.length ? [...row, codes] : row
