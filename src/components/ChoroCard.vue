@@ -77,8 +77,16 @@ const WARNING_LABELS = {
         code: 'tonalite-non-verifiee',
         label: 'Tonalité non vérifiée',
         detail: 'Les versions de cette partition ne concordent pas entre elles : la tonalité reste à confirmer.'
+    },
+    'tessiture-hors-plage': {
+        code: 'tessiture-hors-plage',
+        label: 'Quelques notes hors tessiture',
+        detail: "La mélodie est plus étendue que l'instrument : quelques notes restent hors de la tessiture "
+            + '(clarinette Sib Mi3–Do7, sax alto Mib Sib3–Fa♯6, notes écrites).'
     }
 };
+
+const KEY_NAMES = { Bb: 'Sib', Eb: 'Mib' };
 
 export default {
     name: 'ChoroCard',
@@ -117,7 +125,18 @@ export default {
     computed: {
         // Codes come from choro-db/avertissements.json, via the song index.
         warnings() {
-            return (this.music.warnings || []).map(code => WARNING_LABELS[code]).filter(Boolean)
+            // "code" or "code:Key"; keys of one code are listed on a single line.
+            const byCode = {}
+            for (const raw of this.music.warnings || []) {
+                const [code, key] = raw.split(':')
+                if (!WARNING_LABELS[code]) continue
+                byCode[code] = byCode[code] || []
+                if (key) byCode[code].push(KEY_NAMES[key] || key)
+            }
+            return Object.entries(byCode).map(([code, keys]) => ({
+                ...WARNING_LABELS[code],
+                label: keys.length ? `${WARNING_LABELS[code].label} (${keys.join(', ')})` : WARNING_LABELS[code].label
+            }))
         },
         museScoreData() {
             // Matched on title AND author, ignoring case and accents: the two

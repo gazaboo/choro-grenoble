@@ -159,6 +159,17 @@ const SONG_MERGES = new Map([
  * Songs are still keyed on the *original* author, so two spellings of one name
  * stay two entries even after renaming. Merging them is a separate decision.
  */
+/**
+ * Range warnings concern one transposition, not the whole song: the code
+ * carries the instrument key ("tessiture-hors-plage:Eb") so the card can say which.
+ */
+function qualify(code, path) {
+  if (code !== 'tessiture-hors-plage') return code
+  if (/ - (Clarinet )?Bb(\(\d+\))?\.pdf$/.test(path)) return `${code}:Bb`
+  if (/ - (Saxophone )?Eb(\(\d+\))?\.pdf$/.test(path)) return `${code}:Eb`
+  return code
+}
+
 function buildIndex(tree, warnings = {}) {
   const songs = new Map()
 
@@ -192,7 +203,7 @@ function buildIndex(tree, warnings = {}) {
   // Sort for a stable diff between regenerations, and drop the sha bookkeeping.
   // A fourth element lists the song's warning codes, only when it has some.
   const rows = [...songs.values()].map(([author, title, paths]) => {
-    const codes = [...new Set(paths.flatMap((p) => warnings[p] ?? []))].sort()
+    const codes = [...new Set(paths.flatMap((p) => (warnings[p] ?? []).map((code) => qualify(code, p))))].sort()
     const row = [author, title, paths.sort()]
     return codes.length ? [...row, codes] : row
   })
