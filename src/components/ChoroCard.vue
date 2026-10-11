@@ -3,6 +3,7 @@
         <div class="title-author">
             <h3>{{ music.title }}</h3>
             <h4>{{ music.author }}</h4>
+            <p v-for="w in warnings" :key="w.code" class="warning-note" :title="w.detail">⚠ {{ w.label }}</p>
         </div>
 
         <div class="links-wrapper">
@@ -71,6 +72,14 @@
 <script>
 import { findScore } from '@/services/scoreLookup';
 
+const WARNING_LABELS = {
+    'tonalite-non-verifiee': {
+        code: 'tonalite-non-verifiee',
+        label: 'Tonalité non vérifiée',
+        detail: 'Les versions de cette partition ne concordent pas entre elles : la tonalité reste à confirmer.'
+    }
+};
+
 export default {
     name: 'ChoroCard',
     props: ['music', 'id'],
@@ -106,6 +115,10 @@ export default {
     // },
 
     computed: {
+        // Codes come from choro-db/avertissements.json, via the song index.
+        warnings() {
+            return (this.music.warnings || []).map(code => WARNING_LABELS[code]).filter(Boolean)
+        },
         museScoreData() {
             // Matched on title AND author, ignoring case and accents: the two
             // datasets disagree on spelling for 88 songs whose score does exist.
@@ -274,6 +287,13 @@ export default {
         font-weight: 400;
         margin: 0;
         color: #A0A0A0;
+    }
+
+    .warning-note {
+        margin: 0.35rem 0 0;
+        font-size: 0.8rem;
+        color: #c9a227;
+        cursor: help;
     }
 }
 
