@@ -139,7 +139,8 @@ function buildIndex(tree) {
   const songs = new Map()
 
   for (const file of tree) {
-    if (!file.path.endsWith('.pdf')) continue
+    // Only pdf/ is the library; archives/ keeps retired files out of the app.
+    if (!file.path.startsWith('pdf/') || !file.path.endsWith('.pdf')) continue
 
     const filename = file.path.split('/').pop().slice(0, -'.pdf'.length)
     const parts = filename.split(' - ')
