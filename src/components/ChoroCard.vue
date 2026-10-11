@@ -36,13 +36,14 @@
             </template>
 
 
-            <h4>PDF Music Sheets</h4>
+            <h4>Partitions PDF</h4>
+            <p class="pdf-note">Au choix, sélection non vérifiée : plusieurs versions d'origines diverses.</p>
             <div class="pdf-links">
                 <a v-for="link in pdfLinks" :key="link.url" :href="link.url" @click.prevent="openPdf(link.url)"
                     class="action-button pdf-link">
                     <!-- Show Instrument AND Type if it's not just 'Theme' -->
                     {{ link.instrument }} <span v-if="link.type !== 'Theme'" style="font-size: 0.8em">({{ link.type
-                    }})</span><span v-if="link.variant" style="font-size: 0.8em"> · v{{ link.variant }}</span>
+                    }})</span>
                 </a>
             </div>
 
@@ -158,24 +159,11 @@ export default {
                     type: pdf.type,      // "Theme" or "Contracanto"
                     // Use the raw URL from GitHub (or replace host with cdn.jsdelivr.net for better caching)
                     url: pdf.url.replace('raw.githubusercontent.com', 'cdn.jsdelivr.net/gh').replace('/main/', '@main/')
-                })).sort((a, b) => a.instrument.localeCompare(b.instrument));
-
-                // The index drops byte-identical duplicates, but a handful of songs
-                // really do have two different engravings of the same part. Number
-                // those so the buttons are not two identical labels.
-                const totals = {};
-                for (const link of links) {
-                    const label = `${link.instrument}|${link.type}`;
-                    totals[label] = (totals[label] || 0) + 1;
-                }
-                const seen = {};
-                for (const link of links) {
-                    const label = `${link.instrument}|${link.type}`;
-                    if (totals[label] > 1) {
-                        seen[label] = (seen[label] || 0) + 1;
-                        link.variant = seen[label];
-                    }
-                }
+                }));
+                // Several versions of one key are listed side by side, unlabelled:
+                // the list is a free choice (see the note above it), sorted C, Bb, Eb.
+                const order = { C: 0, Bb: 1, Eb: 2 };
+                links.sort((a, b) => (order[a.instrument] ?? 3) - (order[b.instrument] ?? 3));
                 return links;
             }
 
@@ -329,6 +317,12 @@ export default {
         font-weight: 600;
         font-size: 1.1rem;
         color: #f0f0f0;
+    }
+
+    .pdf-note {
+        margin: -0.4rem 0 0;
+        font-size: 0.8rem;
+        color: #A0A0A0;
     }
 }
 
