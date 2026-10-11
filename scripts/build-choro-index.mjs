@@ -43,6 +43,30 @@ function readLocalTree(dir) {
     })
 }
 
+/**
+ * choro-db/avertissements.json: { fichiers: { "pdf/…": ["tonalite-non-verifiee", …] } },
+ * written by the library audit. Missing file means no warnings.
+ */
+async function fetchWarnings() {
+  let text
+  if (process.env.CHORO_DB_DIR) {
+    try {
+      text = execFileSync('git', ['-C', process.env.CHORO_DB_DIR, 'show', 'HEAD:avertissements.json'], {
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+      })
+    } catch {
+      return {}
+    }
+  } else {
+    const response = await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/avertissements.json`)
+    if (response.status === 404) return {}
+    if (!response.ok) throw new Error(`avertissements.json: ${response.status} ${response.statusText}`)
+    text = await response.text()
+  }
+  return JSON.parse(text).fichiers ?? {}
+}
+
 async function fetchTree() {
   if (process.env.CHORO_DB_DIR) return readLocalTree(process.env.CHORO_DB_DIR)
   const url = `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`
@@ -135,11 +159,12 @@ const SONG_MERGES = new Map([
  * Songs are still keyed on the *original* author, so two spellings of one name
  * stay two entries even after renaming. Merging them is a separate decision.
  */
-function buildIndex(tree) {
+function buildIndex(tree, warnings = {}) {
   const songs = new Map()
 
   for (const file of tree) {
-    if (!file.path.endsWith('.pdf')) continue
+    // Only pdf/ is the library; archives/ keeps retired files out of the app.
+    if (!file.path.startsWith('pdf/') || !file.path.endsWith('.pdf')) continue
 
     const filename = file.path.split('/').pop().slice(0, -'.pdf'.length)
     const parts = filename.split(' - ')
@@ -165,12 +190,17 @@ function buildIndex(tree) {
   }
 
   // Sort for a stable diff between regenerations, and drop the sha bookkeeping.
-  const rows = [...songs.values()].map(([author, title, paths]) => [author, title, paths.sort()])
+  // A fourth element lists the song's warning codes, only when it has some.
+  const rows = [...songs.values()].map(([author, title, paths]) => {
+    const codes = [...new Set(paths.flatMap((p) => warnings[p] ?? []))].sort()
+    const row = [author, title, paths.sort()]
+    return codes.length ? [...row, codes] : row
+  })
   return rows.sort((a, b) => a[1].localeCompare(b[1]) || a[0].localeCompare(b[0]))
 }
 
 const tree = await fetchTree()
-const index = buildIndex(tree)
+const index = buildIndex(tree, await fetchWarnings())
 
 await mkdir(dirname(OUT), { recursive: true })
 await writeFile(OUT, JSON.stringify(index))
